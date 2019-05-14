@@ -33,12 +33,11 @@
 }
 
 body {
-	width: 100wh;
-	font-family: 'Permanent Marker', cursive;
+	width: 100%;
+	font-family: 'Audiowide', cursive;
 	height: 90vh;
-	color: white;
-	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-	background-size: 400% 400%;
+	background: radial-gradient(rgb(253, 252, 252), rgb(250, 26, 26), rgb(8, 8, 8), rgb(158, 152, 152));
+	background-size: 10% 10%;
 	-webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
 	animation: Gradient 15s ease infinite;
@@ -91,26 +90,13 @@ h6 {
 };
 
 .card-title {
- text-shadow: 1px 1px 1px black;
- background: transparent;
+	text-shadow: 1px 1px 1px black;
+	color: dodgerblue;
+	background: transparent;
 };
 
-.card-footer {
-	background: transparent;
-	border: transparent solid;
-}
-
-.card-body {
-	background: transparent;
-}
-
-.card {
-	background: transparent;
-	border: transparent solid;
-}
-
 #chatWindowTitle {
-  color: white;
+	color: dodgerblue;
 }
 
 .btn-danger {
@@ -139,33 +125,71 @@ h6 {
 }
 
 .messages {
-    max-height:200px;
-    overflow:scroll;
-		overflow-x:hidden;
-		font-family: 'Taviraj', serif;
-		text-shadow: 1px 1px 1px black;
+	color: whitesmoke;
+	max-height:200px;
+	overflow:scroll;
+	overflow-x:hidden;
+	text-shadow: 1px 1px 1px black;
+	text-align: center;
+}
+
+.privateMessages {
+	color: whitesmoke;
+	max-height:200px;
+	overflow:scroll;
+	overflow-x:hidden;
+	text-shadow: 1px 1px 1px black;
+	text-align: center;
+}
+
+.card-body {
+	background: rgba(51, 49, 49, 0.63);
+}
+
+.card {
+	background: rgba(51, 49, 49, 0.63);
+	border: transparent solid;
+	flex-direction: column;
+}
+
+.card-footer {
+	/* background: rgba(51, 49, 49, 0.63); */
+	border: transparent solid;
+}
+
+.card-header {
+	font-family: 'Audiowide', cursive;
+	text-align: left;
+	background: rgba(10, 10, 10, 0.815);
 }
 
 #title {
-	font-size: 30px;
-	color: white;
-	margin-top: 50px;
-	font-family: 'Permanent Marker', cursive;
-	text-shadow: 1px 1px 1px black;
+	font-size: 40px;
+	color: transparent;
+	margin-top: 40px;
+	font-family: 'Audiowide', cursive;
+	text-shadow: 1px 1px 1px rgba(105, 117, 38, 0.842);
+	background: url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/"), url("https://i.gifer.com/9j0g.gif");
+	background-blend-mode: screen;
+  background-size: contain, cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .img-fluid {
-	width: 25px;
-	background: black;
-	border-radius: 25%;
-	border: solid whitesmoke;
+	width: 30px;
+	animation: App-logo-spin infinite 10s linear;
+	/* background: black; */
+	/* border-radius: 100%; */
+	/* border: solid whitesmoke; */
 }
 
 .users {
 	max-height: 200px;
 	overflow: scroll;
 	overflow-x: hidden;
-	font-family: 'Taviraj', serif;
+	color: whitesmoke;
+	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 1px black;
 }
 
@@ -182,10 +206,54 @@ input {
 }
 
 h4, h5 {
+	font-family: 'Audiowide', cursive;
+  color: dodgerblue;
 	text-shadow: 1px 1px 1px black;
+	/* border: double orangered; */
+	/* background: black; */
 }
 
 a {
 	color: yellow;
-	text-shadow: 1px 1px 1px dodgerblue;
+	text-shadow: 1px 1px 1px red;
 }
+
+a:hover {
+  color: yellow;
+  text-shadow: 1px 1px 1px red;
+}
+
+#subTitle {
+  color: dodgerblue;
+}
+
+hr {
+  border-top: solid transparent;
+}
+
+#usernameInput,
+#emailInput,
+#passwordInput {
+  /* background: transparent; */
+  border-bottom: solid black;
+  border-top: solid black;
+  border-left: solid black;
+  border-right: solid black;
+}
+
+#usernameInput:focus,
+#emailInput:focus,
+#passwordInput:focus {
+  box-shadow: 1px 1px 1px 1px rgba(255, 255, 1, 0.685);
+}
+
+#loginForm {
+  background: transparent;
+}
+
+/* #root {
+  background: url("https://dumielauxepices.net/sites/default/files/speech-bubble-clipart-quote-773675-3772328.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+} */

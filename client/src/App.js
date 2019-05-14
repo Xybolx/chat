@@ -9,7 +9,6 @@ function App() {
   return (
 
     <div className="App">
-      <h1 id="title">I Ch<i className="fas fa-poo"></i>t Myself</h1>
       <Switch>
         <Route exact path="/" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
