@@ -1,10 +1,14 @@
 const router = require("express").Router();
 const userRoutes = require("./users");
+const messageRoutes = require("./messages");
+const privateMessageRoutes = require("./privateMessages");
 const db = require("../../models");
 const passport = require("../../config/passport-setup");
 
-// User routes
+// User routes, Message routes, privateMessage routes
 router.use("/users", userRoutes);
+router.use("/messages", messageRoutes);
+router.use("/privateMessages", privateMessageRoutes);
 
 // Route to log a user in
 router.post("/login", passport.authenticate("local"), function (req, res) {
@@ -32,6 +36,7 @@ router.post("/signup", function (req, res) {
     email: req.body.email,
     username: req.body.username,
     avatarURL: req.body.avatarURL,
+    colorSeed: req.body.colorSeed,
     password: req.body.password
   }).then(function () {
     res.redirect(307, "/api/login");

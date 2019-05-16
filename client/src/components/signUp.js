@@ -11,6 +11,7 @@ class SignUp extends React.Component {
             email: '',
             username: '',
             avatarURL: '',
+            colorSeed: '',
             password: ''
         };
 
@@ -24,11 +25,19 @@ class SignUp extends React.Component {
         this.handleFormSubmit = ev => {
             ev.preventDefault();
             if (this.state.email && this.state.password && this.state.username) {
+                const colors = ["red", "blue", "gold", "violet", "yellow", "tomato", "cyan", "pink", "lightcoral", "lawngreen", "dodgerblue", "orange", "sandybrown", "lightgreen", "lightseagreen", "darkred", "green", "purple", "hotpink"];
+                let colorSeed = colors[Math.floor(Math.random() * colors.length)];
                 API.signUp({
                     email: this.state.email,
                     username: this.state.username,
                     avatarURL: 'https://avatars.dicebear.com/v2/gridy/:' + this.state.username + '.svg?option[colorful]=1',
+                    colorSeed:  colorSeed,
                     password: this.state.password
+                }).then(function () {
+                    if (colors.includes(colorSeed)) {
+                        colors.splice(colors.indexOf(colorSeed, 1));
+                    }
+                    console.log(colors);
                 })
                     .then(res => window.location = "/chat")
                     .catch(err => console.log(err));
@@ -39,7 +48,7 @@ class SignUp extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div className="col-md-4 sm-2">
+                    <div className="col-xl-6 lg-4 md-4 sm-2 xs-2">
                         <div className="card">
                             <div className="card-body">
                                 <div id="subTitle" className="card-title">

@@ -19,4 +19,18 @@ export default {
   logOut: function(id) {
     return axios.get("/api/logout/", id);
   },
+  // Saves a message to the database
+  saveMessage: function(messageData) {
+    return axios.post("/api/messages", messageData);
+  },
+  getMessages: function() {
+    return axios.get("/api/messages");
+  },
+  // Saves a private message to the database
+  savePrivateMessage: function(privateMessageData) {
+    return axios.post("/api/privateMessages", privateMessageData);
+  },
+  getPrivateMessages: function() {
+    return axios.get("/api/privateMessages");
+  }
 }

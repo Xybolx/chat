@@ -10,6 +10,7 @@ class LogIn extends React.Component{
             email: '',
             username: '',
             avatarURL: '',
+            colorSeed: '',
             password: ''
         };
         
@@ -41,7 +42,7 @@ class LogIn extends React.Component{
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div className="col-md-4 sm-2">
+                    <div className="col-xl-6 lg-4 md-4 sm-2 xs-2">
                         <div className="card">
                             <div className="card-body">
                                 <Link to="/chat">Chat Page</Link>

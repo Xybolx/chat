@@ -2,27 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -79,16 +58,6 @@ body {
 	}
 }
 
-h6 {
-	font-family: 'Open Sans';
-	font-weight: 300;
-	text-align: center;
-	position: absolute;
-	top: 45%;
-	right: 0;
-	left: 0;
-};
-
 .card-title {
 	text-shadow: 1px 1px 1px black;
 	color: dodgerblue;
@@ -100,7 +69,6 @@ h6 {
 }
 
 .btn-danger {
-	margin-top:10px;
 	background: rgb(185, 120, 120);
 	border: solid red;
 	text-shadow: 1px 1px 1px black;
@@ -125,6 +93,7 @@ h6 {
 }
 
 .messages {
+	margin-top: 10px;
 	color: whitesmoke;
 	max-height:200px;
 	overflow:scroll;
@@ -134,16 +103,13 @@ h6 {
 }
 
 .privateMessages {
+	margin-top: 10px;
 	color: whitesmoke;
 	max-height:200px;
 	overflow:scroll;
 	overflow-x:hidden;
 	text-shadow: 1px 1px 1px black;
 	text-align: center;
-}
-
-.card-body {
-	background: rgba(51, 49, 49, 0.63);
 }
 
 .card {
@@ -153,7 +119,6 @@ h6 {
 }
 
 .card-footer {
-	/* background: rgba(51, 49, 49, 0.63); */
 	border: transparent solid;
 }
 
@@ -161,6 +126,13 @@ h6 {
 	font-family: 'Audiowide', cursive;
 	text-align: left;
 	background: rgba(10, 10, 10, 0.815);
+	border-top-left-radius: 0%;
+	border-top-right-radius: 0%;
+}
+
+.card-header:first-child {
+	border-top-left-radius: 0%;
+	border-top-right-radius: 0%;
 }
 
 #title {
@@ -178,10 +150,9 @@ h6 {
 
 .img-fluid {
 	width: 30px;
-	animation: App-logo-spin infinite 10s linear;
-	/* background: black; */
-	/* border-radius: 100%; */
-	/* border: solid whitesmoke; */
+	background: black;
+	border-radius: 10%;
+	border: solid whitesmoke;
 }
 
 .users {
@@ -206,11 +177,10 @@ input {
 }
 
 h4, h5 {
+	margin-top: 10px;
 	font-family: 'Audiowide', cursive;
   color: dodgerblue;
 	text-shadow: 1px 1px 1px black;
-	/* border: double orangered; */
-	/* background: black; */
 }
 
 a {

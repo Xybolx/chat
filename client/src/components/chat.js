@@ -1,6 +1,7 @@
 import React from "react";
 import io from "socket.io-client";
 import API from "../utils/API";
+import moment from "moment";
 
 class Chat extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ class Chat extends React.Component {
         this.state = {
             username: {},
             userAvatar: {},
+            userColor: {},
             message: '',
             privateMessage: '',
             privateMessages: [],
@@ -42,13 +44,11 @@ class Chat extends React.Component {
 
         const addMessage = data => {
             console.log(data);
-            this.setState({ messages: [...this.state.messages, data] });
             console.log(this.state.messages);
         };
 
         const addPrivateMessage = data => {
             console.log(data);
-            this.setState({ privateMessages: [...this.state.privateMessages, data] });
             console.log(this.state.privateMessages);
         };
 
@@ -61,11 +61,18 @@ class Chat extends React.Component {
             ev.preventDefault();
             this.resetTimeout();
             if (this.state.message) {
+                API.saveMessage({
+                    author: this.state.username,
+                    userAvatar: this.state.userAvatar,
+                    userColor: this.state.userColor,
+                    message: this.state.message
+                });
                 this.socket.emit('SEND_MESSAGE', {
                     author: this.state.username,
                     userAvatar: this.state.userAvatar,
+                    userColor: this.state.userColor,
                     message: this.state.message
-                })
+                });
             }
             
             this.setState({ message: '' });
@@ -78,11 +85,19 @@ class Chat extends React.Component {
                 let receiver = message.substr(0, ind);
                 let messageIndex = message.substr(ind + 1);
             if (this.state.privateMessage.substr(0, 1) === '@' && ind !== -1) {
+                API.savePrivateMessage({
+                    receiver: receiver,
+                    author: this.state.username,
+                    userAvatar: this.state.userAvatar,
+                    userColor: this.state.userColor,
+                    privateMessage: messageIndex
+                });
                 this.socket.emit('SEND_PRIVATE_MESSAGE', {
                     receiver: receiver,
                     author: this.state.username,
                     userAvatar: this.state.userAvatar,
-                    privateMessage: messageIndex,
+                    userColor: this.state.userColor,
+                    privateMessage: messageIndex
                 })
             }
             
@@ -115,7 +130,21 @@ class Chat extends React.Component {
     loadUser = () => {
         API.getUser()
             .then(res =>
-                this.setState({ username: res.data.username, userAvatar: res.data.avatarURL }),
+                this.setState({ username: res.data.username, userAvatar: res.data.avatarURL, userColor: res.data.colorSeed }),
+            )
+    }
+
+    loadMessages = () => {
+        API.getMessages()
+            .then(res =>
+                this.setState({ messages: res.data })
+            )
+    }
+
+    loadPrivateMessages = () => {
+        API.getPrivateMessages()
+            .then(res =>
+                this.setState({ privateMessages: res.data })
             )
     }
 
@@ -128,12 +157,16 @@ class Chat extends React.Component {
     componentDidMount() {
         this.loadUser();
         this.timeout = setTimeout(this.logOut, 1800000);
-        this.handleInterval = setInterval(this.loadUsers, 5000);
+        this.handleUserInterval = setInterval(this.loadUsers, 5000);
+        this.handleMessageInterval = setInterval(this.loadMessages, 5000);
+        this.handlePrivateMessageInterval = setInterval(this.loadPrivateMessages, 5000);
     }
 
     componentWillUnmount() {
         this.logOut();
-        clearInterval(this.handleInterval);
+        clearInterval(this.handleUserInterval);
+        clearInterval(this.handleMessageInterval);
+        clearInterval(this.handlePrivateMessageInterval);
         clearTimeout(this.timeout);
     }
 
@@ -142,68 +175,68 @@ class Chat extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div className="col-md-4 sm-2">
+                    <div className="col-xl-6 lg-4 md-4 sm-2 xs-2">
                         <div className="card">
                             <div className="card-body">
                             <h1 id="title">CYBORG CHAT</h1>
                             <div className="container">
-                                <h4> {this.state.users.length} <i className="fas fa-users"></i> Online Now </h4>
+                                <h4><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h4>
                                 {this.state.users.length ? (
-                                    <div className="users flex-fill text-justify-center">
+                                    <div className="users flex-fill text-left">
                                         {this.state.users.map(user => (
-                                            <div key={user._id}>
-                                                <strong>
-                                                    <img className="img-fluid" alt="" src={user.avatarURL}></img>&nbsp;{user.username}
-                                                </strong>
-                                            </div>
+                                            <div className="card" key={user._id}>
+                                                <div style={{ background: `${user.colorSeed}` }} className="card-header">
+                                                    <div>
+                                                        <img className="img-fluid" alt="" src={user.avatarURL}></img>&nbsp;{user.username} <span className="joinDate" style={{ fontSize: 10 }}>member since {moment(user.date).format("M/YY")}</span>
+                                                    </div>
+                                                </div>
+                                            </div>    
                                         ))}
                                     </div>
                                 ) : (
-                                    <h4><i className="fab fa-react fa-spin"></i> Loading Users <i className="fab fa-react fa-spin"></i></h4>
+                                    <h4><i className="fab fa-react fa-spin"></i></h4>
                                     )}
-                                <h4> <i className="far fa-comment-alt"></i> Messages </h4>
+                                <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs</h4>
                                 {this.state.messages.length ? (    
                                     <div className="messages">
-                                        {this.state.messages.slice(0).reverse().map(message => (
-                                            <div className="card" key={message.message}>
-                                                <div className="card-header">
-                                                    <strong>
+                                        {this.state.messages.map(message => (
+                                            <div className="card" key={message._id}>
+                                                <div style={{ background: `${message.userColor}` }} className="card-header">
+                                                    <div>
                                                         <img className="img-fluid" alt="" src={message.userAvatar}></img>
-                                                        &nbsp;{message.author}
-                                                    </strong>
+                                                        &nbsp;{message.author} <span className="msgTime" style={{ fontSize: 10 }}>{moment(message.date).fromNow()}:</span> <br />{message.message}
+                                                    </div>
                                                 </div>
-                                                {message.message}
                                             </div>
                                         ))}
                                     </div>
                                 ) : (
-                                    <h4><i className="fab fa-react fa-spin"></i> No Messages <i className="fab fa-react fa-spin"></i></h4>
+                                    <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
-                                    <h4> <i className="far fa-comment-alt"></i> Private Messages </h4>
+                                    <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h4>
                                 {this.state.privateMessages.length ? (    
                                     <div className="privateMessages">
-                                        {this.state.privateMessages.slice(0).reverse().map(privateMessage => (
-                                            <div className="card" key={privateMessage.privateMessage}>
-                                                <div className="card-header">
-                                                <strong>
+                                        {this.state.privateMessages.map(privateMessage => (
+                                            <div className="card" key={privateMessage._id}>
+                                                <div style={{ background: `${privateMessage.userColor}`}} className="card-header">
+                                                <div>
                                                     <img className="img-fluid" alt="" src={privateMessage.userAvatar}></img>
-                                                    &nbsp;{privateMessage.author}
-                                                </strong>
+                                                    &nbsp;{privateMessage.author} <span className="privateMsgTime" style={{ fontSize: 10 }}>{moment(privateMessage.date).fromNow()}:</span> <br />{privateMessage.privateMessage}
                                                 </div>
-                                                {privateMessage.privateMessage}
+                                                </div>
                                             </div>
                                         ))}
                                     </div>
                                 ) : (
-                                    <h4><i className="fab fa-react fa-spin"></i> No Private Msg <i className="fab fa-react fa-spin"></i></h4>
+                                    <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
                             </div>
                             <div className="card-footer">
-                                <input type="text" name="message" placeholder="📝 Message" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
+                                <textarea type="text" name="message" placeholder="📝Message" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                 <br />
                                 <button onClick={this.sendMessage} className="btn btn-primary form-control"> <i className="far fa-paper-plane"></i> Send </button>
                                 <hr />
-                                <input type="text" name="privateMessage" placeholder="📝 Private Message" className="form-control" value={this.state.privateMessage} onChange={this.handleInputChange} />
+                                <textarea type="text" name="privateMessage" placeholder="🔒Private Message" className="form-control" value={this.state.privateMessage} onChange={this.handleInputChange} />
                                 <br />
                                 <button onClick={this.sendPrivateMessage} className="btn btn-primary form-control"> <i className="far fa-paper-plane"></i> Send Private </button>
                                 <hr />
