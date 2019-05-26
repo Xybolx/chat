@@ -15,8 +15,9 @@ body {
 	width: 100%;
 	font-family: 'Audiowide', cursive;
 	height: 90vh;
-	background: radial-gradient(rgb(253, 252, 252), rgb(250, 26, 26), rgb(8, 8, 8), rgb(158, 152, 152));
-	background-size: 10% 10%;
+	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/");
+	background-blend-mode: screen;
+	background-size: 15% 15%;
 	-webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
 	animation: Gradient 15s ease infinite;
@@ -69,25 +70,34 @@ body {
 }
 
 .btn-danger {
-	background: rgb(185, 120, 120);
+	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
+	background-blend-mode: multiply;
+	background-size: contain;
 	border: solid red;
 	text-shadow: 1px 1px 1px black;
 }
 
 .btn-danger:hover {
-	background: rgb(185, 120, 120);
+	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
+	background-blend-mode: multiply;
+	background-size: contain;
 	border: solid yellow;
 	color: yellow;
 }
 
 .btn-primary {
-	background: rgb(157, 157, 236);
+	margin-bottom: 25px; 
+	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
+	background-blend-mode: multiply;
+	background-size: contain;
 	border: solid dodgerblue;
 	text-shadow: 1px 1px 1px black;
 }
 
 .btn-primary:hover {
-	background: rgb(157, 157, 236);
+	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
+	background-blend-mode: multiply;
+	background-size: contain;
 	border: solid yellow;
 	color: yellow;
 }
@@ -98,14 +108,13 @@ body {
 	max-height:200px;
 	overflow:scroll;
 	overflow-x:hidden;
-	text-shadow: 1px 1px 1px black;
 	text-align: center;
 }
 
 .privateMessages {
 	margin-top: 10px;
 	color: whitesmoke;
-	max-height:200px;
+	max-height: 200px;
 	overflow:scroll;
 	overflow-x:hidden;
 	text-shadow: 1px 1px 1px black;
@@ -120,14 +129,16 @@ body {
 
 .card-footer {
 	border: transparent solid;
+	margin-top: 30px;
 }
 
 .card-header {
 	font-family: 'Audiowide', cursive;
+	background: rgba(0, 0, 0, 0.521);
 	text-align: left;
-	background: rgba(10, 10, 10, 0.815);
 	border-top-left-radius: 0%;
 	border-top-right-radius: 0%;
+	max-height: 65px;
 }
 
 .card-header:first-child {
@@ -137,22 +148,22 @@ body {
 
 #title {
 	font-size: 40px;
-	color: transparent;
+	color: rgba(235, 119, 80, 0.753);
 	margin-top: 40px;
+	border-radius: 50%;
 	font-family: 'Audiowide', cursive;
-	text-shadow: 1px 1px 1px rgba(105, 117, 38, 0.842);
+	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
 	background: url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/"), url("https://i.gifer.com/9j0g.gif");
-	background-blend-mode: screen;
-  background-size: contain, cover;
-  background-repeat: no-repeat;
-  background-position: center;
+	background-blend-mode: saturation;
+    background-size: cover, 100% 300%;
+    background-repeat: space;
+    background-position: center;
 }
 
 .img-fluid {
 	width: 30px;
-	background: black;
-	border-radius: 10%;
-	border: solid whitesmoke;
+	border-radius: 25%;
+	border: ridge whitesmoke;
 }
 
 .users {
@@ -179,7 +190,7 @@ input {
 h4, h5 {
 	margin-top: 10px;
 	font-family: 'Audiowide', cursive;
-  color: dodgerblue;
+  color: whitesmoke;
 	text-shadow: 1px 1px 1px black;
 }
 
@@ -203,8 +214,11 @@ hr {
 
 #usernameInput,
 #emailInput,
-#passwordInput {
-  /* background: transparent; */
+#passwordInput,
+#publicMsg,
+#privateMsg {
+  background: transparent;
+  color: whitesmoke;
   border-bottom: solid black;
   border-top: solid black;
   border-left: solid black;
@@ -213,17 +227,48 @@ hr {
 
 #usernameInput:focus,
 #emailInput:focus,
-#passwordInput:focus {
+#passwordInput:focus,
+#publicMsg:focus,
+#privateMsg:focus {
   box-shadow: 1px 1px 1px 1px rgba(255, 255, 1, 0.685);
 }
 
 #loginForm {
-  background: transparent;
+	background: transparent;
+	text-align: left;
 }
 
-/* #root {
-  background: url("https://dumielauxepices.net/sites/default/files/speech-bubble-clipart-quote-773675-3772328.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-} */
+.userTyping {
+	color: whitesmoke;
+	text-shadow: 1px 1px 1px black;
+}
+
+.msgBody,
+.privateMsgTime,
+.joinDate,
+.msgTime {
+	color: whitesmoke;
+}
+
+.emailLabel,
+.userLabel,
+.passLabel {
+	text-align: left;
+	color: whitesmoke;
+	margin-left: 10px;
+}
+
+#privateLabel,
+#msgLabel {
+	text-align: left;
+	color: whitesmoke;
+	margin-left: 10px;
+}
+
+#signUpForm {
+	text-align: left;
+}
+
+.msgBody {
+	font-size: 12px;
+}

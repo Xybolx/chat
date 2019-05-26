@@ -19,9 +19,12 @@ module.exports = function (io) {
 
         socket.on('SEND_USER', data => {
             console.log(data);
-            connections[data.username] = socket;
-            console.log(connections);
+            connections[data.user.username] = socket;
             io.sockets.emit('RECEIVE_USER', data);
+        });
+
+        socket.on('SEND_TYPING_USER', data => {
+          io.sockets.emit('RECEIVE_TYPING_USER', data);
         });
   
       });

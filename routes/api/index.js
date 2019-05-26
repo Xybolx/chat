@@ -25,7 +25,7 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
     {
       returnNewDocument: true
     }).then(function () {
-      res.redirect(302, "/chat");
+      res.send(200, "user logged in!");
     })
 
 });

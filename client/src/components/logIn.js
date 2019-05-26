@@ -8,9 +8,6 @@ class LogIn extends React.Component{
         
         this.state = {
             email: '',
-            username: '',
-            avatarURL: '',
-            colorSeed: '',
             password: ''
         };
         
@@ -26,8 +23,6 @@ class LogIn extends React.Component{
             if (this.state.email && this.state.password) {
               API.logIn({  
                 email: this.state.email,
-                username: this.state.username,
-                avatarURL: 'https://avatars.dicebear.com/v2/gridy/:' + this.state.username + '.svg?option[colorful]=1',
                 password: this.state.password
               })
                 .then(res => window.location = "/chat")
@@ -42,23 +37,24 @@ class LogIn extends React.Component{
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div className="col-xl-6 lg-4 md-4 sm-2 xs-2">
+                    <div className="col-lg-4 md-4 sm-2 xs-2">
                         <div className="card">
                             <div className="card-body">
                                 <Link to="/chat">Chat Page</Link>
                                 <div id="subTitle" className="card-title">
-                                <h1 id="title">CYBORG CHAT</h1>
+                                <h1 id="title">M.E.R.N<div>Messenger</div></h1>
                                 <h5> <i className="fas fa-user-plus"></i> Login </h5>
                                 <h5> or<br/> Sign Up<Link to="/"><br />Here</Link>!</h5>
                                 </div>
                             </div>
                             <div className="card-footer">
                             <form id="loginForm">
+                            <label className="emailLabel">Email</label>
                                 <input id="emailInput" type="email" name="email" placeholder="📧 Email" value={this.state.email} onChange={this.handleInputChange} className="form-control" required/>
-                                <br/>
+                                <label className="passLabel" htmlFor="password">Password</label>
                                 <input id="passwordInput" type="password" name="password" placeholder=" 🔑 Password" className="form-control" value={this.state.password} onChange={this.handleInputChange} required/>
                                 <br/>
-                                <button onClick={this.handleFormSubmit} className="btn btn-primary form-control"> <i className="fas fa-user-plus"></i> Login</button>
+                                <button onClick={this.handleFormSubmit} className="btn btn-primary"> <i className="fas fa-user-plus"></i> Login</button>
                                 </form>
                             </div>
                         </div>
