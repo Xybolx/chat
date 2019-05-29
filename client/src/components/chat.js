@@ -16,6 +16,8 @@ class Chat extends React.Component {
             userAvatar: {},
             userColor: {},
             userTyping: '',
+            userTypingColor: '',
+            userTypingAvatar: '',
             message: '',
             privateMessage: '',
             privateMessages: [],
@@ -68,10 +70,10 @@ class Chat extends React.Component {
             addTypingUser(data);
             if (data) {
                 console.log(data.username + ' is typing');
-                this.setState({ userTyping: data.username });
-            } else {
-                this.setState({ userTyping: '' });
+                this.setState({ userTyping: data.username, userTypingColor: data.userColor, userTypingAvatar: data.userAvatar });
             }
+            clearTimeout(this.typeTimeout);
+            this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         });
 
         this.socket.on('connect', () => {
@@ -156,10 +158,10 @@ class Chat extends React.Component {
                 [name]: value
             });
             this.socket.emit('SEND_TYPING_USER', {
-                username: this.state.username
+                username: this.state.username,
+                userColor: this.state.userColor,
+                userAvatar: this.state.userAvatar
             });
-            clearTimeout(this.typeTimeout);
-            this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         };
         
         this.logOut = () => {
@@ -206,7 +208,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.socket.emit('SEND_TYPING_USER', false);
+        this.setState({ userTyping: '', userTypingColor: '', userTypingAvatar: '' });
     };
 
     sendingMsgTimeout = () => {
@@ -302,7 +304,7 @@ class Chat extends React.Component {
                                         <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
-                                <span className={`${this.state.username} typing`} style={{ color: `${this.state.userColor}` }}>{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</span>
+                                <span className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }}>{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</span>
                                 <span className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</span>
                                 <span className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.userColor}` }}>{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}</span>
                                 <div id="userAlert" className="user-alert joining" style={{ color: `${this.state.userColor}` }}>

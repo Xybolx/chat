@@ -53,7 +53,7 @@ class Users extends React.Component {
                                             playStatus={Sound.status.PLAYING}
                                             playbackRate={.50} 
                                         />
-                                    )};
+                                    )}
                                     </div>
         );
     };
