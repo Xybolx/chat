@@ -279,3 +279,7 @@ hr {
 .user-alert {
 	animation: Flash .25s infinite;
 }
+
+.jumbotron {
+	background: transparent;
+}
