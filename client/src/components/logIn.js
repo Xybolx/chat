@@ -3,7 +3,6 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Clock from "./clock";
 import Title from "./title";
-import BtnPrimary from "./btnPrimary";
 
 class LogIn extends React.Component{
     constructor(props){
@@ -57,8 +56,7 @@ class LogIn extends React.Component{
                                 <label className="passLabel" htmlFor="password">Password</label>
                                 <input id="passwordInput" type="password" name="password" placeholder=" 🔑 Password" className="form-control" value={this.state.password} onChange={this.handleInputChange} required/>
                                 <br/>
-                                {/* <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="fas fa-user-plus"></i> Login</button> */}
-                                <BtnPrimary onClick={this.handleFormSubmit}><i className="fas fa-user-plus"></i> Login</BtnPrimary>
+                                <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="fas fa-user-plus"></i> Login</button>
                                 </form>
                             </div>
                         </div>

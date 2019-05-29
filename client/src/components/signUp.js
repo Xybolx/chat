@@ -1,7 +1,6 @@
 import React from "react";
 import Clock from "./clock";
 import Title from "./title";
-import BtnPrimary from "./btnPrimary";
 import API from "../utils/API";
 import "../App.css";
 import { Link } from "react-router-dom";
@@ -71,8 +70,7 @@ class SignUp extends React.Component {
                                     <label className="passLabel" htmlFor="password">Password</label>
                                     <input id="passwordInput" type="password" placeholder=" 🔑 Password" className="form-control" value={this.state.password} onChange={ev => this.setState({ password: ev.target.value })} required />
                                     <br />
-                                    {/* <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="far fa-address-card"></i> Sign Up</button> */}
-                                    <BtnPrimary onClick={this.handleFormSubmit}><i className="far fa-address-card"></i> Sign Up</BtnPrimary>
+                                    <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="far fa-address-card"></i> Sign Up</button>
                                 </form>
                             </div>
                         </div>

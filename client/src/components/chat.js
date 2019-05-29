@@ -3,7 +3,6 @@ import Sound from "react-sound";
 import Clock from "./clock";
 import Users from "./users";
 import Title from "./title";
-import BtnPrimary from "./btnPrimary";
 import io from "socket.io-client";
 import API from "../utils/API";
 import moment from "moment";
@@ -321,8 +320,7 @@ class Chat extends React.Component {
                                      <label id="msgLabel" htmlFor="message" />Message
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
-                                     {/* <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</button> */}
-                                     <BtnPrimary onClick={this.handleFormSubmit}><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</BtnPrimary>
+                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</button>
                                      </form>
                                      <button onClick={this.logOut} className="btn btn-danger btn-block"> <i className="fas fa-user-slash"></i> Logout </button>
                                 </div>
