@@ -25,7 +25,7 @@ body {
 	width: 100%;
 	font-family: 'Audiowide', cursive;
 	height: 90vh;
-	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("http://bestanimations.com/Humans/Eyes/eyes-animated-gif-12.gif");
+	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("https://media0.giphy.com/media/IyuKoOynx5VHG/giphy.gif?cid=790b76115cee967c6333356d73291b32&rid=giphy.gif");
 	background-blend-mode: screen;
 	background-size: 15% 15%;
 	/* -webkit-animation: Gradient 15s ease infinite;
@@ -151,7 +151,7 @@ body {
 	border-radius: 50%;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
-	background: url("http://bestanimations.com/Humans/Eyes/eyes-animated-gif-12.gif"), url("https://i.gifer.com/9j0g.gif");
+	background: url("https://media0.giphy.com/media/IyuKoOynx5VHG/giphy.gif?cid=790b76115cee967c6333356d73291b32&rid=giphy.gif"), url("https://i.gifer.com/9j0g.gif");
 	background-blend-mode: saturation;
   background-size: cover, 100% 300%;
 	background-repeat: space;
