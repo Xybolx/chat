@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+	text-align: center;
+	background: transparent;
 }
 
 @keyframes Spin {
@@ -278,8 +279,4 @@ hr {
 
 .user-alert {
 	animation: Flash .25s infinite;
-}
-
-.jumbotron {
-	background: transparent;
 }
