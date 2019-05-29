@@ -26,7 +26,7 @@ class Chat extends React.Component {
             userJoiningAvatar: ''
         };
 
-        this.socket = io("http://localhost:3001/");
+        this.socket = io("https://mernmessenger.herokuapp.com");
 
         this.socket.on('RECEIVE_MESSAGE', data => {
             addMessage(data);
