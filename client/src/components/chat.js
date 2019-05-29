@@ -169,6 +169,11 @@ class Chat extends React.Component {
         };
     };
 
+    handleReceiverState = (ev) => {
+        this.setState({ privateReceiver: ev.target.value });
+        document.getElementById("receiverInput").focus();
+    };
+
     loadUser = () => {
         API.getUser()
             .then(res =>
@@ -315,7 +320,7 @@ class Chat extends React.Component {
                                 <div className="card-footer text-left">
                                      <form id="msgsForm">
                                      <label id="msgLabel" htmlFor="message">Message</label>
-                                     <input id="receiverInput" type="text" name="receiver" placeholder="Private Msg Receiver" className="form-control" value={this.state.privateReceiver} />
+                                     <input id="receiverInput" type="text" name="receiver" placeholder="Private Msg Receiver" className="form-control" readOnly value={this.state.privateReceiver} />
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
                                      <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</button>

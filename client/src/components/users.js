@@ -8,14 +8,8 @@ class Users extends React.Component {
         super(props);
 
         this.state = {
-            users: [],
-            privateReceiver: ''
+            users: []
         }
-    };
-
-    handleReceiverState = (ev) => {
-        this.setState({ privateReceiver: ev.target.value });
-        document.getElementById("receiverInput").focus();
     };
 
     loadUsers = () => {
