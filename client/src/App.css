@@ -151,7 +151,7 @@ body {
 	border-radius: 50%;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
-	background: url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/"), url("https://i.gifer.com/9j0g.gif");
+	background: url("eye.gif"), url("https://i.gifer.com/9j0g.gif");
 	background-blend-mode: saturation;
   background-size: cover, 100% 300%;
 	background-repeat: space;
