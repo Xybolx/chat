@@ -72,7 +72,7 @@ class SignUp extends React.Component {
                                     <input id="passwordInput" type="password" placeholder=" 🔑 Password" className="form-control" value={this.state.password} onChange={ev => this.setState({ password: ev.target.value })} required />
                                     <br />
                                     {/* <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="far fa-address-card"></i> Sign Up</button> */}
-                                    <BtnPrimary><i className="far fa-address-card"></i> Sign Up</BtnPrimary>
+                                    <BtnPrimary onClick={this.handleFormSubmit}><i className="far fa-address-card"></i> Sign Up</BtnPrimary>
                                 </form>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ class BtnPrimary extends React.Component {
     };
     render() {
         return (
-            <button onClick={this.handleFormSubmit} type="button" className="btn btn-primary btn-block"></button>
+            <button type="button" className="btn btn-primary btn-block"></button>
         );
     };
 };
