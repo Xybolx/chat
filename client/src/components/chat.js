@@ -30,11 +30,15 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_MESSAGE', data => {
             addMessage(data);
+        });
+
+        this.socket.on('RECEIVE_STATUS', data => {
+            addStatus(data);
             if (data) {
                 this.setState({ msgSent: "message sent" })
-            } else {
-                this.setState({ msgSent: "" })
             }
+            clearTimeout(this.sendMsgTimeout);
+            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 2000);
         });
 
         this.socket.on('RECEIVE_USER', data => {
@@ -91,6 +95,9 @@ class Chat extends React.Component {
         const addTypingUser = data => {
         };
 
+        const addStatus = data => {
+        };
+
         this.sendMessage = ev => {
             ev.preventDefault();
             this.resetLogOutTimeout();
@@ -108,8 +115,9 @@ class Chat extends React.Component {
                     message: this.state.message
                 });
 
-                clearTimeout(this.sendMsgTimeout);
-                this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 2000);
+                this.socket.emit('SEND_STATUS', {
+                    author: this.state.username
+                });
             };
 
             this.setState({ message: '' });
@@ -202,7 +210,7 @@ class Chat extends React.Component {
     };
 
     sendingMsgTimeout = () => {
-        this.socket.emit('SEND_MESSAGE', false);
+        this.setState({ msgSent: '' });
     };
 
     sendingPrivateMsgTimeout = () => {
