@@ -51,7 +51,7 @@ class Users extends React.Component {
                                         <Sound
                                             url="welcome.wav"
                                             playStatus={Sound.status.PLAYING}
-                                            playbackRate={.50} 
+                                            playbackRate={.75} 
                                         />
                                     )}
                                     </div>
