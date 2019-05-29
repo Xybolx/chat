@@ -24,7 +24,7 @@ body {
 	width: 100%;
 	font-family: 'Audiowide', cursive;
 	height: 90vh;
-	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("../public/eye.gif");
+	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("eye.gif");
 	background-blend-mode: screen;
 	background-size: 15% 15%;
 	/* -webkit-animation: Gradient 15s ease infinite;
