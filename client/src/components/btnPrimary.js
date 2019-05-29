@@ -1,13 +1,14 @@
 import React from "react";
 
- 
-    BtnPrimary = props => {
+class BtnPrimary extends React.Component {
+    constructor(props) {
+        super(props);
+    };
+    render() {
         return (
-            <div>
-                <button {...props} type="button" className="btn btn-primary btn-block"></button>
-                    {props.children}
-            </div>
+            <button type="button" className="btn btn-primary btn-block"></button>
         );
     };
+};
 
 export default BtnPrimary;
