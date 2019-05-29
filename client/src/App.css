@@ -280,3 +280,7 @@ hr {
 .user-alert {
 	animation: Flash .25s infinite;
 }
+
+.info {
+	background: rgba(0, 0, 0, 0.521);
+}
