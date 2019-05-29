@@ -179,7 +179,7 @@ class Chat extends React.Component {
                     privateMessage: messageIndex
                 });
 
-                this.setState({ privateMessage: '' });
+                this.setState({ message: '' });
 
             } else {
                 API.saveMessage({
