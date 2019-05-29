@@ -24,6 +24,8 @@ class Chat extends React.Component {
             messages: [],
             msgSent: '',
             prvtSent: '',
+            prvtSentColor: '',
+            prvtSentAvatar: '',
             userJoining: '',
             userJoiningAvatar: ''
         };
@@ -57,7 +59,9 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_PRIVATE_MESSAGE', data => {
             addPrivateMessage(data);
-            const privateSender = `${data.author}`
+            const privateSender = `${data.author}`;
+            const privateColor = `${data.userColor}`;
+            const privateAvatar = `${data.userAvatar}`;
             if (data) {
                 this.setState({ prvtSent: privateSender })
             }
@@ -216,7 +220,7 @@ class Chat extends React.Component {
     };
 
     sendingPrivateMsgTimeout = () => {
-        this.setState({ prvtSent: '' });
+        this.setState({ prvtSent: '', prvtSentColor: '', prvtSentAvatar: '' });
     };
 
     setupBeforeUnloadListener = () => {
@@ -304,9 +308,9 @@ class Chat extends React.Component {
                                         <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
-                                <span className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }}>{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</span>
+                                <span className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }}>{this.state.userTyping ? <img className="img-fluid" src={this.state.userTypingAvatar} alt=""></img> : ""}&nbsp;{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</span>
                                 <span className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</span>
-                                <span className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.userColor}` }}>{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}</span>
+                                <span className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }}>{this.state.prvSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}&nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}</span>
                                 <div id="userAlert" className="user-alert joining" style={{ color: `${this.state.userColor}` }}>
                                     {this.state.userJoining ? <img className="img-fluid" src={this.state.userJoiningAvatar} alt=""></img> : ""}
                                     &nbsp;{this.state.userJoining ? `${this.state.userJoining}...joined!` : ``}
