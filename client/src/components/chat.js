@@ -20,7 +20,6 @@ class Chat extends React.Component {
             userTypingAvatar: '',
             message: '',
             privateMessage: '',
-            privateReceiver: '',
             privateMessages: [],
             messages: [],
             msgSent: '',
@@ -106,27 +105,27 @@ class Chat extends React.Component {
         this.handleFormSubmit = ev => {
             ev.preventDefault();
             this.resetLogOutTimeout();
-            // let msg = this.state.message.substr(1);
-            // let ind = msg.indexOf('/');
-            // let receiver = msg.substr(0, ind);
-            // let messageIndex = msg.substr(ind + 1);
-            if (this.state.message && this.state.privateReceiver) {
+            let msg = this.state.message.substr(1);
+            let ind = msg.indexOf('/');
+            let receiver = msg.substr(0, ind);
+            let messageIndex = msg.substr(ind + 1);
+            if (this.state.message.substr(0, 1) === '@' && ind !== -1) {
                 API.savePrivateMessage({
-                    receiver: this.state.privateReceiver,
+                    receiver: receiver,
                     author: this.state.username,
                     userAvatar: this.state.userAvatar,
                     userColor: this.state.userColor,
-                    privateMessage: this.state.message
+                    privateMessage: messageIndex
                 });
                 this.socket.emit('SEND_PRIVATE_MESSAGE', {
-                    receiver: this.state.privateReceiver,
+                    receiver: receiver,
                     author: this.state.username,
                     userAvatar: this.state.userAvatar,
                     userColor: this.state.userColor,
-                    privateMessage: this.state.message
+                    privateMessage: messageIndex
                 });
 
-                this.setState({ message: '', privateReceiver: '' });
+                this.setState({ message: '' });
 
             } else {
                 API.saveMessage({
@@ -316,7 +315,6 @@ class Chat extends React.Component {
                                 <div className="card-footer text-left">
                                      <form id="msgsForm">
                                      <label id="msgLabel" htmlFor="message">Message</label>
-                                     <input id="receiverInput" type="text" name="receiver" placeholder="Private Msg Receiver" className="form-control" value={this.state.privateReceiver} />
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
                                      <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</button>

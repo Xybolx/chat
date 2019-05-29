@@ -12,6 +12,10 @@ class Users extends React.Component {
         }
     };
 
+    handleMsgFocus = () => {
+        document.getElementById("publicMsg").focus();
+    };
+
     loadUsers = () => {
         API.getUsers()
             .then(res =>
@@ -36,7 +40,7 @@ class Users extends React.Component {
                                         {this.state.users.map(user => (
                                             <div className="card" key={user._id}>
                                                 <div style={{ borderColor: `${user.colorSeed}` }} className="card-header">
-                                                    <div className="userValue" onClick={this.setState({ privateReceiver: ev.target.value })} value={user.username} style={{ color: `${user.colorSeed}` }}>
+                                                    <div className="userValue" onClick={this.handleMsgFocus} value={user.username} style={{ color: `${user.colorSeed}` }}>
                                                         <img className="img-fluid" alt="" src={user.avatarURL}></img>&nbsp;{user.username} <span className="joinDate" style={{ fontSize: 8 }}>member since {moment(user.date).format("M/YYYY")}</span>
                                                     </div>
                                                 </div>
