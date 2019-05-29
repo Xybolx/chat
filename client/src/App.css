@@ -14,10 +14,12 @@
 
 @keyframes Flash {
   50% {
-    color: yellow;
+		color: yellow;
+		transform: rotate(0deg);
   }
   100% {
-    color: red;
+		color: red;
+		transform: rotate(360deg);
   }
 }
 
@@ -278,9 +280,9 @@ hr {
 }
 
 .user-alert {
-	animation: Flash .25s infinite;
+	animation: Flash 1s infinite;
 }
 
 .info {
-	background: rgba(0, 0, 0, 0.521);
+	height: 100px;
 }

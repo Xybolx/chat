@@ -304,8 +304,8 @@ class Chat extends React.Component {
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
                                 <div className="info">
-                                <span className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }} {...this.state.userTyping ? {display: "block"} : {display: "none"}}>{this.state.userTyping ? <img className="img-fluid" src={this.state.userTypingAvatar} alt=""></img> : ""}&nbsp;{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</span>
-                                <span className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</span>
+                                <div className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }} {...this.state.userTyping ? {display: "block"} : {display: "none"}}>{this.state.userTyping ? <img className="img-fluid" src={this.state.userTypingAvatar} alt=""></img> : ""}&nbsp;{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</div>
+                                <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
                                     &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}
