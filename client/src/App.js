@@ -8,7 +8,7 @@ import { Route, Switch } from "react-router-dom";
 function App() {
   return (
 
-    <div className="App">
+    <div className="App jumbotron jumbotron-fluid">
       <Switch>
         <Route exact path="/" component={SignUp} />
         <Route exact path="/login" component={LogIn} />
