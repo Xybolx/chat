@@ -1,4 +1,7 @@
 import React from "react";
+import Sound from "react-sound";
+import Clock from "./clock";
+import Users from "./users";
 import io from "socket.io-client";
 import API from "../utils/API";
 import moment from "moment";
@@ -17,21 +20,44 @@ class Chat extends React.Component {
             privateMessage: '',
             privateMessages: [],
             messages: [],
-            users: []
+            msgSent: '',
+            prvtSent: '',
+            userJoining: '',
+            userJoiningAvatar: ''
         };
 
         this.socket = io("http://localhost:3001/");
 
         this.socket.on('RECEIVE_MESSAGE', data => {
             addMessage(data);
+            if (data) {
+                this.setState({ msgSent: "message sent" })
+            } else {
+                this.setState({ msgSent: "" })
+            }
         });
 
         this.socket.on('RECEIVE_USER', data => {
             addUser(data);
+            const joiningUser = `${data.user.username}`;
+            const joiningAvatar = `${data.user.avatarURL}`;
+            if (data) {
+                this.setState({ userJoining: joiningUser, userJoiningAvatar: joiningAvatar })
+            } 
+            clearTimeout(this.userJoinedTimeout);
+            this.userJoinedTimeout = setTimeout(this.userJoiningTimeout, 4000);
+            // alert(`${data.user.username} has joined!`);
         });
 
         this.socket.on('RECEIVE_PRIVATE_MESSAGE', data => {
             addPrivateMessage(data);
+            const privateSender = `${data.author}`
+            if (data) {
+                this.setState({ prvtSent: privateSender })
+            }
+            clearTimeout(this.sendPrivateMsgTimeout);
+            this.sendPrivateMsgTimeout = setTimeout(this.sendingPrivateMsgTimeout, 4000);
+            // alert(`${data.author} sent you a private message!`);
         });
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
@@ -67,7 +93,7 @@ class Chat extends React.Component {
 
         this.sendMessage = ev => {
             ev.preventDefault();
-            this.resetTimeout();
+            this.resetLogOutTimeout();
             if (this.state.message) {
                 API.saveMessage({
                     author: this.state.username,
@@ -81,6 +107,9 @@ class Chat extends React.Component {
                     userColor: this.state.userColor,
                     message: this.state.message
                 });
+
+                clearTimeout(this.sendMsgTimeout);
+                this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 2000);
             };
 
             this.setState({ message: '' });
@@ -88,7 +117,7 @@ class Chat extends React.Component {
 
         this.sendPrivateMessage = ev => {
             ev.preventDefault();
-            this.resetTimeout();
+            this.resetLogOutTimeout();
             let message = this.state.privateMessage.substr(1);
             let ind = message.indexOf('/');
             let receiver = message.substr(0, ind);
@@ -109,10 +138,10 @@ class Chat extends React.Component {
                     privateMessage: messageIndex
                 });
             };
-
+            
             this.setState({ privateMessage: '' });
         };
-
+        
         this.handleInputChange = ev => {
             const { name, value } = ev.target;
             this.setState({
@@ -124,23 +153,12 @@ class Chat extends React.Component {
             clearTimeout(this.typeTimeout);
             this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         };
-
+        
         this.logOut = () => {
-            API.logOut(
-            ).then(res => window.location = "/login")
-        }
-    };
-
-    handlePrivateMsgFocus = (ev) => {
-        this.setState({privateMessage: ev.target.value});
-        document.getElementById('privateMsg').focus();
-    } 
-
-    loadUsers = () => {
-        API.getUsers()
-            .then(res =>
-                this.setState({ users: res.data }))
-                .catch(err => console.log(err))
+            API.logOut()
+            .then(res => window.location = "/login")
+            .catch(err => console.log(err))
+        };
     };
 
     loadUser = () => {
@@ -153,8 +171,8 @@ class Chat extends React.Component {
     sendUser = () => {
         this.socket.emit('SEND_USER', {
             user: this.state.user
-        })
-    }
+        });
+    };
 
     loadMessages = () => {
         API.getMessages()
@@ -170,13 +188,25 @@ class Chat extends React.Component {
                 .catch(err => console.log(err))
     };
 
-    resetTimeout = () => {
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(this.logOut, 1800000);
+    resetLogOutTimeout = () => {
+        clearTimeout(this.logOutTimeout);
+        this.logOutTimeout = setTimeout(this.logOut, 1800000);
+    };
+
+    userJoiningTimeout = () => {
+        this.setState({ userJoining: '', userJoiningAvatar: '' });
     };
 
     typingTimeout = () => {
         this.socket.emit('SEND_TYPING_USER', false);
+    };
+
+    sendingMsgTimeout = () => {
+        this.socket.emit('SEND_MESSAGE', false);
+    };
+
+    sendingPrivateMsgTimeout = () => {
+        this.setState({ prvtSent: '' });
     };
 
     setupBeforeUnloadListener = () => {
@@ -192,25 +222,30 @@ class Chat extends React.Component {
         });
     };
 
-    componentDidMount() {
-        this.loadUser();
-        this.setupBeforeUnloadListener();
-        this.timeout = setTimeout(this.logOut, 1800000);
+    handleTimers = () => {
+        this.logOutTimeout = setTimeout(this.logOut, 1800000);
         this.loadUserTimeout = setTimeout(this.loadUser, 6000);
         this.sendUserTimeout = setTimeout(this.sendUser, 8000);
-        this.handleUserInterval = setInterval(this.loadUsers, 5000);
         this.handleMessageInterval = setInterval(this.loadMessages, 5000);
         this.handlePrivateMessageInterval = setInterval(this.loadPrivateMessages, 5000);
-    };
+    }
 
-    componentWillUnmount() {
-        this.removeBeforeUnloadListener();
-        clearInterval(this.handleUserInterval);
+    clearTimers = () => {
         clearInterval(this.handleMessageInterval);
         clearInterval(this.handlePrivateMessageInterval);
         clearTimeout(this.loadUserTimeout);
         clearTimeout(this.sendUserTimeout);
-        clearTimeout(this.timeout);
+        clearTimeout(this.logOutTimeout);
+    }
+
+    componentDidMount() {
+        this.setupBeforeUnloadListener();
+        this.handleTimers();
+    };
+
+    componentWillUnmount() {
+        this.removeBeforeUnloadListener();
+        this.clearTimers();
     };
 
     render() {
@@ -222,22 +257,8 @@ class Chat extends React.Component {
                         <div className="card">
                             <div className="card-body">
                                 <h1 id="title">M.E.R.N<div></div>Messenger</h1>
-                                <h4><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h4>
-                                {this.state.users.length ? (
-                                    <div className="users flex-fill text-left">
-                                        {this.state.users.map(user => (
-                                            <div className="card" key={user._id}>
-                                                <div style={{ borderColor: `${user.colorSeed}` }} className="card-header">
-                                                    <div onClick={this.handlePrivateMsgFocus} value={user.username} style={{ color: `${user.colorSeed}` }}>
-                                                        <img className="img-fluid" alt="" src={user.avatarURL}></img>&nbsp;{user.username} <span className="joinDate" style={{ fontSize: 8 }}>member since {moment(user.date).format("M/YYYY")}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                        <h4><i className="fab fa-react fa-spin"></i></h4>
-                                    )}
+                                    <Clock />
+                                        <Users />
                                 <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs</h4>
                                 {this.state.messages.length ? (
                                     <div className="messages">
@@ -272,17 +293,24 @@ class Chat extends React.Component {
                                 ) : (
                                         <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
+                                <h4> <i className="fas fa-info"></i> Info</h4>
                                 <span className={`${this.state.username} typing`} style={{ color: `${this.state.userColor}` }}>{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</span>
-                                <div className="card-footer text-right">
+                                <span className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</span>
+                                <span className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.userColor}` }}>{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}</span>
+                                <div id="userAlert" className="user-alert joining" style={{ color: `${this.state.userColor}` }}>
+                                    {this.state.userJoining ? <img className="img-fluid" src={this.state.userJoiningAvatar} alt=""></img> : ""}
+                                    &nbsp;{this.state.userJoining ? `${this.state.userJoining}...joined!` : ``}
+                                </div>
+                                <div className="card-footer text-left">
+                                     <label id="msgLabel" htmlFor="message">Public Message</label>
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Public Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
-                                     <button onClick={this.sendMessage} className="btn btn-primary" type="button"><i className="far fa-paper-plane"></i> Send</button>
-                                     <label htmlFor="private message"></label>
+                                     <button onClick={this.sendMessage} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</button>
+                                     <label id="privateMsgLabel" htmlFor="private message">Private Message</label>
                                      <input id="privateMsg" type="text" name="privateMessage" placeholder="🔒Private Msg" className="form-control" value={this.state.privateMessage} onChange={this.handleInputChange} />
                                      <br />
-                                     <button onClick={this.sendPrivateMessage} className="btn btn-primary" type="button"><i className="far fa-paper-plane"></i> Send </button>
-                                     <hr/>
-                                     <button onClick={this.logOut} className="btn btn-danger"> <i className="fas fa-user-slash"></i> Logout </button>
+                                     <button onClick={this.sendPrivateMessage} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i> Send</button>
+                                     <button onClick={this.logOut} className="btn btn-danger btn-block"> <i className="fas fa-user-slash"></i> Logout </button>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +318,7 @@ class Chat extends React.Component {
                 </div>
             </div>
         );
-    }
-}
+    };
+};
 
 export default Chat;

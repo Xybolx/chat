@@ -2,12 +2,21 @@
   text-align: center;
 }
 
-@keyframes App-logo-spin {
+@keyframes Spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes Flash {
+  50% {
+    color: yellow;
+  }
+  100% {
+    color: red;
   }
 }
 
@@ -18,9 +27,9 @@ body {
 	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/");
 	background-blend-mode: screen;
 	background-size: 15% 15%;
-	-webkit-animation: Gradient 15s ease infinite;
+	/* -webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
-	animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite; */
 }
 
 @-webkit-keyframes Gradient {
@@ -70,34 +79,24 @@ body {
 }
 
 .btn-danger {
-	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
-	background-blend-mode: multiply;
-	background-size: contain;
 	border: solid red;
 	text-shadow: 1px 1px 1px black;
 }
 
 .btn-danger:hover {
-	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
-	background-blend-mode: multiply;
-	background-size: contain;
+	background: transparent;
 	border: solid yellow;
 	color: yellow;
 }
 
 .btn-primary {
 	margin-bottom: 25px; 
-	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
-	background-blend-mode: multiply;
-	background-size: contain;
 	border: solid dodgerblue;
 	text-shadow: 1px 1px 1px black;
 }
 
 .btn-primary:hover {
-	background: url("https://66.media.tumblr.com/a40b0b20f5a13e5aec886ab7aa342d94/tumblr_oovdkwkARy1rn5gv3o1_400.gif");
-	background-blend-mode: multiply;
-	background-size: contain;
+	background: transparent;
 	border: solid yellow;
 	color: yellow;
 }
@@ -138,7 +137,6 @@ body {
 	text-align: left;
 	border-top-left-radius: 0%;
 	border-top-right-radius: 0%;
-	max-height: 65px;
 }
 
 .card-header:first-child {
@@ -155,9 +153,9 @@ body {
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
 	background: url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/"), url("https://i.gifer.com/9j0g.gif");
 	background-blend-mode: saturation;
-    background-size: cover, 100% 300%;
-    background-repeat: space;
-    background-position: center;
+  background-size: cover, 100% 300%;
+	background-repeat: space;
+	background-position: center;
 }
 
 .img-fluid {
@@ -252,7 +250,9 @@ hr {
 
 .emailLabel,
 .userLabel,
-.passLabel {
+.passLabel,
+#msgLabel,
+#privateMsgLabel {
 	text-align: left;
 	color: whitesmoke;
 	margin-left: 10px;
@@ -271,4 +271,12 @@ hr {
 
 .msgBody {
 	font-size: 12px;
+}
+
+.clock {
+	color: whitesmoke;
+}
+
+.user-alert {
+	animation: Flash .25s infinite;
 }

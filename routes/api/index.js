@@ -25,7 +25,7 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
     {
       returnNewDocument: true
     }).then(function () {
-      res.send(200, "user logged in!");
+      res.status(200).send("user authenticated!");
     })
 
 });

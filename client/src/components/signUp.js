@@ -1,4 +1,5 @@
 import React from "react";
+import Clock from "./clock";
 import API from "../utils/API";
 import "../App.css";
 import { Link } from "react-router-dom";
@@ -54,6 +55,7 @@ class SignUp extends React.Component {
                             <div className="card-body">
                                 <div id="subTitle" className="card-title">
                                 <h1 id="title">M.E.R.N<div>Messenger</div></h1>
+                                    <Clock />
                                 <h5><i className="far fa-address-card"></i> Sign Up </h5>
                                 <h5> or<br/> Login <Link to="/login">Here</Link>!</h5>
                                 </div>
@@ -67,7 +69,7 @@ class SignUp extends React.Component {
                                     <label className="passLabel" htmlFor="password">Password</label>
                                     <input id="passwordInput" type="password" placeholder=" 🔑 Password" className="form-control" value={this.state.password} onChange={ev => this.setState({ password: ev.target.value })} required />
                                     <br />
-                                    <button onClick={this.handleFormSubmit} className="btn btn-primary"> <i className="far fa-address-card"></i> Sign Up</button>
+                                    <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="far fa-address-card"></i> Sign Up</button>
                                 </form>
                             </div>
                         </div>

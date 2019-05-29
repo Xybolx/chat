@@ -8,11 +8,11 @@ module.exports = function (io) {
           console.log('user disconnected from ' + socket.id);
         });
   
-        socket.on('SEND_MESSAGE', function(data) { 
+        socket.on('SEND_MESSAGE', data => { 
           io.sockets.emit('RECEIVE_MESSAGE', data);
       });
 
-        socket.on('SEND_PRIVATE_MESSAGE', function(data) {
+        socket.on('SEND_PRIVATE_MESSAGE', function (data) {
             console.log(connections[data.receiver].id);
           io.to(connections[data.receiver].id).emit('RECEIVE_PRIVATE_MESSAGE', data);
       });
