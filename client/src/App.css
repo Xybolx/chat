@@ -23,8 +23,8 @@
 body {
 	width: 100%;
 	font-family: 'Audiowide', cursive;
-	height: 90vh;
-	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/");
+	/* height: 90vh; */
+	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("http://bestanimations.com/Humans/Eyes/eyes-animated-gif-12.gif");
 	background-blend-mode: screen;
 	background-size: 15% 15%;
 	/* -webkit-animation: Gradient 15s ease infinite;
@@ -128,7 +128,6 @@ body {
 
 .card-footer {
 	border: transparent solid;
-	margin-top: 30px;
 }
 
 .card-header {
@@ -151,7 +150,7 @@ body {
 	border-radius: 50%;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
-	background: url("https://steamuserimages-a.akamaihd.net/ugc/959724006840310669/DDDAED6BAC65D5C3C63A253923518FCB43C16D0D/"), url("https://i.gifer.com/9j0g.gif");
+	background: url("http://bestanimations.com/Humans/Eyes/eyes-animated-gif-12.gif"), url("https://i.gifer.com/9j0g.gif");
 	background-blend-mode: saturation;
   background-size: cover, 100% 300%;
 	background-repeat: space;
