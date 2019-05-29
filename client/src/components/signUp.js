@@ -1,5 +1,6 @@
 import React from "react";
 import Clock from "./clock";
+import Title from "./title";
 import API from "../utils/API";
 import "../App.css";
 import { Link } from "react-router-dom";
@@ -54,7 +55,7 @@ class SignUp extends React.Component {
                         <div className="card">
                             <div className="card-body">
                                 <div id="subTitle" className="card-title">
-                                <h1 id="title">M.E.R.N<div>Messenger</div></h1>
+                                    <Title />
                                     <Clock />
                                 <h5><i className="far fa-address-card"></i> Sign Up </h5>
                                 <h5> or<br/> Login <Link to="/login">Here</Link>!</h5>

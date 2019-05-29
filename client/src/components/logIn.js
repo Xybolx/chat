@@ -2,6 +2,7 @@ import React from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Clock from "./clock";
+import Title from "./title";
 
 class LogIn extends React.Component{
     constructor(props){
@@ -42,8 +43,8 @@ class LogIn extends React.Component{
                         <div className="card">
                             <div className="card-body">
                                 <div id="subTitle" className="card-title">
-                                <h1 id="title">M.E.R.N<div>Messenger</div></h1>
-                                <Clock />
+                                    <Title />
+                                    <Clock />
                                 <h5> <i className="fas fa-user-plus"></i> Login </h5>
                                 <h5> or<br/> Sign Up<Link to="/"><br />Here</Link>!</h5>
                                 </div>

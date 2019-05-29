@@ -2,6 +2,7 @@ import React from "react";
 import Sound from "react-sound";
 import Clock from "./clock";
 import Users from "./users";
+import Title from "./title";
 import io from "socket.io-client";
 import API from "../utils/API";
 import moment from "moment";
@@ -264,7 +265,7 @@ class Chat extends React.Component {
                     <div className="col-xl-6 lg-4 md-4 sm-2 xs-2">
                         <div className="card">
                             <div className="card-body">
-                                <h1 id="title">M.E.R.N<div></div>Messenger</h1>
+                                <Title />
                                     <Clock />
                                         <Users />
                                 <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs</h4>
