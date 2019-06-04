@@ -236,8 +236,8 @@ class Chat extends React.Component {
 
     handleTimers = () => {
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
-        this.loadUserTimeout = setTimeout(this.loadUser, 6000);
-        this.sendUserTimeout = setTimeout(this.sendUser, 8000);
+        this.loadUserTimeout = setTimeout(this.loadUser, 5000);
+        this.sendUserTimeout = setTimeout(this.sendUser, 7000);
         this.handleMessageInterval = setInterval(this.loadMessages, 5000);
         this.handlePrivateMessageInterval = setInterval(this.loadPrivateMessages, 5000);
     }
@@ -260,7 +260,6 @@ class Chat extends React.Component {
         this.loadUser();
         this.loadMessages();
         this.loadPrivateMessages();
-        this.sendUser();
     };
 
     componentWillUnmount() {
