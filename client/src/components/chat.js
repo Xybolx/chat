@@ -45,7 +45,7 @@ class Chat extends React.Component {
                 this.setState({ msgSent: "message sent" })
             }
             clearTimeout(this.sendMsgTimeout);
-            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 4000);
+            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 2500);
         });
 
         this.socket.on('RECEIVE_USER', data => {
@@ -74,10 +74,18 @@ class Chat extends React.Component {
             addTypingUser(data);
             if (data && this.state.userTyping !== data.username){
                 console.log(data.username + ' is typing');
-                this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
+                this.setState({ typingUsers: [...this.state.typingUsers, data] });
             }
             clearTimeout(this.typeTimeout);
-            this.typeTimeout = setTimeout(this.typingTimeout, 3000);
+            this.typeTimeout = setTimeout(this.typingTimeout, 3500);
+        });
+
+        this.socket.on('RECEIVE_TYPING_STATUS', data => {
+            if (data) {
+                this.setState({ userTyping: data.username });
+            }
+            clearTimeout(this.typeStatusTimeout);
+            this.typeStatusTimeout = setTimeout(this.typingStatusTimeout, 3500);
         });
 
         this.socket.on('connect', () => {
@@ -162,6 +170,9 @@ class Chat extends React.Component {
                 userColor: this.state.userColor,
                 userAvatar: this.state.userAvatar
             });
+            this.socket.emit('SEND_TYPING_STATUS', {
+                username: this.state.username
+            });
         };
         
         this.logOut = () => {
@@ -209,7 +220,11 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ typingUsers: [], userTyping: '' });
+        this.setState({ typingUsers: [] });
+    };
+
+    typingStatusTimeout = () => {
+        this.setState({ userTyping: '' });
     };
 
     sendingMsgTimeout = () => {
