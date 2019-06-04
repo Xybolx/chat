@@ -257,6 +257,10 @@ class Chat extends React.Component {
     componentDidMount() {
         this.setupBeforeUnloadListener();
         this.handleTimers();
+        this.loadUser();
+        this.loadMessages();
+        this.loadPrivateMessages();
+        this.sendUser();
     };
 
     componentWillUnmount() {
