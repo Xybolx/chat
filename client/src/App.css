@@ -214,18 +214,11 @@ hr {
 .emailLabel,
 .userLabel,
 .passLabel,
-#msgLabel,
-#privateMsgLabel {
-	text-align: left;
-	color: whitesmoke;
-	margin-left: 10px;
-}
-
-#privateLabel,
 #msgLabel {
 	text-align: left;
 	color: whitesmoke;
 	margin-left: 10px;
+	text-shadow: 1px 1px 1px black;
 }
 
 #signUpForm {
