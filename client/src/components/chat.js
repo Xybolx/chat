@@ -325,8 +325,8 @@ class Chat extends React.Component {
                                         {this.state.messages.map(message => (
                                             <div className="card" key={message._id}>
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
+                                                <input className={`${message.author} join`} type="checkbox" value={message.author} onChange={ev => this.setState({ otherUser: ev.target.value })}></input>
                                                     <div onClick={this.handleRoomJoin} style={{ color: `${message.userColor}` }}>
-                                                        <input className={`${message.author} join`} type="checkbox" value={message.author} onChange={ev => this.setState({ otherUser: ev.target.value })}></input>
                                                         <img className="img-fluid" alt="" src={message.userAvatar}></img>
                                                         &nbsp;{message.author} <span className="msgTime" style={{ fontSize: 8 }}>{moment(message.date).fromNow()}:</span> <br /> <span className="msgBody">{message.message}</span>
                                                     </div>
