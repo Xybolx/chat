@@ -17,6 +17,7 @@ class Chat extends React.Component {
             userAvatar: {},
             userColor: {},
             typingUsers: [],
+            userTyping: '',
             userTypingColor: '',
             userTypingAvatar: '',
             message: '',
@@ -71,12 +72,9 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
-            const userTyping = `${data.username}`;
-            const typingColor = `${data.userColor}`;
-            const typingAvatar = `${data.userAvatar}`;
-            if (data && !this.state.typingUsers.includes(data)) {
+            if (data && this.state.userTyping !== data.username){
                 console.log(data.username + ' is typing');
-                this.setState({ typingUsers: [...this.state.typingUsers, data] });
+                this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
             }
             clearTimeout(this.typeTimeout);
             this.typeTimeout = setTimeout(this.typingTimeout, 3000);
@@ -211,7 +209,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ typingUsers: [] })
+        this.setState({ typingUsers: [], userTyping: '' })
     };
 
     sendingMsgTimeout = () => {
