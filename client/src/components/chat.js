@@ -33,7 +33,8 @@ class Chat extends React.Component {
             userJoiningAvatar: '',
             otherUser: '',
             roomInvite: '',
-            roomName: ''
+            roomName: '',
+            dmMessage: ''
         };
 
         this.socket = io("https://mernmessenger.herokuapp.com");
@@ -43,7 +44,8 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_ROOM_JOIN', data => {
-            this.setState({ roomInvite: `${data.username} invites you to join a private chat ${data.username + data.otherUser}`, roomName: `${data.username}${data.otherUser}` })
+            console.log(`${data.username} joined ${data.username + data.otherUser}`);
+            this.setState({ roomInvite: `${data.username} invited you to a private chat ${data.username + data.otherUser}`, roomName: `${data.username}${data.otherUser}` })
         });
 
         this.socket.on('RECEIVE_ACCEPT_ROOM_JOIN', data => {
@@ -79,6 +81,10 @@ class Chat extends React.Component {
             }
             clearTimeout(this.sendPrivateMsgTimeout);
             this.sendPrivateMsgTimeout = setTimeout(this.sendingPrivateMsgTimeout, 4000);
+        });
+
+        socket.on('RECEIVE_DM_MESSAGE', data => {
+            alert(`DM: ${data.dmMessage} from ${data.author}`);
         });
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
@@ -161,6 +167,14 @@ class Chat extends React.Component {
 
                 this.setState({ message: '' });
             }
+        };
+
+        this.sendDM = () => {
+            this.socket.emit('SEND_DM_MESSAGE', {
+                roomName: this.state.roomName,
+                author: this.state.username,
+                dmMessage: this.state.dmMessage
+            });
         };
         
         this.handleInputChange = ev => {
@@ -364,6 +378,9 @@ class Chat extends React.Component {
                                 </div>
                                 <div className="card-footer text-left">
                                      <form id="msgsForm">
+                                     <input id="dmMsg" type="text" name="dmMessage" placeholder="📝DM Msg" className="form-control" value={this.state.dmMessage} onChange={this.handleInputChange} />
+                                     <br/>
+                                     <button onClick={this.sendDM} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp; Send DM</button>
                                      <label id="msgLabel" htmlFor="message" />Message
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>

@@ -17,6 +17,10 @@ module.exports = function (io) {
           socket.join(data.roomName);
           io.in(data.roomName).emit('RECEIVE_ACCEPT_ROOM_JOIN', data);
         });
+
+        socket.on('SEND_DM_MESSAGE', data => {
+          io.in(data.roomName).emit('RECEIVE_DM_MESSAGE', data);
+        });
   
         socket.on('SEND_MESSAGE', data => { 
           io.sockets.emit('RECEIVE_MESSAGE', data);
