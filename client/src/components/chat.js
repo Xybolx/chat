@@ -30,7 +30,10 @@ class Chat extends React.Component {
             prvtSentAvatar: '',
             joiningUsers: [],
             userJoining: '',
-            userJoiningAvatar: ''
+            userJoiningAvatar: '',
+            otherUser: '',
+            roomInvite: '',
+            roomName: ''
         };
 
         this.socket = io("https://mernmessenger.herokuapp.com");
@@ -39,13 +42,21 @@ class Chat extends React.Component {
             addMessage(data);
         });
 
+        this.socket.on('RECEIVE_ROOM_JOIN', data => {
+            this.setState({ roomInvite: `${data.username} invites you to join a private chat ${data.username + data.otherUser}`, roomName: `${data.username}${data.otherUser}` })
+        });
+
+        this.socket.on('RECEIVE_ACCEPT_ROOM_JOIN', data => {
+            console.log(`${data.username} joined ${data.roomName}`);
+        });
+
         this.socket.on('RECEIVE_STATUS', data => {
             addStatus(data);
             if (data) {
                 this.setState({ msgSent: "message sent" })
             }
             clearTimeout(this.sendMsgTimeout);
-            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 2500);
+            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 3000);
         });
 
         this.socket.on('RECEIVE_USER', data => {
@@ -234,6 +245,21 @@ class Chat extends React.Component {
         });
     };
 
+    handleRoomJoin = () => {
+        this.socket.emit('SEND_ROOM_JOIN', {
+            username: this.state.username,
+            otherUser: this.state.otherUser
+                
+        });
+    };
+
+    acceptRoomJoin = () => {
+        this.socket.emit('SEND_ACCEPT_ROOM_JOIN', {
+            roomName: this.state.roomName,
+            username: this.state.username
+        });
+    };
+
     handleTimers = () => {
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
         this.loadUserTimeout = setTimeout(this.loadUser, 5000);
@@ -283,8 +309,9 @@ class Chat extends React.Component {
                                     <div className="messages">
                                         {this.state.messages.map(message => (
                                             <div className="card" key={message._id}>
+                                                <input className={`${message.author} join`} type="checkbox" value={message.author} onChange={ev => this.setState({ otherUser: ev.target.value })}></input>
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
-                                                    <div style={{ color: `${message.userColor}` }}>
+                                                    <div onClick={this.handleRoomJoin} style={{ color: `${message.userColor}` }}>
                                                         <img className="img-fluid" alt="" src={message.userAvatar}></img>
                                                         &nbsp;{message.author} <span className="msgTime" style={{ fontSize: 8 }}>{moment(message.date).fromNow()}:</span> <br /> <span className="msgBody">{message.message}</span>
                                                     </div>
@@ -314,6 +341,7 @@ class Chat extends React.Component {
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
                                 <div className="info">
+                                    <button onClick={this.acceptRoomJoin} className="btn btn-success btn-md" type="button" {...this.state.roomInvite ? {display: "block"} : {display: "none"}}>{this.state.roomInvite}</button>
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
