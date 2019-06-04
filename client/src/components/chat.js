@@ -43,7 +43,7 @@ class Chat extends React.Component {
                 this.setState({ msgSent: "message sent" })
             }
             clearTimeout(this.sendMsgTimeout);
-            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 2000);
+            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 3000);
         });
 
         this.socket.on('RECEIVE_USER', data => {
@@ -197,6 +197,7 @@ class Chat extends React.Component {
                 .catch(err => console.log(err))
     };
 
+    // Event timeouts
     resetLogOutTimeout = () => {
         clearTimeout(this.logOutTimeout);
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
@@ -225,6 +226,7 @@ class Chat extends React.Component {
         });
     };
 
+    // logs user out on page unload
     removeBeforeUnloadListener = () => {
         window.removeEventListener("beforeunload", (ev) => {
             ev.preventDefault();
@@ -245,6 +247,10 @@ class Chat extends React.Component {
         clearTimeout(this.loadUserTimeout);
         clearTimeout(this.sendUserTimeout);
         clearTimeout(this.logOutTimeout);
+        clearTimeout(this.typeTimeout);
+        clearTimeout(this.sendPrivateMsgTimeout);
+        clearTimeout(this.userJoinedTimeout);
+        clearTimeout(this.sendMsgTimeout);
     }
 
     componentDidMount() {
