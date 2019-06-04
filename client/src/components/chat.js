@@ -16,7 +16,7 @@ class Chat extends React.Component {
             username: {},
             userAvatar: {},
             userColor: {},
-            usersTyping: [],
+            typingUsers: [],
             userTypingColor: '',
             userTypingAvatar: '',
             message: '',
@@ -71,12 +71,6 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
-            if (data) {
-                console.log(data.username + ' is typing');
-                this.setState({ usersTyping: [...this.state.usersTyping, data] });
-            }
-            clearTimeout(this.typeTimeout);
-            this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         });
 
         this.socket.on('connect', () => {
@@ -98,6 +92,15 @@ class Chat extends React.Component {
         };
 
         const addTypingUser = data => {
+            if (data.username) {
+                console.log(data.username + ' is typing');
+                this.setState({ typingUsers: [...this.state.typingUsers, data] });
+            } else {
+                let remove = this.state.typingUsers.indexOf(data.username);
+                this.setState({ typingUsers: this.state.typingUsers.filter((_, i) => i !== remove) })
+            }
+            clearTimeout(this.typeTimeout);
+            this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         };
 
         const addStatus = data => {
@@ -208,7 +211,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ usersTyping: [], userTypingColor: '', userTypingAvatar: '' });
+        this.setState({ userTypingColor: '', userTypingAvatar: '' });
     };
 
     sendingMsgTimeout = () => {
@@ -310,7 +313,13 @@ class Chat extends React.Component {
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
                                 <div className="info">
-                                <div className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }} {...this.state.usersTyping ? {display: "block"} : {display: "none"}}>{this.state.usersTyping ? <img className="img-fluid" src={this.state.userTypingAvatar} alt=""></img> : ""}&nbsp;{this.state.usersTyping ? `${this.state.usersTyping}...typing` : ``}</div>
+                                <div className="typing">
+                                {this.state.typingUsers.map(typingUser => {
+                                    return (
+                                        <div {...this.state.typingUsers.length ? {display: "block"} : {display: "none"}} style={{ color: `${typingUser.userTypingColor}` }}><img className="img-fluid" src={`${typingUser.userTypingAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
+                                    )
+                                })}
+                                </div>
                                 <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
