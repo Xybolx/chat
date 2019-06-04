@@ -78,8 +78,6 @@ class Chat extends React.Component {
                 console.log(data.username + ' is typing');
                 this.setState({ typingUsers: [...this.state.typingUsers, data] });
             }
-                let remove = this.state.typingUsers.indexOf(data.username);
-                this.setState({ typingUsers: this.state.typingUsers.filter((_, i) => i !== remove) })
             clearTimeout(this.typeTimeout);
             this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         });
