@@ -72,20 +72,12 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
-            if (data && this.state.userTyping !== data.username){
+            if (data && this.state.userTyping === ''){
                 console.log(data.username + ' is typing');
-                this.setState({ typingUsers: [...this.state.typingUsers, data] });
+                this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
             }
             clearTimeout(this.typeTimeout);
             this.typeTimeout = setTimeout(this.typingTimeout, 3500);
-        });
-
-        this.socket.on('RECEIVE_TYPING_STATUS', data => {
-            if (data) {
-                this.setState({ userTyping: data.username });
-            }
-            clearTimeout(this.typeStatusTimeout);
-            this.typeStatusTimeout = setTimeout(this.typingStatusTimeout, 3500);
         });
 
         this.socket.on('connect', () => {
@@ -170,9 +162,6 @@ class Chat extends React.Component {
                 userColor: this.state.userColor,
                 userAvatar: this.state.userAvatar
             });
-            this.socket.emit('SEND_TYPING_STATUS', {
-                username: this.state.username
-            });
         };
         
         this.logOut = () => {
@@ -220,11 +209,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ typingUsers: [] });
-    };
-
-    typingStatusTimeout = () => {
-        this.setState({ userTyping: '' });
+        this.setState({ typingUsers: [], userTyping: '' });
     };
 
     sendingMsgTimeout = () => {
