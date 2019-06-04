@@ -76,9 +76,6 @@ class Chat extends React.Component {
                 console.log(data.username + ' is typing');
                 this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
             }
-                typingTimeout = () => {
-                    this.setState({ typingUsers: this.state.typingUsers.filter(typingUser => typingUser !== data.username), userTyping: '' })
-                };
             clearTimeout(this.typeTimeout);
             this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         });
@@ -211,6 +208,10 @@ class Chat extends React.Component {
         this.setState({ userJoining: '', userJoiningAvatar: '' });
     };
 
+    typingTimeout = () => {
+        this.setState({ typingUsers: this.state.typingUsers.filter((_, i) => i !== this.state.typingUsers.indexOf(this.state.userTyping)), userTyping: '' })
+    };
+
     sendingMsgTimeout = () => {
         this.setState({ msgSent: '' });
     };
@@ -310,13 +311,13 @@ class Chat extends React.Component {
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
                                 <div className="info">
-                                {this.state.typingUsers.length &&
                                 <div className="typing">
-                                {this.state.typingUsers.map(typingUser => { 
-                                        <div key={typingUser.username} style={{ color: `${typingUser.userColor}` }}><img className="img-fluid" src={`${typingUser.userAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
+                                {this.state.typingUsers.map(typingUser => {
+                                    return (
+                                        <div style={{ color: `${typingUser.userColor}` }}><img className="img-fluid" src={`${typingUser.userAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
+                                    )
                                 })}
                                 </div>
-                                }
                                 <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
