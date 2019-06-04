@@ -83,7 +83,7 @@ class Chat extends React.Component {
             this.sendPrivateMsgTimeout = setTimeout(this.sendingPrivateMsgTimeout, 4000);
         });
 
-        socket.on('RECEIVE_DM_MESSAGE', data => {
+        this.socket.on('RECEIVE_DM_MESSAGE', data => {
             alert(`DM: ${data.dmMessage} from ${data.author}`);
         });
 
@@ -169,7 +169,8 @@ class Chat extends React.Component {
             }
         };
 
-        this.sendDM = () => {
+        this.sendDM = (ev) => {
+            ev.preventDefault();
             this.socket.emit('SEND_DM_MESSAGE', {
                 roomName: this.state.roomName,
                 author: this.state.username,
