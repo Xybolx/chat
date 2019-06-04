@@ -30,10 +30,6 @@ module.exports = function (io) {
         socket.on('SEND_TYPING_USER', data => {
           io.sockets.emit('RECEIVE_TYPING_USER', data);
         });
-
-        socket.on('SEND_TYPING_STATUS', data => {
-          io.to(connections[data.username].id).emit('RECEIVE_TYPING_STATUS', data);
-        });
   
       });
   }
