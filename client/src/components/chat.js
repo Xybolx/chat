@@ -71,6 +71,17 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
+            const userTyping = `${data.username}`;
+            const typingColor = `${data.userColor}`;
+            const typingAvatar = `${data.userAvatar}`;
+            if (data) {
+                console.log(data.username + ' is typing');
+                this.setState({ typingUsers: [...this.state.typingUsers, data] });
+            }
+                let remove = this.state.typingUsers.indexOf(data.username);
+                this.setState({ typingUsers: this.state.typingUsers.filter((_, i) => i !== remove) })
+            clearTimeout(this.typeTimeout);
+            this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         });
 
         this.socket.on('connect', () => {
@@ -92,15 +103,6 @@ class Chat extends React.Component {
         };
 
         const addTypingUser = data => {
-            if (data.username) {
-                console.log(data.username + ' is typing');
-                this.setState({ typingUsers: [...this.state.typingUsers, data] });
-            } else {
-                let remove = this.state.typingUsers.indexOf(data.username);
-                this.setState({ typingUsers: this.state.typingUsers.filter((_, i) => i !== remove) })
-            }
-            clearTimeout(this.typeTimeout);
-            this.typeTimeout = setTimeout(this.typingTimeout, 3000);
         };
 
         const addStatus = data => {
@@ -211,7 +213,8 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ userTypingColor: '', userTypingAvatar: '' });
+        let remove = this.state.typingUsers.indexOf(this.state.username);
+        this.setState({ typingUsers: this.state.typingUsers.filter((_, i) => i !== remove) })
     };
 
     sendingMsgTimeout = () => {
@@ -316,7 +319,7 @@ class Chat extends React.Component {
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
-                                        <div {...this.state.typingUsers.length ? {display: "block"} : {display: "none"}} style={{ color: `${typingUser.userTypingColor}` }}><img className="img-fluid" src={`${typingUser.userTypingAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
+                                        <div style={{ color: `${typingUser.userColor}` }}><img className="img-fluid" src={`${typingUser.userAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
                                     )
                                 })}
                                 </div>
