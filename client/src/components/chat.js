@@ -209,7 +209,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ typingUsers: this.state.typingUsers.filter((_, i) => i !== this.state.typingUsers.indexOf(this.state.userTyping)), userTyping: '' })
+        this.setState({ typingUsers: [], userTyping: '' })
     };
 
     sendingMsgTimeout = () => {
