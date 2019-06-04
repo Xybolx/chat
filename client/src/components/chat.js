@@ -209,7 +209,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ typingUsers: [], userTyping: '' })
+        this.setState({ typingUsers: [], userTyping: '' });
     };
 
     sendingMsgTimeout = () => {
@@ -321,15 +321,15 @@ class Chat extends React.Component {
                                 <div className="joining">
                                 {this.state.joiningUsers.map(joiningUser => {
                                     return (
-                                        <div className="user-alert joining" style={{ color: `${joiningUser.user.userColor}` }}><img className="img-fluid" src={`${joiningUser.user.userAvatar}`} alt=""></img>&nbsp;{joiningUser.user.username}&nbsp;joined!</div>
+                                        <div className="user-alert joining" style={{ color: `${joiningUser.user.colorSeed}` }}><img className="img-fluid" src={`${joiningUser.user.avatarURL}`} alt=""></img>&nbsp;{joiningUser.user.username}&nbsp;joined!</div>
                                     )
                                 })}
                                 </div>
-                                <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
                                     &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}
                                 </div>
+                                <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 </div>
                                 <div className="card-footer text-left">
                                      <form id="msgsForm">
