@@ -74,7 +74,7 @@ class Chat extends React.Component {
             const userTyping = `${data.username}`;
             const typingColor = `${data.userColor}`;
             const typingAvatar = `${data.userAvatar}`;
-            if (data) {
+            if (data && !this.state.typingUsers.includes(data)) {
                 console.log(data.username + ' is typing');
                 this.setState({ typingUsers: [...this.state.typingUsers, data] });
             }
@@ -211,7 +211,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ typingUsers: this.state.typingUsers.splice(indexOf(this.state.username), 1) })
+        this.setState({ typingUsers: [] })
     };
 
     sendingMsgTimeout = () => {
