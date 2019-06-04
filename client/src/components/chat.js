@@ -16,7 +16,7 @@ class Chat extends React.Component {
             username: {},
             userAvatar: {},
             userColor: {},
-            userTyping: '',
+            usersTyping: [],
             userTypingColor: '',
             userTypingAvatar: '',
             message: '',
@@ -73,7 +73,7 @@ class Chat extends React.Component {
             addTypingUser(data);
             if (data) {
                 console.log(data.username + ' is typing');
-                this.setState({ userTyping: data.username, userTypingColor: data.userColor, userTypingAvatar: data.userAvatar });
+                this.setState({ usersTyping: [...this.state.usersTyping, data] });
             }
             clearTimeout(this.typeTimeout);
             this.typeTimeout = setTimeout(this.typingTimeout, 3000);
@@ -208,7 +208,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.setState({ userTyping: '', userTypingColor: '', userTypingAvatar: '' });
+        this.setState({ usersTyping: [], userTypingColor: '', userTypingAvatar: '' });
     };
 
     sendingMsgTimeout = () => {
@@ -310,7 +310,7 @@ class Chat extends React.Component {
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
                                 <div className="info">
-                                <div className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }} {...this.state.userTyping ? {display: "block"} : {display: "none"}}>{this.state.userTyping ? <img className="img-fluid" src={this.state.userTypingAvatar} alt=""></img> : ""}&nbsp;{this.state.userTyping ? `${this.state.userTyping}...is typing` : ``}</div>
+                                <div className={`${this.state.username} typing`} style={{ color: `${this.state.userTypingColor}` }} {...this.state.usersTyping ? {display: "block"} : {display: "none"}}>{this.state.usersTyping ? <img className="img-fluid" src={this.state.userTypingAvatar} alt=""></img> : ""}&nbsp;{this.state.usersTyping ? `${this.state.usersTyping}...typing` : ``}</div>
                                 <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
