@@ -30,45 +30,6 @@ body {
 	background: repeating-radial-gradient(rgba(253, 252, 252, 0.815), rgb(8, 8, 8), rgba(119, 98, 98, 0.788), rgb(8, 8, 8), rgb(158, 152, 152)), url("https://media0.giphy.com/media/IyuKoOynx5VHG/giphy.gif?cid=790b76115cee967c6333356d73291b32&rid=giphy.gif");
 	background-blend-mode: screen;
 	background-size: 15% 15%;
-	/* -webkit-animation: Gradient 15s ease infinite;
-	-moz-animation: Gradient 15s ease infinite;
-	animation: Gradient 15s ease infinite; */
-}
-
-@-webkit-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
-}
-
-@-moz-keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
-}
-
-@keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
 }
 
 .card-title {
@@ -155,7 +116,7 @@ body {
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
 	background: url("https://media0.giphy.com/media/IyuKoOynx5VHG/giphy.gif?cid=790b76115cee967c6333356d73291b32&rid=giphy.gif"), url("https://i.gifer.com/9j0g.gif");
 	background-blend-mode: saturation;
-  background-size: cover, 100% 300%;
+  	background-size: cover, 100% 300%;
 	background-repeat: space;
 	background-position: center;
 }
@@ -190,7 +151,7 @@ input {
 h4, h5 {
 	margin-top: 10px;
 	font-family: 'Audiowide', cursive;
-  color: whitesmoke;
+  	color: whitesmoke;
 	text-shadow: 1px 1px 1px black;
 }
 

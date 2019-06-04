@@ -28,6 +28,7 @@ class Chat extends React.Component {
             prvtSent: '',
             prvtSentColor: '',
             prvtSentAvatar: '',
+            joiningUsers: [],
             userJoining: '',
             userJoiningAvatar: ''
         };
@@ -44,15 +45,14 @@ class Chat extends React.Component {
                 this.setState({ msgSent: "message sent" })
             }
             clearTimeout(this.sendMsgTimeout);
-            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 3000);
+            this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 4000);
         });
 
         this.socket.on('RECEIVE_USER', data => {
             addUser(data);
             const joiningUser = `${data.user.username}`;
-            const joiningAvatar = `${data.user.avatarURL}`;
-            if (data) {
-                this.setState({ userJoining: joiningUser, userJoiningAvatar: joiningAvatar })
+            if (data && this.state.userJoining !== data.user.username) {
+                this.setState({ joiningUsers: [...this.state.joiningUsers, data], userJoining: joiningUser })
             } 
             clearTimeout(this.userJoinedTimeout);
             this.userJoinedTimeout = setTimeout(this.userJoiningTimeout, 4000);
@@ -205,7 +205,7 @@ class Chat extends React.Component {
     };
 
     userJoiningTimeout = () => {
-        this.setState({ userJoining: '', userJoiningAvatar: '' });
+        this.setState({ joiningUsers: [], userJoining: '' });
     };
 
     typingTimeout = () => {
@@ -318,14 +318,17 @@ class Chat extends React.Component {
                                     )
                                 })}
                                 </div>
+                                <div className="joining">
+                                {this.state.joiningUsers.map(joiningUser => {
+                                    return (
+                                        <div className="user-alert joining" style={{ color: `${joiningUser.user.userColor}` }}><img className="img-fluid" src={`${joiningUser.user.userAvatar}`} alt=""></img>&nbsp;{joiningUser.user.username}&nbsp;joined!</div>
+                                    )
+                                })}
+                                </div>
                                 <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
                                     &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}
-                                </div>
-                                <div id="userAlert" className="user-alert joining" style={{ color: `${this.state.userColor}` }} {...this.state.userJoining ? {display: "block"} : {display: "none"}}>
-                                    {this.state.userJoining ? <img className="img-fluid" src={this.state.userJoiningAvatar} alt=""></img> : ""}
-                                    &nbsp;{this.state.userJoining ? `${this.state.userJoining}...joined!` : ``}
                                 </div>
                                 </div>
                                 <div className="card-footer text-left">
