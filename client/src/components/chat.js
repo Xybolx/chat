@@ -258,6 +258,7 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
+        this.socket.emit('SEND_TYPING_USER', false);
         this.setState({ typingUsers: [], userTyping: '' });
     };
 
