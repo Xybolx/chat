@@ -85,12 +85,11 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
-            if (data && this.state.userTyping !== data.username && !this.state.typingUsers.includes(data.username)) {
-                console.log(this.state.typingUsers);
+            if (data) {
                 this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
-                clearTimeout(this.typeTimeout);
-                this.typeTimeout = setTimeout(this.typingTimeout, 3500);
             }
+            clearTimeout(this.typeTimeout);
+            this.typeTimeout = setTimeout(this.typingTimeout, 4000);
         });
 
         this.socket.on('connect', () => {
@@ -166,7 +165,9 @@ class Chat extends React.Component {
             [name]: value
         });
 
-        this.sendTypingUser();
+        if (!this.state.typingUsers.includes(this.state.username)) {
+            this.sendTypingUser();
+        }
     };
 
     // socket send events
@@ -258,7 +259,6 @@ class Chat extends React.Component {
     };
 
     typingTimeout = () => {
-        this.socket.emit('SEND_TYPING_USER', false);
         this.setState({ typingUsers: [], userTyping: '' });
     };
 
