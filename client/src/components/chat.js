@@ -29,13 +29,9 @@ class Chat extends React.Component {
             prvtSentColor: '',
             prvtSentAvatar: '',
             joiningUsers: [],
+            leavingUsers: [],
             userJoining: '',
-            userLeaving: '',
-            userJoiningAvatar: '',
-            otherUser: '',
-            roomInvite: '',
-            roomName: '',
-            dmMessage: ''
+            userLeaving: ''
         };
 
         // initialize socket
@@ -211,8 +207,8 @@ class Chat extends React.Component {
     
     // API calls
     logOut = () => {
+        this.sendUserLeft();
         API.logOut()
-        .then(this.sendUserLeft())
         .then(res => window.location = "/login")
         .catch(err => console.log(err))
     };
