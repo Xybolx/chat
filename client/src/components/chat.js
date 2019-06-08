@@ -18,8 +18,6 @@ class Chat extends React.Component {
             userColor: {},
             typingUsers: [],
             userTyping: '',
-            userTypingColor: '',
-            userTypingAvatar: '',
             message: '',
             privateMessage: '',
             privateMessages: [],
@@ -85,7 +83,7 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
-            if (data) {
+            if (data && !this.state.userTyping) {
                 this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
             }
             clearTimeout(this.typeTimeout);
@@ -165,9 +163,7 @@ class Chat extends React.Component {
             [name]: value
         });
 
-        if (!this.state.typingUsers.includes(this.state.username)) {
-            this.sendTypingUser();
-        }
+        this.sendTypingUser();
     };
 
     // socket send events
