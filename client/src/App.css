@@ -211,10 +211,7 @@ hr {
 	color: whitesmoke;
 }
 
-.emailLabel,
-.userLabel,
-.passLabel,
-#msgLabel {
+label {
 	text-align: left;
 	color: whitesmoke;
 	margin-left: 10px;
