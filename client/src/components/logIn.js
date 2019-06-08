@@ -51,9 +51,9 @@ class LogIn extends React.Component{
                             </div>
                             <div className="card-footer">
                             <form id="loginForm">
-                            <label className="emailLabel">Email</label>
+                                <label className="label" htmlFor="email">Email</label>
                                 <input id="emailInput" type="email" name="email" placeholder="📧 Email" value={this.state.email} onChange={this.handleInputChange} className="form-control" required/>
-                                <label className="passLabel" htmlFor="password">Password</label>
+                                <label className="label" htmlFor="password">Password</label>
                                 <input id="passwordInput" type="password" name="password" placeholder=" 🔑 Password" className="form-control" value={this.state.password} onChange={this.handleInputChange} required/>
                                 <br/>
                                 <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="fas fa-user-plus"></i> Login</button>
