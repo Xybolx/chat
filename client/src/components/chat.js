@@ -70,9 +70,9 @@ class Chat extends React.Component {
             const leavingUser = `${data.user.username}`;
             if (data && this.state.userLeaving !== leavingUser) {
                 this.setState({ leavingUsers: [...this.state.leavingUsers, data], userLeaving: leavingUser })
-                clearTimeout(this.userLeftTimeout);
-                this.userLeftTimeout = setTimeout(this.userLeavingTimeout, 4000);
             } 
+            clearTimeout(this.userLeftTimeout);
+            this.userLeftTimeout = setTimeout(this.userLeavingTimeout, 4000);
         });
 
         this.socket.on('RECEIVE_PRIVATE_MESSAGE', data => {
@@ -211,8 +211,8 @@ class Chat extends React.Component {
     
     // API calls
     logOut = () => {
-        this.sendUserLeft();
         API.logOut()
+        .then(this.sendUserLeft())
         .then(res => window.location = "/login")
         .catch(err => console.log(err))
     };
