@@ -78,8 +78,9 @@ class Chat extends React.Component {
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
-            if (data && !this.state.typingUsers.includes(data.username)){
-                console.log(data.username + ' is typing');
+            console.log(this.state.typingUsers);
+            if (data && !this.state.typingUsers.includes(data.username || data.userColor || data.userAvatar)){
+                console.log(data);
                 this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
             }
             clearTimeout(this.typeTimeout);
@@ -114,7 +115,6 @@ class Chat extends React.Component {
     // handle msg form submit
     handleFormSubmit = ev => {
         ev.preventDefault();
-        this.resetLogOutTimeout();
 
         let msg = this.state.message.substr(1);
         let ind = msg.indexOf('/');
@@ -138,27 +138,14 @@ class Chat extends React.Component {
                 privateMessage: messageIndex
             });
 
+            this.resetLogOutTimeout();
             this.setState({ message: '' });
 
         } else {
-            API.saveMessage({
-                author: this.state.username,
-                userAvatar: this.state.userAvatar,
-                userColor: this.state.userColor,
-                message: this.state.message
-            });
-
-            this.socket.emit('SEND_MESSAGE', {
-                author: this.state.username,
-                userAvatar: this.state.userAvatar,
-                userColor: this.state.userColor,
-                message: this.state.message
-            });
-
-            this.socket.emit('SEND_STATUS', {
-                author: this.state.username
-            });
-
+            this.saveMsg();
+            this.sendMsg();
+            this.sendStatus();
+            this.resetLogOutTimeout();
             this.setState({ message: '' });
         };
     };
@@ -170,6 +157,17 @@ class Chat extends React.Component {
             [name]: value
         });
 
+        this.sendTypingUser();
+    };
+
+    // socket send events
+    sendUser = () => {
+        this.socket.emit('SEND_USER', {
+            user: this.state.user
+        });
+    };
+
+    sendTypingUser = () => {
         this.socket.emit('SEND_TYPING_USER', {
             username: this.state.username,
             userColor: this.state.userColor,
@@ -177,10 +175,18 @@ class Chat extends React.Component {
         });
     };
 
-    // send current user to socketEvents
-    sendUser = () => {
-        this.socket.emit('SEND_USER', {
-            user: this.state.user
+    sendMsg = () => {
+        this.socket.emit('SEND_MESSAGE', {
+            author: this.state.username,
+            userAvatar: this.state.userAvatar,
+            userColor: this.state.userColor,
+            message: this.state.message
+        });
+    };
+
+    sendStatus = () => {
+        this.socket.emit('SEND_STATUS', {
+            author: this.state.username
         });
     };
     
@@ -210,6 +216,15 @@ class Chat extends React.Component {
             .then(res =>
                 this.setState({ privateMessages: res.data }))
                 .catch(err => console.log(err))
+    };
+
+    saveMsg = () => {
+        API.saveMessage({
+            author: this.state.username,
+            userAvatar: this.state.userAvatar,
+            userColor: this.state.userColor,
+            message: this.state.message
+        });
     };
 
     // event timeouts
