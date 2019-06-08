@@ -63,11 +63,11 @@ class SignUp extends React.Component {
                             </div>
                             <div className="card-footer">
                                 <form id="signUpForm">
-                                <label className="emailLabel" htmlFor="email">Email</label>
+                                    <label className="label" htmlFor="email">Email</label>
                                     <input id="emailInput" type="email" placeholder="📧 Email" value={this.state.email} onChange={ev => this.setState({ email: ev.target.value })} className="form-control" required />
-                                    <label className="userLabel" htmlFor="username">Username</label>
+                                    <label className="label" htmlFor="username">Username</label>
                                     <input id="usernameInput" type="text" placeholder="👥 Username" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} className="form-control" required />
-                                    <label className="passLabel" htmlFor="password">Password</label>
+                                    <label className="label" htmlFor="password">Password</label>
                                     <input id="passwordInput" type="password" placeholder=" 🔑 Password" className="form-control" value={this.state.password} onChange={ev => this.setState({ password: ev.target.value })} required />
                                     <br />
                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block"> <i className="far fa-address-card"></i> Sign Up</button>
