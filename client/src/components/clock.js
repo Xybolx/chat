@@ -15,6 +15,7 @@ class Clock extends React.Component {
     };
 
     componentDidMount() {
+        this.loadClock();
         this.handleClockInterval = setInterval(this.loadClock, 1000);
     };
 

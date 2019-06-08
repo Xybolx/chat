@@ -37,19 +37,12 @@ class Chat extends React.Component {
             dmMessage: ''
         };
 
+        // initialize socket
         this.socket = io("https://mernmessenger.herokuapp.com");
 
+        // client receive socket events
         this.socket.on('RECEIVE_MESSAGE', data => {
             addMessage(data);
-        });
-
-        this.socket.on('RECEIVE_ROOM_JOIN', data => {
-            console.log(`${data.username} joined ${data.username + data.otherUser}`);
-            this.setState({ roomInvite: `${data.username} invited you to a private chat ${data.username + data.otherUser}`, roomName: `${data.username}${data.otherUser}` })
-        });
-
-        this.socket.on('RECEIVE_ACCEPT_ROOM_JOIN', data => {
-            console.log(`${data.username} joined ${data.roomName}`);
         });
 
         this.socket.on('RECEIVE_STATUS', data => {
@@ -81,10 +74,6 @@ class Chat extends React.Component {
             }
             clearTimeout(this.sendPrivateMsgTimeout);
             this.sendPrivateMsgTimeout = setTimeout(this.sendingPrivateMsgTimeout, 4000);
-        });
-
-        this.socket.on('RECEIVE_DM_MESSAGE', data => {
-            alert(`DM: ${data.dmMessage} from ${data.author}`);
         });
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
@@ -119,82 +108,87 @@ class Chat extends React.Component {
         };
 
         const addStatus = data => {
-        };
+        };    
+    };
 
-        this.handleFormSubmit = ev => {
-            ev.preventDefault();
-            this.resetLogOutTimeout();
-            let msg = this.state.message.substr(1);
-            let ind = msg.indexOf('/');
-            let receiver = msg.substr(0, ind);
-            let messageIndex = msg.substr(ind + 1);
-            if (this.state.message.substr(0, 1) === '@' && ind !== -1) {
-                API.savePrivateMessage({
-                    receiver: receiver,
-                    author: this.state.username,
-                    userAvatar: this.state.userAvatar,
-                    userColor: this.state.userColor,
-                    privateMessage: messageIndex
-                });
-                this.socket.emit('SEND_PRIVATE_MESSAGE', {
-                    receiver: receiver,
-                    author: this.state.username,
-                    userAvatar: this.state.userAvatar,
-                    userColor: this.state.userColor,
-                    privateMessage: messageIndex
-                });
+    // handle msg form submit
+    handleFormSubmit = ev => {
+        ev.preventDefault();
+        this.resetLogOutTimeout();
 
-                this.setState({ message: '' });
+        let msg = this.state.message.substr(1);
+        let ind = msg.indexOf('/');
+        let receiver = msg.substr(0, ind);
+        let messageIndex = msg.substr(ind + 1);
 
-            } else {
-                API.saveMessage({
-                    author: this.state.username,
-                    userAvatar: this.state.userAvatar,
-                    userColor: this.state.userColor,
-                    message: this.state.message
-                });
-
-                this.socket.emit('SEND_MESSAGE', {
-                    author: this.state.username,
-                    userAvatar: this.state.userAvatar,
-                    userColor: this.state.userColor,
-                    message: this.state.message
-                });
-
-                this.socket.emit('SEND_STATUS', {
-                    author: this.state.username
-                });
-
-                this.setState({ message: '' });
-            }
-        };
-
-        this.sendDM = (ev) => {
-            ev.preventDefault();
-            this.socket.emit('SEND_DM_MESSAGE', {
-                roomName: this.state.roomName,
+        if (this.state.message.substr(0, 1) === '@' && ind !== -1) {
+            API.savePrivateMessage({
+                receiver: receiver,
                 author: this.state.username,
-                dmMessage: this.state.dmMessage
-            });
-        };
-        
-        this.handleInputChange = ev => {
-            const { name, value } = ev.target;
-            this.setState({
-                [name]: value
-            });
-            this.socket.emit('SEND_TYPING_USER', {
-                username: this.state.username,
+                userAvatar: this.state.userAvatar,
                 userColor: this.state.userColor,
-                userAvatar: this.state.userAvatar
+                privateMessage: messageIndex
             });
+
+            this.socket.emit('SEND_PRIVATE_MESSAGE', {
+                receiver: receiver,
+                author: this.state.username,
+                userAvatar: this.state.userAvatar,
+                userColor: this.state.userColor,
+                privateMessage: messageIndex
+            });
+
+            this.setState({ message: '' });
+
+        } else {
+            API.saveMessage({
+                author: this.state.username,
+                userAvatar: this.state.userAvatar,
+                userColor: this.state.userColor,
+                message: this.state.message
+            });
+
+            this.socket.emit('SEND_MESSAGE', {
+                author: this.state.username,
+                userAvatar: this.state.userAvatar,
+                userColor: this.state.userColor,
+                message: this.state.message
+            });
+
+            this.socket.emit('SEND_STATUS', {
+                author: this.state.username
+            });
+
+            this.setState({ message: '' });
         };
-        
-        this.logOut = () => {
-            API.logOut()
-            .then(res => window.location = "/login")
-            .catch(err => console.log(err))
-        };
+    };
+    
+    // handle input change/send typing user
+    handleInputChange = ev => {
+        const { name, value } = ev.target;
+        this.setState({
+            [name]: value
+        });
+
+        this.socket.emit('SEND_TYPING_USER', {
+            username: this.state.username,
+            userColor: this.state.userColor,
+            userAvatar: this.state.userAvatar
+        });
+    };
+
+    // send current user to socketEvents
+    sendUser = () => {
+        this.socket.emit('SEND_USER', {
+            user: this.state.user
+        });
+    };
+    
+    // API calls
+    logOut = () => {
+        API.logOut()
+        .then(res => window.location = "/login")
+        .catch(err => console.log(err))
     };
 
     loadUser = () => {
@@ -202,12 +196,6 @@ class Chat extends React.Component {
             .then(res =>
                 this.setState({ user: res.data, username: res.data.username, userAvatar: res.data.avatarURL, userColor: res.data.colorSeed }))
                 .catch(err => console.log(err))
-    };
-
-    sendUser = () => {
-        this.socket.emit('SEND_USER', {
-            user: this.state.user
-        });
     };
 
     loadMessages = () => {
@@ -224,7 +212,7 @@ class Chat extends React.Component {
                 .catch(err => console.log(err))
     };
 
-    // Event timeouts
+    // event timeouts
     resetLogOutTimeout = () => {
         clearTimeout(this.logOutTimeout);
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
@@ -246,6 +234,7 @@ class Chat extends React.Component {
         this.setState({ prvtSent: '', prvtSentColor: '', prvtSentAvatar: '' });
     };
 
+    // sets up logging user out on page unload
     setupBeforeUnloadListener = () => {
         window.addEventListener("beforeunload", (ev) => {
             ev.preventDefault();
@@ -253,25 +242,10 @@ class Chat extends React.Component {
         });
     };
 
-    // logs user out on page unload
+    // removes setup logging user out on page unload
     removeBeforeUnloadListener = () => {
         window.removeEventListener("beforeunload", (ev) => {
             ev.preventDefault();
-        });
-    };
-
-    handleRoomJoin = () => {
-        this.socket.emit('SEND_ROOM_JOIN', {
-            username: this.state.username,
-            otherUser: this.state.otherUser
-                
-        });
-    };
-
-    acceptRoomJoin = () => {
-        this.socket.emit('SEND_ACCEPT_ROOM_JOIN', {
-            roomName: this.state.roomName,
-            username: this.state.username
         });
     };
 
@@ -325,8 +299,7 @@ class Chat extends React.Component {
                                         {this.state.messages.map(message => (
                                             <div className="card" key={message._id}>
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
-                                                <input className={`${message.author} join`} type="checkbox" value={message.author} onChange={ev => this.setState({ otherUser: ev.target.value })}></input>
-                                                    <div onClick={this.handleRoomJoin} style={{ color: `${message.userColor}` }}>
+                                                    <div style={{ color: `${message.userColor}` }}>
                                                         <img className="img-fluid" alt="" src={message.userAvatar}></img>
                                                         &nbsp;{message.author} <span className="msgTime" style={{ fontSize: 8 }}>{moment(message.date).fromNow()}:</span> <br /> <span className="msgBody">{message.message}</span>
                                                     </div>
@@ -356,7 +329,6 @@ class Chat extends React.Component {
                                     )}
                                 <h4> <i className="fas fa-info"></i> Info</h4>
                                 <div className="info">
-                                    <button onClick={this.acceptRoomJoin} className="btn btn-success btn-md" type="button" {...this.state.roomInvite ? {display: "block"} : {display: "none"}}>{this.state.roomInvite}</button>
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
@@ -379,9 +351,6 @@ class Chat extends React.Component {
                                 </div>
                                 <div className="card-footer text-left">
                                      <form id="msgsForm">
-                                     <input id="dmMsg" type="text" name="dmMessage" placeholder="📝DM Msg" className="form-control" value={this.state.dmMessage} onChange={this.handleInputChange} />
-                                     <br/>
-                                     <button onClick={this.sendDM} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp; Send DM</button>
                                      <label id="msgLabel" htmlFor="message" />Message
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
