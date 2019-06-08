@@ -20,9 +20,13 @@ module.exports = function (io) {
         io.to(connections[data.author].id).emit('RECEIVE_STATUS', data);
       });
 
-      socket.on('SEND_USER', data => {
+      socket.on('SEND_USER_JOINED', data => {
           connections[data.user.username] = socket;
-          io.sockets.emit('RECEIVE_USER', data);
+          io.sockets.emit('RECEIVE_USER_JOINED', data);
+      });
+
+      socket.on('SEND_USER_LEFT', data => {
+          socket.broadcast.emit('RECEIVE_USER_LEFT', data);
       });
 
       socket.on('SEND_TYPING_USER', data => {

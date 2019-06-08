@@ -30,6 +30,7 @@ class Chat extends React.Component {
             prvtSentAvatar: '',
             joiningUsers: [],
             userJoining: '',
+            userLeaving: '',
             userJoiningAvatar: '',
             otherUser: '',
             roomInvite: '',
@@ -54,14 +55,24 @@ class Chat extends React.Component {
             this.sendMsgTimeout = setTimeout(this.sendingMsgTimeout, 3000);
         });
 
-        this.socket.on('RECEIVE_USER', data => {
+        this.socket.on('RECEIVE_USER_JOINED', data => {
             addUser(data);
             const joiningUser = `${data.user.username}`;
-            if (data && this.state.userJoining !== data.user.username) {
+            if (data && this.state.userJoining !== joiningUser) {
                 this.setState({ joiningUsers: [...this.state.joiningUsers, data], userJoining: joiningUser })
             } 
             clearTimeout(this.userJoinedTimeout);
             this.userJoinedTimeout = setTimeout(this.userJoiningTimeout, 4000);
+        });
+
+        this.socket.on('RECEIVE_USER_LEFT', data => {
+            removeUser(data);
+            const leavingUser = `${data.user.username}`;
+            if (data && this.state.userLeaving !== leavingUser) {
+                this.setState({ leavingUsers: [...this.state.leavingUsers, data], userLeaving: leavingUser })
+                clearTimeout(this.userLeftTimeout);
+                this.userLeftTimeout = setTimeout(this.userLeavingTimeout, 4000);
+            } 
         });
 
         this.socket.on('RECEIVE_PRIVATE_MESSAGE', data => {
@@ -82,7 +93,7 @@ class Chat extends React.Component {
                 console.log(this.state.typingUsers);
                 this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
                 clearTimeout(this.typeTimeout);
-                this.typeTimeout = setTimeout(this.typingTimeout, 2500);
+                this.typeTimeout = setTimeout(this.typingTimeout, 3500);
             }
         });
 
@@ -102,6 +113,9 @@ class Chat extends React.Component {
         };
 
         const addUser = data => {
+        };
+
+        const removeUser = data => {
         };
 
         const addTypingUser = data => {
@@ -161,7 +175,7 @@ class Chat extends React.Component {
 
     // socket send events
     sendUser = () => {
-        this.socket.emit('SEND_USER', {
+        this.socket.emit('SEND_USER_JOINED', {
             user: this.state.user
         });
     };
@@ -188,9 +202,16 @@ class Chat extends React.Component {
             author: this.state.username
         });
     };
+
+    sendUserLeft = () => {
+        this.socket.emit('SEND_USER_LEFT', {
+            user: this.state.user
+        });
+    };
     
     // API calls
     logOut = () => {
+        this.sendUserLeft();
         API.logOut()
         .then(res => window.location = "/login")
         .catch(err => console.log(err))
@@ -236,7 +257,12 @@ class Chat extends React.Component {
         this.setState({ joiningUsers: [], userJoining: '' });
     };
 
+    userLeavingTimeout = () => {
+        this.setState({ leavingUsers: [], userLeaving: '' });
+    };
+
     typingTimeout = () => {
+        this.socket.emit('SEND_TYPING_USER', false);
         this.setState({ typingUsers: [], userTyping: '' });
     };
 
@@ -280,6 +306,7 @@ class Chat extends React.Component {
         clearTimeout(this.typeTimeout);
         clearTimeout(this.sendPrivateMsgTimeout);
         clearTimeout(this.userJoinedTimeout);
+        clearTimeout(this.userLeftTimeout);
         clearTimeout(this.sendMsgTimeout);
     }
 
@@ -354,6 +381,13 @@ class Chat extends React.Component {
                                 {this.state.joiningUsers.map(joiningUser => {
                                     return (
                                         <div className="user-alert joining" style={{ color: `${joiningUser.user.colorSeed}` }}><img className="img-fluid" src={`${joiningUser.user.avatarURL}`} alt=""></img>&nbsp;{joiningUser.user.username}&nbsp;joined!</div>
+                                    )
+                                })}
+                                </div>
+                                <div className="leaving">
+                                {this.state.leavingUsers.map(leavingUser => {
+                                    return (
+                                        <div className="user-alert leaving" style={{ color: `${leavingUser.user.colorSeed}` }}><img className="img-fluid" src={`${leavingUser.user.avatarURL}`} alt=""></img>&nbsp;{leavingUser.user.username}&nbsp;Left!</div>
                                     )
                                 })}
                                 </div>
