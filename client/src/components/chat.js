@@ -351,7 +351,7 @@ class Chat extends React.Component {
                                 </div>
                                 <div className="card-footer text-left">
                                      <form id="msgsForm">
-                                     <label className="passLabel" htmlFor="message">Msg/Private Msg-@username/</label>
+                                     <label className="label" htmlFor="message">Msg/Private Msg-@username/</label>
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
                                      <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</button>
