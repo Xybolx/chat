@@ -18,6 +18,7 @@ class Chat extends React.Component {
             userColor: '',
             typingUsers: [],
             messages: [],
+            messagesCleared: '',
             privateMessages: [],
             joiningUsers: [],
             leavingUsers: [],
@@ -40,7 +41,7 @@ class Chat extends React.Component {
         this.socket.on('RECEIVE_MESSAGE', data => {
             addMessage(data);
             if (data) {
-                this.clearMessages();
+                this.loadMessages();
             }
         });
 
@@ -109,6 +110,8 @@ class Chat extends React.Component {
             if (data) {
                 this.clearMessages();
             }
+            clearTimeout(this.clearedTimeout);
+            this.clearedTimeout = setTimeout(this.clearingTimeout, 4000);
         });
 
         this.socket.on('connect', () => {
@@ -283,7 +286,7 @@ class Chat extends React.Component {
     clearMessages = () => {
         API.deleteMessages()
             .then(res => 
-                this.loadMessages())
+                this.setState({ messagesCleared: 'cleared' }))
                 .catch(err => console.log(err))
     };
 
@@ -317,6 +320,10 @@ class Chat extends React.Component {
         this.setState({ prvtSuccess: '' });
     };
 
+    clearingTimeout = () => {
+        this.setState({ messagesCleared: '' });
+    };
+
     // sets up logging user out on page unload
     setupBeforeUnloadListener = () => {
         window.addEventListener("beforeunload", (ev) => {
@@ -348,6 +355,7 @@ class Chat extends React.Component {
         clearTimeout(this.userJoinedTimeout);
         clearTimeout(this.userLeftTimeout);
         clearTimeout(this.sendMsgTimeout);
+        clearTimeout(this.clearedTimeout);
     };
 
     componentDidMount() {
@@ -374,7 +382,7 @@ class Chat extends React.Component {
                                 <Title />
                                     <Clock />
                                         <Users />
-                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button onClick={this.sendClearMsgs} className="btn btn-danger">Clear</button></h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button onClick={this.sendClearMsgs} className="btn btn-danger">{this.state.messagesCleared ? `Clearing...` : `Clear` }</button></h5>
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         {this.state.messages.map(message => (
@@ -391,7 +399,7 @@ class Chat extends React.Component {
                                 ) : (
                                         <h5>Messages Cleared!</h5>
                                     )}
-                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span>{this.state.username}'s Private Msgs&nbsp;<button className="btn btn-info privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">Show</button></h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<button className="btn btn-info privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">Show</button></h5>
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages collapse" id="collapsePrivate">
                                         {this.state.privateMessages.map(privateMessage => (
