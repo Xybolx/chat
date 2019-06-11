@@ -15,23 +15,13 @@
 @keyframes Flash {
   50% {
 		color: yellow;
-		transform: rotate(0deg);
+		transform: rotateX(0deg);
   }
   100% {
 		color: red;
-		transform: rotate(360deg);
+		transform: rotateX(360deg);
   }
 }
-
-@keyframes typing {
-	from {
-	  width: 0%
-	}
-
-	to {
-	  width: 100%
-	}
-  }
 
 body {
 	width: 100%;
@@ -265,5 +255,5 @@ hr {
 }
 
 .typingUser {
-	animation: typing .5s infinite;
+	animation: Flash 1s infinite;
 }
