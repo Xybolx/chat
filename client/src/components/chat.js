@@ -109,6 +109,7 @@ class Chat extends React.Component {
             removeMessages(data);
             if (data) {
                 this.clearMessages();
+                this.loadMessages();
             }
             clearTimeout(this.clearedTimeout);
             this.clearedTimeout = setTimeout(this.clearingTimeout, 4000);
