@@ -4,8 +4,31 @@ import API from "../utils/API";
 
 class Messages extends Component {
     state = {
+        user: {},
+        username: '',
+        userColor: '',
+        userAvatar: '',
         messages: []
-    }
+    };
+
+    loadMessages = () => {
+        API.getMessages()
+            .then(res =>
+                this.setState({ messages: res.data }))
+                .catch(err => console.log(err))
+    };
+
+    loadUser = () => {
+        API.getUser()
+            .then(res =>
+                this.setState({ user: res.data, username: res.data.username, userAvatar: res.data.avatarURL, userColor: res.data.colorSeed }))
+                .catch(err => console.log(err))
+    };
+
+    componentDidMount() {
+        this.loadUser();
+        this.loadMessages();
+    };
 
     render() {
         return (

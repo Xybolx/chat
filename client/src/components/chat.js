@@ -218,13 +218,6 @@ class Chat extends React.Component {
                 .catch(err => console.log(err))
     };
 
-    loadMessages = () => {
-        API.getMessages()
-            .then(res =>
-                this.setState({ messages: res.data }))
-                .catch(err => console.log(err))
-    };
-
     loadPrivateMessages = () => {
         API.getPrivateMessages()
             .then(res =>
