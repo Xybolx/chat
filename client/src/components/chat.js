@@ -17,18 +17,18 @@ class Chat extends React.Component {
             userAvatar: {},
             userColor: {},
             typingUsers: [],
+            messages: [],
+            privateMessages: [],
+            joiningUsers: [],
+            leavingUsers: [],
             userTyping: '',
             message: '',
             privateMessage: '',
-            privateMessages: [],
-            messages: [],
             msgSent: '',
             prvtSent: '',
             prvtSuccess: '',
             prvtSentColor: '',
             prvtSentAvatar: '',
-            joiningUsers: [],
-            leavingUsers: [],
             userJoining: '',
             userLeaving: ''
         };
@@ -67,7 +67,7 @@ class Chat extends React.Component {
             removeUser(data);
             const leavingUser = `${data.user.username}`;
             if (data && this.state.userLeaving !== leavingUser) {
-                this.setState({ leavingUsers: [...this.state.leavingUsers, data], userLeaving: leavingUser })
+                this.setState({ leavingUsers: [...this.state.leavingUsers, data], userLeaving: leavingUser });
             } 
             clearTimeout(this.userLeftTimeout);
             this.userLeftTimeout = setTimeout(this.userLeavingTimeout, 4000);
@@ -79,7 +79,8 @@ class Chat extends React.Component {
             const privateColor = `${data.userColor}`;
             const privateAvatar = `${data.userAvatar}`;
             if (data) {
-                this.setState({ prvtSent: privateSender, prvtSentColor: privateColor, prvtSentAvatar: privateAvatar })
+                this.setState({ prvtSent: privateSender, prvtSentColor: privateColor, prvtSentAvatar: privateAvatar });
+                this.loadPrivateMessages();
             }
             clearTimeout(this.sendPrivateMsgTimeout);
             this.sendPrivateMsgTimeout = setTimeout(this.sendingPrivateMsgTimeout, 4000);
@@ -312,11 +313,9 @@ class Chat extends React.Component {
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
         this.loadUserTimeout = setTimeout(this.loadUser, 5000);
         this.sendUserTimeout = setTimeout(this.sendUser, 7000);
-        this.handlePrivateMessageInterval = setInterval(this.loadPrivateMessages, 5000);
-    }
+    };
 
     clearTimers = () => {
-        clearInterval(this.handlePrivateMessageInterval);
         clearTimeout(this.loadUserTimeout);
         clearTimeout(this.sendUserTimeout);
         clearTimeout(this.logOutTimeout);
@@ -326,7 +325,7 @@ class Chat extends React.Component {
         clearTimeout(this.userJoinedTimeout);
         clearTimeout(this.userLeftTimeout);
         clearTimeout(this.sendMsgTimeout);
-    }
+    };
 
     componentDidMount() {
         this.setupBeforeUnloadListener();
