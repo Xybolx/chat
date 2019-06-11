@@ -368,9 +368,9 @@ class Chat extends React.Component {
                                 ) : (
                                         <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
-                                <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h4>
+                                <h4 data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h4>
                                 {this.state.privateMessages.length ? (
-                                    <div className="privateMessages">
+                                    <div className="privateMessages collapse" id="collapseExample">
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div className="card" key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">
