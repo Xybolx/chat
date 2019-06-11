@@ -59,7 +59,6 @@ class SignUp extends Component {
                                     <Title />
                                     <Clock />
                                     <h5><i className="far fa-address-card"></i> Sign Up </h5>
-                                    <br />
                                     <h5>or<br /><i className="fas fa-user-plus"></i> Login<Link to="/login">&nbsp;Here</Link>!</h5>
                                 </div>
                             </div>
