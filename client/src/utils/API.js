@@ -26,6 +26,9 @@ export default {
   getMessages: function() {
     return axios.get("/api/messages");
   },
+  deleteMessages: function() {
+    return axios.delete("/api/messages");
+  },
   // Saves a private message to the database
   savePrivateMessage: function(privateMessageData) {
     return axios.post("/api/privateMessages", privateMessageData);

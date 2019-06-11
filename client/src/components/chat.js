@@ -264,6 +264,13 @@ class Chat extends React.Component {
         });
     };
 
+    clearMessages = () => {
+        API.deleteMessages()
+            .then(res => 
+                this.setState({ messages: [] }))
+                .catch(err => console.log(err))
+    };
+
     // event timeouts
     resetLogOutTimeout = () => {
         clearTimeout(this.logOutTimeout);
@@ -351,7 +358,7 @@ class Chat extends React.Component {
                                 <Title />
                                     <Clock />
                                         <Users />
-                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs</h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<a onClick={this.clearMessages} className="btn btn-danger">Clear</a></h5>
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         {this.state.messages.map(message => (

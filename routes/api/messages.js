@@ -5,13 +5,13 @@ const messagesController = require("../../controllers/messagesController");
 router
   .route("/")
   .get(messagesController.findAll)
-  .post(messagesController.create);
+  .post(messagesController.create)
+  .delete(messagesController.remove);
 
 // Matches with "/api/messages/:id"
 router
   .route("/:id")
   .get(messagesController.findOne)
-  .put(messagesController.update)
-  .delete(messagesController.remove);
+  .put(messagesController.update);
 
 module.exports = router;
