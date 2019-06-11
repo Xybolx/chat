@@ -1,10 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 
-class Title extends React.Component {
-    constructor(props) {
-        super(props);
-    };
+class Title extends Component {
+    
     render() {
+
         return (
             <h1 id="title">M.E.R.N<div>Messenger</div></h1>
         );

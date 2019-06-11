@@ -38,6 +38,9 @@ class Chat extends React.Component {
         // client receive socket events
         this.socket.on('RECEIVE_MESSAGE', data => {
             addMessage(data);
+            if (data) {
+                this.loadMessages();
+            }
         });
 
         this.socket.on('RECEIVE_STATUS', data => {
@@ -285,12 +288,10 @@ class Chat extends React.Component {
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
         this.loadUserTimeout = setTimeout(this.loadUser, 5000);
         this.sendUserTimeout = setTimeout(this.sendUser, 7000);
-        this.handleMessageInterval = setInterval(this.loadMessages, 5000);
         this.handlePrivateMessageInterval = setInterval(this.loadPrivateMessages, 5000);
     }
 
     clearTimers = () => {
-        clearInterval(this.handleMessageInterval);
         clearInterval(this.handlePrivateMessageInterval);
         clearTimeout(this.loadUserTimeout);
         clearTimeout(this.sendUserTimeout);
