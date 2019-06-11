@@ -3,6 +3,7 @@ import Sound from "react-sound";
 import Clock from "./clock";
 import Users from "./users";
 import Title from "./title";
+import Messages from "./messages";
 import io from "socket.io-client";
 import API from "../utils/API";
 import moment from "moment";
@@ -326,23 +327,7 @@ class Chat extends React.Component {
                                 <Title />
                                     <Clock />
                                         <Users />
-                                <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs</h4>
-                                {this.state.messages.length ? (
-                                    <div className="messages">
-                                        {this.state.messages.map(message => (
-                                            <div className="card" key={message._id}>
-                                                <div style={{ borderColor: `${message.userColor}` }} className="card-header">
-                                                    <div style={{ color: `${message.userColor}` }}>
-                                                        <img className="img-fluid" alt="" src={message.userAvatar}></img>
-                                                        &nbsp;{message.author} <span className="msgTime" style={{ fontSize: 8 }}>{moment(message.date).fromNow()}:</span> <br /> <span className="msgBody">{message.message}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                        <h5><i className="fab fa-react fa-spin"></i></h5>
-                                    )}
+                                            <Messages />
                                 <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h4>
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages">
