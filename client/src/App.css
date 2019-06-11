@@ -237,3 +237,7 @@ hr {
 .info {
 	height: 100px;
 }
+
+#privateCollapse:hover {
+	cursor: pointer;
+}

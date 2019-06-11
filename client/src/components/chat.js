@@ -368,9 +368,9 @@ class Chat extends React.Component {
                                 ) : (
                                         <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
-                                <h4 data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h4>
+                                <h4 className="privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate"><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h4>
                                 {this.state.privateMessages.length ? (
-                                    <div className="privateMessages collapse" id="collapseExample">
+                                    <div className="privateMessages collapse" id="collapsePrivate">
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div className="card" key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">
@@ -416,12 +416,15 @@ class Chat extends React.Component {
                                 <div className={`${this.state.username} prvtSuccess`} style={{ color: `${this.state.userColor}` }} {...this.state.prvtSuccess ? {display: "block"} : {display: "none"}}>{this.state.prvtSuccess ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 </div>
                                 <div className="card-footer text-left">
+                                    <button className="btn btn-info btn-block" data-toggle="collapse" data-target="#collapseMsgForm" aria-expanded="false" aria-controls="collapseMsgForm"><i className="far fa-edit"></i> Message</button>
+                                    <div className="collapse" id="collapseMsgForm"> 
                                      <form id="msgsForm">
                                      <label className="label" htmlFor="message">Msg/Private Msg-@username/</label>
-                                     <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
+                                     <textarea id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
-                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent || this.state.prvtSuccess ? `Sending...` : `Send` }</button>
+                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-md" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent || this.state.prvtSuccess ? `Sending...` : `Send` }</button>
                                      </form>
+                                    </div> 
                                      <button onClick={this.logOut} className="btn btn-danger btn-block"> <i className="fas fa-user-slash"></i> Logout </button>
                                 </div>
                             </div>
