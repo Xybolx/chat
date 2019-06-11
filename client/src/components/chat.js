@@ -13,9 +13,9 @@ class Chat extends React.Component {
 
         this.state = {
             user: {},
-            username: {},
-            userAvatar: {},
-            userColor: {},
+            username: '',
+            userAvatar: '',
+            userColor: '',
             typingUsers: [],
             messages: [],
             privateMessages: [],
