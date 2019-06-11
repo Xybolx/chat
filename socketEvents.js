@@ -36,6 +36,10 @@ module.exports = function (io) {
       socket.on('SEND_TYPING_USER', data => {
           socket.broadcast.emit('RECEIVE_TYPING_USER', data);
         });
+
+      socket.on('SEND_CLEAR_MSGS', data => { 
+          io.sockets.emit('RECEIVE_CLEAR_MSGS', data);
+        });
   
   });
 };

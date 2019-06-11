@@ -40,7 +40,7 @@ class Chat extends React.Component {
         this.socket.on('RECEIVE_MESSAGE', data => {
             addMessage(data);
             if (data) {
-                this.loadMessages();
+                this.clearMessages();
             }
         });
 
@@ -104,6 +104,13 @@ class Chat extends React.Component {
             this.typeTimeout = setTimeout(this.typingTimeout, 4000);
         });
 
+        this.socket.on('RECEIVE_CLEAR_MSGS', data => {
+            removeMessages(data);
+            if (data) {
+                this.clearMessages();
+            }
+        });
+
         this.socket.on('connect', () => {
             let id = this.socket.io.engine.id;
             console.log(id);
@@ -132,6 +139,9 @@ class Chat extends React.Component {
         };
         
         const addPrvtStatus = data => {
+        };
+
+        const removeMessages = data => {
         };
     };
 
@@ -225,6 +235,12 @@ class Chat extends React.Component {
             user: this.state.user
         });
     };
+
+    sendClearMsgs = () => {
+        this.socket.emit('SEND_CLEAR_MSGS', {
+            clear: 'Messages Cleared!'
+        });
+    };
     
     // API calls
     logOut = () => {
@@ -267,7 +283,7 @@ class Chat extends React.Component {
     clearMessages = () => {
         API.deleteMessages()
             .then(res => 
-                this.setState({ messages: [] }))
+                this.loadMessages())
                 .catch(err => console.log(err))
     };
 
@@ -358,7 +374,7 @@ class Chat extends React.Component {
                                 <Title />
                                     <Clock />
                                         <Users />
-                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button onClick={this.clearMessages} className="btn btn-danger">Clear</button></h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button onClick={this.sendClearMsgs} className="btn btn-danger">Clear</button></h5>
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         {this.state.messages.map(message => (
@@ -390,7 +406,7 @@ class Chat extends React.Component {
                                         ))}
                                     </div>
                                 ) : (
-                                        <h5><i className="fab fa-react fa-spin"></i></h5>
+                                        <h5>Messages Cleared!</h5>
                                     )}
                                 <h5> <i className="fas fa-info"></i> Info</h5>
                                 <div className="info">
