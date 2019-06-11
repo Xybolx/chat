@@ -24,6 +24,7 @@ class Chat extends React.Component {
             messages: [],
             msgSent: '',
             prvtSent: '',
+            prvtSuccess: '',
             prvtSentColor: '',
             prvtSentAvatar: '',
             joiningUsers: [],
@@ -43,8 +44,8 @@ class Chat extends React.Component {
             }
         });
 
-        this.socket.on('RECEIVE_STATUS', data => {
-            addStatus(data);
+        this.socket.on('RECEIVE_MSG_STATUS', data => {
+            addMsgStatus(data);
             if (data) {
                 this.setState({ msgSent: "message sent" })
             }
@@ -84,6 +85,15 @@ class Chat extends React.Component {
             this.sendPrivateMsgTimeout = setTimeout(this.sendingPrivateMsgTimeout, 4000);
         });
 
+        this.socket.on('RECEIVE_PRVT_STATUS', data => {
+            addPrvtStatus(data);
+            if (data) {
+                this.setState({ prvtSuccess: 'yes' });
+            }
+            clearTimeout(this.prvtSuccessTimeout);
+            this.prvtSuccessTimeout = setTimeout(this.prvtMsgSuccessTimeout, 4000);
+        });
+
         this.socket.on('RECEIVE_TYPING_USER', data => {
             addTypingUser(data);
             if (data && !this.state.userTyping) {
@@ -117,8 +127,11 @@ class Chat extends React.Component {
         const addTypingUser = data => {
         };
 
-        const addStatus = data => {
-        };    
+        const addMsgStatus = data => {
+        };
+        
+        const addPrvtStatus = data => {
+        };
     };
 
     // handle msg form submit
@@ -147,13 +160,14 @@ class Chat extends React.Component {
                 privateMessage: messageIndex
             });
 
+            this.sendPrvtStatus();
             this.resetLogOutTimeout();
             this.setState({ message: '' });
 
         } else {
             this.saveMsg();
             this.sendMsg();
-            this.sendStatus();
+            this.sendMsgStatus();
             this.resetLogOutTimeout();
             this.setState({ message: '' });
         };
@@ -193,8 +207,14 @@ class Chat extends React.Component {
         });
     };
 
-    sendStatus = () => {
-        this.socket.emit('SEND_STATUS', {
+    sendMsgStatus = () => {
+        this.socket.emit('SEND_MSG_STATUS', {
+            author: this.state.username
+        });
+    };
+
+    sendPrvtStatus = () => {
+        this.socket.emit('SEND_PRVT_STATUS', {
             author: this.state.username
         });
     };
@@ -269,6 +289,10 @@ class Chat extends React.Component {
         this.setState({ prvtSent: '', prvtSentColor: '', prvtSentAvatar: '' });
     };
 
+    prvtMsgSuccessTimeout = () => {
+        this.setState({ prvtSuccess: '' });
+    };
+
     // sets up logging user out on page unload
     setupBeforeUnloadListener = () => {
         window.addEventListener("beforeunload", (ev) => {
@@ -298,6 +322,7 @@ class Chat extends React.Component {
         clearTimeout(this.logOutTimeout);
         clearTimeout(this.typeTimeout);
         clearTimeout(this.sendPrivateMsgTimeout);
+        clearTimeout(this.prvtSuccessTimeout);
         clearTimeout(this.userJoinedTimeout);
         clearTimeout(this.userLeftTimeout);
         clearTimeout(this.sendMsgTimeout);
@@ -389,13 +414,14 @@ class Chat extends React.Component {
                                     &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}
                                 </div>
                                 <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
+                                <div className={`${this.state.username} prvtSuccess`} style={{ color: `${this.state.userColor}` }} {...this.state.prvtSuccess ? {display: "block"} : {display: "none"}}>{this.state.prvtSuccess ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 </div>
                                 <div className="card-footer text-left">
                                      <form id="msgsForm">
                                      <label className="label" htmlFor="message">Msg/Private Msg-@username/</label>
                                      <input id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
-                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent ? `Sending...` : `Send` }</button>
+                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent || this.state.prvtSuccess ? `Sending...` : `Send` }</button>
                                      </form>
                                      <button onClick={this.logOut} className="btn btn-danger btn-block"> <i className="fas fa-user-slash"></i> Logout </button>
                                 </div>

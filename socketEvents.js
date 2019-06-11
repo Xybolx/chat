@@ -16,8 +16,12 @@ module.exports = function (io) {
           io.to(connections[data.receiver].id).emit('RECEIVE_PRIVATE_MESSAGE', data);
         });
 
-      socket.on('SEND_STATUS', data => {
-          io.to(connections[data.author].id).emit('RECEIVE_STATUS', data);
+        socket.on('SEND_MSG_STATUS', data => {
+          io.to(connections[data.author].id).emit('RECEIVE_MSG_STATUS', data);
+        });
+
+        socket.on('SEND_PRVT_STATUS', data => {
+          io.to(connections[data.author].id).emit('RECEIVE_PRVT_STATUS', data);
         });
 
       socket.on('SEND_USER_JOINED', data => {
