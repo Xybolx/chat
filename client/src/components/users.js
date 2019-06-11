@@ -32,7 +32,7 @@ class Users extends Component {
     render() {
         return (
             <div>
-            <h4><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h4>
+            <h5><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h5>
                                 {this.state.users.length ? (
                                     <div className="users flex-fill text-left">
                                         {this.state.users.map(user => (

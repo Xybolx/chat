@@ -80,7 +80,7 @@ body {
 .messages {
 	margin-top: 10px;
 	color: whitesmoke;
-	max-height:200px;
+	max-height: 100px;
 	overflow:scroll;
 	overflow-x:hidden;
 	text-align: center;
@@ -89,7 +89,7 @@ body {
 .privateMessages {
 	margin-top: 10px;
 	color: whitesmoke;
-	max-height: 200px;
+	max-height: 100px;
 	overflow:scroll;
 	overflow-x:hidden;
 	text-shadow: 1px 1px 1px black;

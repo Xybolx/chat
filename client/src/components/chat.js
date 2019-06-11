@@ -351,7 +351,7 @@ class Chat extends React.Component {
                                 <Title />
                                     <Clock />
                                         <Users />
-                                <h4><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs</h4>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs</h5>
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         {this.state.messages.map(message => (
