@@ -424,7 +424,7 @@ class Chat extends React.Component {
                                      <br/>
                                      <button onClick={this.handleFormSubmit} className="btn btn-primary btn-md" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent || this.state.prvtSuccess ? `Sending...` : `Send` }</button>
                                      </form>
-                                    </div> 
+                                    </div>
                                      <button onClick={this.logOut} className="btn btn-danger btn-block"> <i className="fas fa-user-slash"></i> Logout </button>
                                 </div>
                             </div>

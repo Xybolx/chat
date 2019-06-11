@@ -65,6 +65,18 @@ body {
 	color: yellow;
 }
 
+.btn-info {
+	margin-bottom: 25px; 
+	border: solid teal;
+	text-shadow: 1px 1px 1px black;
+}
+
+.btn-info:hover {
+	background: transparent;
+	border: solid yellow;
+	color: yellow;
+}
+
 .messages {
 	margin-top: 10px;
 	color: whitesmoke;
