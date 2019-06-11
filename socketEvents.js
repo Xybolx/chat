@@ -1,5 +1,6 @@
 module.exports = function (io) {
     const connections = {};
+    const onlineUsers = [];
     
       io.sockets.on('connection', socket => {
         console.log('user connected on: ' + socket.id);
@@ -9,11 +10,14 @@ module.exports = function (io) {
         });
   
         socket.on('SEND_MESSAGE', data => { 
-          io.sockets.emit('RECEIVE_MESSAGE', data);
+          io.emit('RECEIVE_MESSAGE', data);
         });
 
-        socket.on('SEND_PRIVATE_MESSAGE', function (data) {
-          io.to(connections[data.receiver].id).emit('RECEIVE_PRIVATE_MESSAGE', data);
+        socket.on('SEND_PRIVATE_MESSAGE', data => {
+          if (onlineUsers.includes(data.receiver)) {
+            io.to(connections[data.receiver].id).emit('RECEIVE_PRIVATE_MESSAGE', data);
+          }
+
         });
 
         socket.on('SEND_MSG_STATUS', data => {
@@ -25,11 +29,15 @@ module.exports = function (io) {
         });
 
       socket.on('SEND_USER_JOINED', data => {
-          connections[data.user.username] = socket;
+          let user = data.user.username;
+          onlineUsers.push(user); 
+          connections[user] = socket;
           socket.broadcast.emit('RECEIVE_USER_JOINED', data);
         });
 
       socket.on('SEND_USER_LEFT', data => {
+          onlineUsers.splice(onlineUsers.indexOf(data.user.username), 1);
+          console.log(onlineUsers);
           socket.broadcast.emit('RECEIVE_USER_LEFT', data);
         });
 
@@ -38,7 +46,7 @@ module.exports = function (io) {
         });
 
       socket.on('SEND_CLEAR_MSGS', data => { 
-          io.sockets.emit('RECEIVE_CLEAR_MSGS', data);
+          io.emit('RECEIVE_CLEAR_MSGS', data);
         });
   
   });

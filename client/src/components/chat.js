@@ -159,7 +159,7 @@ class Chat extends React.Component {
         let receiver = msg.substr(0, ind);
         let messageIndex = msg.substr(ind + 1);
 
-        if (this.state.message.substr(0, 1) === '@' && ind !== -1 && this.state.users.includes(receiver)) {
+        if (this.state.message.substr(0, 1) === '@' && ind !== -1) {
             API.savePrivateMessage({
                 receiver: receiver,
                 author: this.state.username,
