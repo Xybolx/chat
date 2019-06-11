@@ -1,53 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import Clock from "./clock";
 import Title from "./title";
 import API from "../utils/API";
 import "../App.css";
 import { Link } from "react-router-dom";
 
-class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
+class SignUp extends Component {
 
-        this.state = {
-            email: '',
-            username: '',
-            avatarURL: '',
-            colorSeed: '',
-            password: ''
+    state = {
+        email: '',
+        username: '',
+        avatarURL: '',
+        colorSeed: '',
+        password: ''
+    };
+
+    handleInputChange = ev => {
+        const { name, value } = ev.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleFormSubmit = ev => {
+        ev.preventDefault();
+
+        if (this.state.email && this.state.password && this.state.username) {
+
+            const colors = ["red", "blue", "gold", "violet", "yellow", "tomato", "cyan", "pink", "lightcoral", "lawngreen", "dodgerblue", "orange", "sandybrown", "lightgreen", "lightseagreen", "darkred", "green", "purple", "hotpink"];
+            let colorSeed = colors[Math.floor(Math.random() * colors.length)];
+
+            API.signUp({
+                email: this.state.email,
+                username: this.state.username,
+                avatarURL: 'https://avatars.dicebear.com/v2/gridy/:' + this.state.username + '.svg?option[colorful]=1',
+                colorSeed: colorSeed,
+                password: this.state.password
+            }).then(function () {
+                if (colors.includes(colorSeed)) {
+                    colors.splice(colors.indexOf(colorSeed, 1));
+                }
+                console.log(colors);
+            })
+                .then(res => window.location = "/chat")
+                .catch(err => console.log(err));
         };
+    };
 
-        this.handleInputChange = ev => {
-            const { name, value } = ev.target;
-            this.setState({
-              [name]: value
-            });
-          };
-
-        this.handleFormSubmit = ev => {
-            ev.preventDefault();
-            if (this.state.email && this.state.password && this.state.username) {
-                const colors = ["red", "blue", "gold", "violet", "yellow", "tomato", "cyan", "pink", "lightcoral", "lawngreen", "dodgerblue", "orange", "sandybrown", "lightgreen", "lightseagreen", "darkred", "green", "purple", "hotpink"];
-                let colorSeed = colors[Math.floor(Math.random() * colors.length)];
-                API.signUp({
-                    email: this.state.email,
-                    username: this.state.username,
-                    avatarURL: 'https://avatars.dicebear.com/v2/gridy/:' + this.state.username + '.svg?option[colorful]=1',
-                    colorSeed:  colorSeed,
-                    password: this.state.password
-                }).then(function () {
-                    if (colors.includes(colorSeed)) {
-                        colors.splice(colors.indexOf(colorSeed, 1));
-                    }
-                    console.log(colors);
-                })
-                    .then(res => window.location = "/chat")
-                    .catch(err => console.log(err));
-            }
-        };
-    }
-        
     render() {
+        
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
@@ -57,8 +58,8 @@ class SignUp extends React.Component {
                                 <div id="subTitle" className="card-title">
                                     <Title />
                                     <Clock />
-                                <h5><i className="far fa-address-card"></i> Sign Up </h5>
-                                <h5> or<br/> Login <Link to="/login">Here</Link>!</h5>
+                                    <h5><i className="far fa-address-card"></i> Sign Up </h5>
+                                    <h5> or<br /> Login <Link to="/login">Here</Link>!</h5>
                                 </div>
                             </div>
                             <div className="card-footer">
@@ -78,7 +79,7 @@ class SignUp extends React.Component {
                 </div>
             </div>
         );
-    }
-}
+    };
+};
 
 export default SignUp;

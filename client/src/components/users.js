@@ -1,16 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import Sound from "react-sound";
 import moment from "moment";
 import API from "../utils/API";
 
-class Users extends React.Component {
-    constructor(props) {
-        super(props);
+class Users extends Component {
 
-        this.state = {
+        state = {
             users: []
-        }
-    };
+        };
 
     handleMsgFocus = () => {
         document.getElementById("publicMsg").focus();
@@ -24,6 +21,7 @@ class Users extends React.Component {
     };
 
     componentDidMount() {
+        this.loadUsers();
         this.handleUsersInterval = setInterval(this.loadUsers, 5000);
     };
 

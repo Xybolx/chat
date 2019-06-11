@@ -1,15 +1,13 @@
-import React from "react";
+import React, { Component } from "react";
 import moment from "moment";
 
-class Clock extends React.Component {
-    constructor(props) {
-        super(props);
+class Clock extends Component {
 
-        this.state = {
-            clock: ''
-        }
+    state = {
+        clock: ''
     };
 
+    // get current time and set clock
     loadClock = () => {
         this.setState({ clock: moment().format("h:mm:ssa") })
     };

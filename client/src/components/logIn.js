@@ -1,26 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import Clock from "./clock";
 import Title from "./title";
 
-class LogIn extends React.Component{
-    constructor(props){
-        super(props);
+class LogIn extends Component{
         
-        this.state = {
+        state = {
             email: '',
             password: ''
         };
         
-        this.handleInputChange = ev => {
+        handleInputChange = ev => {
             const { name, value } = ev.target;
             this.setState({
               [name]: value
             });
           };
 
-        this.handleFormSubmit = ev => {
+        handleFormSubmit = ev => {
             ev.preventDefault();
             if (this.state.email && this.state.password) {
               API.logIn({  
@@ -32,10 +30,8 @@ class LogIn extends React.Component{
             }
           };
 
-    }
-    render(){
+    render() {
 
-        console.log(window.location.href)
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
@@ -64,7 +60,7 @@ class LogIn extends React.Component{
                 </div>
             </div>
         );
-    }
-}
+    };
+};
 
 export default LogIn;
