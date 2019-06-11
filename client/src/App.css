@@ -250,6 +250,6 @@ hr {
 	height: 100px;
 }
 
-#privateCollapse:hover {
+.privateCollapse:hover {
 	cursor: pointer;
 }
