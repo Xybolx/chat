@@ -23,6 +23,16 @@
   }
 }
 
+@keyframes typing {
+	from {
+	  width: 0%
+	}
+
+	to {
+	  width: 100%
+	}
+  }
+
 body {
 	width: 100%;
 	font-family: 'Audiowide', cursive;
@@ -252,4 +262,8 @@ hr {
 
 .privateCollapse:hover {
 	cursor: pointer;
+}
+
+.typing {
+	animation: typing .5s infinite;
 }
