@@ -53,6 +53,17 @@ body {
 	color: yellow;
 }
 
+.btn-success {
+	border: solid green;
+	text-shadow: 1px 1px 1px black;
+}
+
+.btn-success:hover {
+	background: transparent;
+	border: solid yellow;
+	color: yellow;
+}
+
 .btn-primary {
 	margin-bottom: 25px; 
 	border: solid dodgerblue;

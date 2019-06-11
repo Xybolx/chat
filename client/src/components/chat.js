@@ -400,7 +400,7 @@ class Chat extends React.Component {
                                 ) : (
                                         <h5>Messages Cleared!</h5>
                                     )}
-                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<button className="btn btn-info privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">Show</button></h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<button className="btn btn-success privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">Show</button></h5>
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages collapse" id="collapsePrivate">
                                         {this.state.privateMessages.map(privateMessage => (
