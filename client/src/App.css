@@ -264,6 +264,6 @@ hr {
 	cursor: pointer;
 }
 
-.typing {
+.typingUser {
 	animation: typing .5s infinite;
 }

@@ -390,7 +390,7 @@ class Chat extends React.Component {
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
-                                        <div style={{ color: `${typingUser.userColor}` }}><img className="img-fluid" src={`${typingUser.userAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
+                                        <div className="typingUser" style={{ color: `${typingUser.userColor}` }}><img className="img-fluid" src={`${typingUser.userAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
                                     )
                                 })}
                                 </div>
