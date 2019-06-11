@@ -389,9 +389,9 @@ class Chat extends React.Component {
                                         ))}
                                     </div>
                                 ) : (
-                                        <h5><i className="fab fa-react fa-spin"></i></h5>
+                                        <h5>Messages Cleared!</h5>
                                     )}
-                                <h5 className="privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate"><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Show {this.state.username}'s Msgs</h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span>{this.state.username}'s Private Msgs&nbsp;<button className="btn btn-info privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">Show</button></h5>
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages collapse" id="collapsePrivate">
                                         {this.state.privateMessages.map(privateMessage => (
@@ -406,7 +406,7 @@ class Chat extends React.Component {
                                         ))}
                                     </div>
                                 ) : (
-                                        <h5>Messages Cleared!</h5>
+                                        <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
                                 <h5> <i className="fas fa-info"></i> Info</h5>
                                 <div className="info">
