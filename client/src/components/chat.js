@@ -422,7 +422,7 @@ class Chat extends React.Component {
                                      <label className="label" htmlFor="message">Msg/Private Msg-@username/</label>
                                      <textarea id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
-                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent || this.state.prvtSuccess ? `Sending...` : `Send` }</button>
+                                     <button onClick={this.handleFormSubmit} className="btn btn-primary btn-lg" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent || this.state.prvtSuccess ? `Sending...` : `Send` }</button>
                                      </form>
                                     </div>
                                      <button onClick={this.logOut} className="btn btn-danger btn-block"> <i className="fas fa-user-slash"></i> Logout </button>
