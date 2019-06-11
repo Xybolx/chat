@@ -31,7 +31,8 @@ class Chat extends React.Component {
             prvtSentColor: '',
             prvtSentAvatar: '',
             userJoining: '',
-            userLeaving: ''
+            userLeaving: '',
+            privateToggle: ''
         };
 
         // initialize socket
@@ -340,6 +341,16 @@ class Chat extends React.Component {
         });
     };
 
+    handlePrivateToggle = () => {
+        if (!this.state.privateToggle) {
+            this.setState({ privateToggle: 'show' })
+        } 
+        else if (this.state.privateToggle) {
+            this.setState({ privateToggle: '' })
+        }
+    };
+
+
     handleTimers = () => {
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
         this.loadUserTimeout = setTimeout(this.loadUser, 5000);
@@ -383,7 +394,7 @@ class Chat extends React.Component {
                                 <Title />
                                     <Clock />
                                         <Users />
-                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<a onClick={this.sendClearMsgs}>{this.state.messagesCleared ? `Clearing...` : `Clear` }</a></h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<a className="btn btn-danger btn-sm" onClick={this.sendClearMsgs}>{this.state.messagesCleared ? `Clearing...` : `Clear` }</a></h5>
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         {this.state.messages.map(message => (
@@ -400,7 +411,7 @@ class Chat extends React.Component {
                                 ) : (
                                         <h5>Messages Cleared!</h5>
                                     )}
-                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<a className="privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">Show</a></h5>
+                                <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<a onClick={this.handlePrivateToggle} className="btn btn-success btn-sm privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">{this.state.privateToggle ? `Hide` : `Show` }</a></h5>
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages collapse" id="collapsePrivate">
                                         {this.state.privateMessages.map(privateMessage => (
