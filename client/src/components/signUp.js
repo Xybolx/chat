@@ -48,7 +48,7 @@ class SignUp extends Component {
     };
 
     render() {
-        
+
         return (
             <div className="container-fluid">
                 <div className="row justify-content-center">
@@ -59,7 +59,8 @@ class SignUp extends Component {
                                     <Title />
                                     <Clock />
                                     <h5><i className="far fa-address-card"></i> Sign Up </h5>
-                                    <h5> or<br /> Login <Link to="/login">Here</Link>!</h5>
+                                    <br />
+                                    <h5>or<br /><i className="fas fa-user-plus"></i> Login<Link to="/login">&nbsp;Here</Link>!</h5>
                                 </div>
                             </div>
                             <div className="card-footer">

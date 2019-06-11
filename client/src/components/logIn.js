@@ -41,8 +41,8 @@ class LogIn extends Component {
                                 <div id="subTitle" className="card-title">
                                     <Title />
                                     <Clock />
-                                <h5> <i className="fas fa-user-plus"></i> Login </h5>
-                                <h5> or<br/> Sign Up<Link to="/"><br />Here</Link>!</h5>
+                                <h5><i className="fas fa-user-plus"></i> Login</h5>
+                                <h5>or<br /><i className="far fa-address-card"></i> Sign Up<Link to="/">&nbsp;Here</Link>!</h5>
                                 </div>
                             </div>
                             <div className="card-footer">
