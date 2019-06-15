@@ -160,7 +160,7 @@ body {
 }
 
 .users div {
-	max-height: 40px;
+	max-height: 50px;
 }
 
 button:hover {
@@ -266,7 +266,7 @@ hr {
 }
 
 .header-link {
-	font-family: fantasy;
+	font-family: 'Courier New', Courier, monospace;
 	color: yellow;
 	text-shadow: 1px 1px 1px red;
 }
