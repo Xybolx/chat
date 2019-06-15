@@ -259,6 +259,7 @@ hr {
 	background-blend-mode: multiply;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
+	border: solid black;
 }
 
 .privateCollapse:hover {
@@ -267,6 +268,7 @@ hr {
 
 .typingUser {
 	animation: Flash 1s infinite;
+	background: black;
 }
 
 .header-link {

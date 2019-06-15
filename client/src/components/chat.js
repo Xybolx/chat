@@ -434,7 +434,6 @@ class Chat extends React.Component {
                                     <hr />
                                     <hr />
                                     <hr />
-                                    <hr />
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
