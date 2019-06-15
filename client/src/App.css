@@ -117,6 +117,12 @@ body {
 	border: transparent solid;
 }
 
+.card-body {
+	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png");
+	background-size: 100 100;
+	background-repeat: no-repeat;
+}
+
 .card-header {
 	font-family: 'Audiowide', cursive;
 	background: rgba(0, 0, 0, 0.521);
