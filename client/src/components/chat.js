@@ -430,7 +430,6 @@ class Chat extends React.Component {
                                     )}
                                 <div className="info">
                                     <hr />
-                                    <hr />
                                     <h5> <i className="fas fa-info"></i> Info</h5>
                                     <hr />
                                     <hr />
