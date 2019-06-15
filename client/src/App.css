@@ -201,8 +201,8 @@ hr {
 #passwordInput,
 #publicMsg,
 #privateMsg {
-  background: transparent;
-  color: whitesmoke;
+  background: lightcyan;
+  color: black;
   border-bottom: solid black;
   border-top: solid black;
   border-left: solid black;
@@ -214,7 +214,7 @@ hr {
 #passwordInput:focus,
 #publicMsg:focus,
 #privateMsg:focus {
-  box-shadow: 1px 1px 1px 1px rgba(255, 255, 1, 0.685);
+  box-shadow: 1px 1px 1px 1px rgba(255, 136, 1, 0.432);
 }
 
 #loginForm {
