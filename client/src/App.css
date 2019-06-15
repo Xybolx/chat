@@ -255,7 +255,8 @@ hr {
 
 .info {
 	height: 200px;
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png");
+	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), url("https://i.ytimg.com/vi/-MH6JZdGZcI/maxresdefault.jpg");
+	background-blend-mode: screen;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
