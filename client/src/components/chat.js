@@ -431,6 +431,10 @@ class Chat extends React.Component {
                                 <h5> <i className="fas fa-info"></i> Info</h5>
                                 <div className="info">
                                     <hr />
+                                    <hr />
+                                    <hr />
+                                    <hr />
+                                    <hr />
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
