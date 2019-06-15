@@ -105,11 +105,6 @@ body {
 	overflow-x:hidden;
 	text-shadow: 1px 1px 1px black;
 	text-align: center;
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), black;
-	background-blend-mode: normal;
-	background-size: 100% 100%;
-	background-clip: border-box content-box;
-	background-repeat: no-repeat;
 }
 
 .card {
@@ -124,7 +119,7 @@ body {
 
 .card-header {
 	font-family: 'Audiowide', cursive;
-	background: transparent;
+	background: rgba(0, 0, 0, 0.521);
 	text-align: left;
 	border-top-left-radius: 0%;
 	border-top-right-radius: 0%;
