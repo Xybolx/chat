@@ -429,7 +429,6 @@ class Chat extends React.Component {
                                     <h5><i className="fab fa-react fa-spin"></i></h5>
                                     )}
                                 <div className="info">
-                                    <hr />
                                     <h5> <i className="fas fa-info"></i> Info</h5>
                                     <hr />
                                     <hr />
