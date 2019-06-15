@@ -91,7 +91,7 @@ body {
 .messages {
 	margin-top: 10px;
 	color: whitesmoke;
-	max-height: 100px;
+	max-height: 150px;
 	overflow:scroll;
 	overflow-x:hidden;
 	text-align: center;
@@ -100,7 +100,7 @@ body {
 .privateMessages {
 	margin-top: 10px;
 	color: whitesmoke;
-	max-height: 100px;
+	max-height: 150px;
 	overflow:scroll;
 	overflow-x:hidden;
 	text-shadow: 1px 1px 1px black;
@@ -159,16 +159,12 @@ body {
 	text-shadow: 1px 1px 1px black;
 }
 
-button:hover {
-	cursor: pointer;
+.users div {
+	max-height: 40px;
 }
 
-input {
-	background: transparent;
-	border-bottom: solid white;
-	border-bottom-right-radius: 0px;
-	border-bottom-left-radius: 0px;
-	color: white;
+button:hover {
+	cursor: pointer;
 }
 
 h4, h5 {
@@ -258,7 +254,7 @@ hr {
 }
 
 .info {
-	height: 100px;
+	height: 75px;
 }
 
 .privateCollapse:hover {
@@ -267,4 +263,9 @@ hr {
 
 .typingUser {
 	animation: Flash 1s infinite;
+}
+
+.header-link {
+	color: yellow;
+	text-shadow: 1px 1px 1px red;
 }
