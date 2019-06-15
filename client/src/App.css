@@ -266,6 +266,12 @@ hr {
 }
 
 .header-link {
+	font-family: fantasy;
+	color: yellow;
+	text-shadow: 1px 1px 1px red;
+}
+
+.header-link:hover {
 	color: yellow;
 	text-shadow: 1px 1px 1px red;
 }
