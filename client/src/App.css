@@ -249,7 +249,15 @@ hr {
 	color: whitesmoke;
 }
 
-.user-alert {
+.user-alert .joining {
+	animation: Flash 1s infinite;
+	background: url("http://www.kiza.ca/wp-content/uploads/2017/10/black-bar-gradient.png");
+	background-size: 100% 100%;
+	background-position: center;
+	background-repeat: repeat-x;
+}
+
+.user-alert .leaving {
 	animation: Flash 1s infinite;
 	background: url("http://www.kiza.ca/wp-content/uploads/2017/10/black-bar-gradient.png");
 	background-size: 100% 100%;
