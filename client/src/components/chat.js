@@ -465,7 +465,7 @@ class Chat extends React.Component {
                                     <button className="btn btn-info btn-block" data-toggle="collapse" data-target="#collapseMsgForm" aria-expanded="false" aria-controls="collapseMsgForm"><i className="far fa-edit"></i> Message</button>
                                     <div className="collapse" id="collapseMsgForm"> 
                                      <form id="msgsForm">
-                                     <label className="label" htmlFor="message">Msg/Private Msg-@username/</label>
+                                     <label className="label" htmlFor="message">Private Msg-@username/</label>
                                      <textarea id="publicMsg" type="text" name="message" placeholder="📝Type Msg" className="form-control" value={this.state.message} onChange={this.handleInputChange} autoFocus />
                                      <br/>
                                      <button onClick={this.handleFormSubmit} className="btn btn-primary btn-block" type="button"><i className="far fa-paper-plane"></i>&nbsp;{this.state.msgSent || this.state.prvtSuccess ? `Sending...` : `Send` }</button>
