@@ -171,7 +171,7 @@ body {
 	overflow:scroll;
 	overflow-x:hidden;
 	text-align: center;
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), rgb(17, 15, 15);
+	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), url("https://media0.giphy.com/media/IyuKoOynx5VHG/giphy.gif?cid=790b76115cee967c6333356d73291b32&rid=giphy.gif");
 	background-blend-mode: normal;
 	background-size: 100% 100%;
 	background-clip: border-box content-box;
@@ -180,6 +180,7 @@ body {
 
 .users div {
 	max-height: 60px;
+	padding: 10px;
 }
 
 button:hover {
