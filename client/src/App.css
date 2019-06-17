@@ -103,8 +103,8 @@ body {
 }
 
 .messages div {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .privateMessages {
@@ -123,8 +123,8 @@ body {
 }
 
 .privateMessages div {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .card {
@@ -317,4 +317,9 @@ hr {
 
 .sendingPrvt {
 	animation: Flash 1s infinite;
+}
+
+.inside {
+	padding-top: 10px;
+	padding-bottom: 10px;
 }

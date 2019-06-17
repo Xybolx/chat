@@ -459,7 +459,7 @@ class Chat extends React.Component {
                                 </div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
-                                    &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent you a private message!` : ``}
+                                    &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent a private message!` : ``}
                                 </div>
                                 <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} prvtSuccess`} style={{ color: `${this.state.userColor}` }} {...this.state.prvtSuccess ? {display: "block"} : {display: "none"}}>{this.state.prvtSuccess ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
