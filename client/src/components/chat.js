@@ -411,7 +411,11 @@ class Chat extends React.Component {
                                         </div>
                                     </div>
                                 ) : (
-                                        <h5>Messages Cleared!</h5>
+                                        <div className="messages">
+                                            <div className="inside">
+                                                <h6>Messages Cleared!</h6>
+                                                </div>
+                                            </div>
                                     )}
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages">
