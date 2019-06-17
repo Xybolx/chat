@@ -430,7 +430,11 @@ class Chat extends React.Component {
                                         </div>
                                     </div>
                                 ) : (
-                                        <h5><i className="fab fa-react fa-spin"></i></h5>
+                                    <div className="privateMessages">
+                                        <div className="inside">
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 35 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h6>
+                                    </div>
+                                    </div>
                                     )}
                                 <div className="info">
                                 <hr />
