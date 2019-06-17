@@ -95,7 +95,7 @@ body {
 	overflow:scroll;
 	overflow-x:hidden;
 	text-align: center;
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), rgb(17, 15, 15);
+	background: url("./imgs/tv.png"), rgb(17, 15, 15);
 	background-blend-mode: normal;
 	background-size: 100% 100%;
 	background-clip: border-box content-box;
@@ -115,7 +115,7 @@ body {
 	overflow-x:hidden;
 	text-shadow: 1px 1px 1px black;
 	text-align: center;
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), rgb(17, 15, 15);
+	background: url("./imgs/tv.png"), rgb(17, 15, 15);
 	background-blend-mode: normal;
 	background-size: 100% 100%;
 	background-clip: border-box content-box;
@@ -157,7 +157,7 @@ body {
 	margin-top: 40px;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), url("./imgs/square-static.gif");
+	background: url("./imgs/tv.png"), url("./imgs/square-static.gif");
 	background-blend-mode: normal;
 	background-size: 100% 100%, 100% 100%;
 	background-clip: border-box, padding-box;
@@ -180,7 +180,7 @@ body {
 	overflow:scroll;
 	overflow-x:hidden;
 	text-align: center;
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), rgb(17, 15, 15);
+	background: url("./imgs/tv.png"), rgb(17, 15, 15);
 	background-blend-mode: normal;
 	background-size: 100% 100%;
 	background-clip: border-box content-box;
@@ -289,7 +289,7 @@ hr {
 
 .info {
 	height: 200px;
-	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), rgb(17, 15, 15);
+	background: url("./imgs/tv.png"), rgb(17, 15, 15);
 	background-blend-mode: normal;
 	background-size: 100% 100%;
 	background-clip: border-box content-box;
