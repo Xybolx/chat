@@ -32,9 +32,9 @@ class Users extends Component {
     render() {
         return (
             <div>
-            <h5><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h5>
                                 {this.state.users.length ? (
                                     <div className="users flex-fill text-left">
+                                    <h5><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h5>
                                         {this.state.users.map(user => (
                                             <div className="card" key={user._id}>
                                                 <div style={{ borderColor: `${user.colorSeed}` }} className="card-header">
