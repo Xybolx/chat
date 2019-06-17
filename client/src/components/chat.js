@@ -413,7 +413,7 @@ class Chat extends React.Component {
                                     )}
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages collapse" id="collapsePrivate">
-                                    <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<a onClick={this.handlePrivateToggle} className="header-link privateCollapse" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="false" aria-controls="collapsePrivate">{this.state.privateToggle ? `Hide` : `Show` }</a></h5>
+                                    <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h5>
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">
