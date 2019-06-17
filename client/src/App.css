@@ -105,6 +105,7 @@ body {
 
 .privateMessages {
 	margin-top: 10px;
+	padding: 10px;
 	color: whitesmoke;
 	max-height: 150px;
 	overflow:scroll;
