@@ -412,7 +412,7 @@ class Chat extends React.Component {
                                         <h5>Messages Cleared!</h5>
                                     )}
                                 {this.state.privateMessages.length ? (
-                                    <div className="privateMessages collapse" id="collapsePrivate">
+                                    <div className="privateMessages">
                                     <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h5>
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div key={privateMessage._id}>
