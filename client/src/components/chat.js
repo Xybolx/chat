@@ -398,7 +398,7 @@ class Chat extends React.Component {
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         {this.state.messages.map(message => (
-                                            <div className="card" key={message._id}>
+                                            <div key={message._id}>
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
                                                     <div style={{ color: `${message.userColor}` }}>
                                                         <img className="img-fluid" alt="" src={message.userAvatar}></img>
@@ -415,7 +415,7 @@ class Chat extends React.Component {
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages collapse" id="collapsePrivate">
                                         {this.state.privateMessages.map(privateMessage => (
-                                            <div className="card" key={privateMessage._id}>
+                                            <div key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">
                                                     <div style={{ color: `${privateMessage.userColor}` }}>
                                                         <img className="img-fluid" alt="" src={privateMessage.userAvatar}></img>
