@@ -103,7 +103,8 @@ body {
 }
 
 .messages div {
-	padding-left: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .privateMessages {
@@ -122,7 +123,8 @@ body {
 }
 
 .privateMessages div {
-	padding-left: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .card {
@@ -187,7 +189,8 @@ body {
 
 .users div {
 	max-height: 60px;
-	padding-left: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 button:hover {
