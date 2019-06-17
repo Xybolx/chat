@@ -402,7 +402,7 @@ class Chat extends React.Component {
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
                                                     <div style={{ color: `${message.userColor}` }}>
                                                         <img className="img-fluid" alt="" src={message.userAvatar}></img>
-                                                        &nbsp;{message.author} <span className="msgTime" style={{ fontSize: 8 }}>{moment(message.date).fromNow()}:</span> <br /> <span className="msgBody">{message.message}</span>
+                                                        &nbsp;{message.author} <br /> <span className="msgTime" style={{ fontSize: 8 }}>{moment(message.date).fromNow()}:</span> <br /> <span className="msgBody">{message.message}</span>
                                                     </div>
                                                 </div>
                                             </div>
