@@ -146,14 +146,13 @@ body {
 	font-size: 40px;
 	color: rgba(235, 119, 80, 0.753);
 	margin-top: 40px;
-	border-radius: 50%;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
-	background: url("https://media0.giphy.com/media/IyuKoOynx5VHG/giphy.gif?cid=790b76115cee967c6333356d73291b32&rid=giphy.gif"), url("https://i.gifer.com/9j0g.gif");
-	background-blend-mode: saturation;
-  	background-size: cover, 100% 300%;
-	background-repeat: space;
-	background-position: center;
+	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), rgb(17, 15, 15);
+	background-blend-mode: normal;
+	background-size: 100% 100%;
+	background-clip: border-box content-box;
+	background-repeat: no-repeat;
 }
 
 .img-fluid {
