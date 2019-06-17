@@ -415,7 +415,7 @@ class Chat extends React.Component {
                                     )}
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages">
-                                        <div className="inside" style={...this.state.prvtSent ? {background: url("http://25.media.tumblr.com/4ffa5869f6600fbcad83f5ee8284c106/tumblr_n32ub3H32w1six59bo2_r1_500.gif")} : {background: "transparent"}}>
+                                        <div className="inside">
                                     <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 35 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h6>
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div key={privateMessage._id}>
