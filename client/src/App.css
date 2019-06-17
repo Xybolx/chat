@@ -90,7 +90,6 @@ body {
 
 .messages {
 	margin-top: 10px;
-	padding: 10px;
 	color: whitesmoke;
 	height: 200px;
 	overflow:scroll;
@@ -105,12 +104,10 @@ body {
 
 .messages div {
 	padding-left: 20px;
-	padding-right: 20px;
 }
 
 .privateMessages {
 	margin-top: 10px;
-	padding: 10px;
 	color: whitesmoke;
 	height: 200px;
 	overflow:scroll;
@@ -126,7 +123,6 @@ body {
 
 .privateMessages div {
 	padding-left: 20px;
-	padding-right: 20px;
 }
 
 .card {
@@ -153,6 +149,7 @@ body {
 }
 
 #title {
+	height: 200px;
 	font-size: 40px;
 	color: rgba(235, 119, 80, 0.753);
 	margin-top: 40px;
@@ -191,7 +188,6 @@ body {
 .users div {
 	max-height: 60px;
 	padding-left: 20px;
-	padding-right: 20px;
 }
 
 button:hover {
