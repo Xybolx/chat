@@ -92,7 +92,6 @@ body {
 	margin-top: 10px;
 	color: whitesmoke;
 	height: 200px;
-	overflow:scroll;
 	overflow-x:hidden;
 	text-align: center;
 	background: url("./imgs/tv.png"), rgb(17, 15, 15);
@@ -111,7 +110,6 @@ body {
 	margin-top: 10px;
 	color: whitesmoke;
 	height: 200px;
-	overflow:scroll;
 	overflow-x:hidden;
 	text-shadow: 1px 1px 1px black;
 	text-align: center;
@@ -177,7 +175,6 @@ body {
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 1px black;
 	height: 200px;
-	overflow:scroll;
 	overflow-x:hidden;
 	text-align: center;
 	background: url("./imgs/tv.png"), rgb(17, 15, 15);
@@ -323,4 +320,6 @@ hr {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	height: 175px;
+	overflow:scroll;
+	overflow-x:hidden;
 }
