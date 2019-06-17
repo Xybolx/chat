@@ -413,7 +413,7 @@ class Chat extends React.Component {
                                 ) : (
                                         <div className="messages">
                                             <div className="inside">
-                                                <h6>Messages Cleared!</h6>
+                                                <h6>Msgs Cleared!</h6>
                                                 </div>
                                             </div>
                                     )}
@@ -436,9 +436,9 @@ class Chat extends React.Component {
                                 ) : (
                                     <div className="privateMessages">
                                         <div className="inside">
-                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 35 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h6>
-                                    </div>
-                                    </div>
+                                            <h6>No Private Msgs!</h6>
+                                            </div>
+                                        </div>
                                     )}
                                 <div className="info">
                                 <hr />
@@ -467,7 +467,7 @@ class Chat extends React.Component {
                                 </div>
                                 <div className={`${this.state.username} sendingPrvt`} style={{ color: `${this.state.prvtSentColor}` }} {...this.state.prvtSent ? {display: "block"} : {display: "none"}}>
                                     {this.state.prvtSent ? <img className="img-fluid" src={this.state.prvtSentAvatar} alt=""></img> : ""}
-                                    &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent a private message!` : ``}
+                                    &nbsp;{this.state.prvtSent ? `${this.state.prvtSent}...sent a private msg!` : ``}
                                 </div>
                                 <div className={`${this.state.username} sending`} style={{ color: `${this.state.userColor}` }} {...this.state.msgSent ? {display: "block"} : {display: "none"}}>{this.state.msgSent ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 <div className={`${this.state.username} prvtSuccess`} style={{ color: `${this.state.userColor}` }} {...this.state.prvtSuccess ? {display: "block"} : {display: "none"}}>{this.state.prvtSuccess ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
