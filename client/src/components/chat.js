@@ -419,7 +419,7 @@ class Chat extends React.Component {
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">
                                                     <div style={{ color: `${privateMessage.userColor}` }}>
                                                         <img className="img-fluid" alt="" src={privateMessage.userAvatar}></img>
-                                                        &nbsp;{privateMessage.author} <span className="privateMsgTime" style={{ fontSize: 8 }}>{moment(privateMessage.date).fromNow()}:</span> <br /> <span className="msgBody">{privateMessage.privateMessage}</span>
+                                                        &nbsp;{privateMessage.author} <span className="privateMsgTime" style={{ fontSize: 6 }}>{moment(privateMessage.date).fromNow()}:</span> <br /> <span className="msgBody">{privateMessage.privateMessage}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -430,7 +430,7 @@ class Chat extends React.Component {
                                     )}
                                 <div className="info">
                                 <hr />
-                                <h5> <i className="fas fa-exclamation"></i> Alerts</h5>
+                                <h6> <i className="fas fa-exclamation"></i> Alerts</h6>
                                 <hr />
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
