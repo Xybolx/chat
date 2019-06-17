@@ -396,7 +396,7 @@ class Chat extends React.Component {
                                         <Users />
                                 {this.state.messages.length ? (
                                     <div className="messages">
-                                    <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<a className="header-link" onClick={this.sendClearMsgs}>{this.state.messagesCleared ? `Clearing...` : `Clear` }</a></h5>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<a className="header-link" onClick={this.sendClearMsgs}>{this.state.messagesCleared ? `Clearing...` : `Clear` }</a></h6>
                                         {this.state.messages.map(message => (
                                             <div key={message._id}>
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
@@ -413,7 +413,7 @@ class Chat extends React.Component {
                                     )}
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages">
-                                    <h5><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h5>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h6>
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">

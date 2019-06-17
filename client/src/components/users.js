@@ -34,7 +34,7 @@ class Users extends Component {
             <div>
                                 {this.state.users.length ? (
                                     <div className="users flex-fill text-center">
-                                    <h5><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h5>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 40 }}>{this.state.users.length}</span></span> Online Now</h6>
                                         {this.state.users.map(user => (
                                             <div key={user._id}>
                                                 <div style={{ borderColor: `${user.colorSeed}` }} className="card-header">
