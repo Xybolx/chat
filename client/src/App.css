@@ -163,12 +163,20 @@ body {
 }
 
 .users {
-	max-height: 200px;
 	overflow: scroll;
 	overflow-x: hidden;
 	color: whitesmoke;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 1px black;
+	height: 200px;
+	overflow:scroll;
+	overflow-x:hidden;
+	text-align: center;
+	background: url("https://purepng.com/public/uploads/large/purepng.com-led-televisiontvtelecommunicationmonochrometelevisionoldlcd-televisionled-1421526536404rxxfa.png"), rgb(17, 15, 15);
+	background-blend-mode: normal;
+	background-size: 100% 100%;
+	background-clip: border-box content-box;
+	background-repeat: no-repeat;
 }
 
 .users div {
