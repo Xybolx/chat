@@ -355,8 +355,7 @@ hr {
 }
 
 .tvOff {
-	border: solid white;
-	border-radius: 50%;
+	border: solid rgba(255, 255, 255, 0.699);
+	border-radius: 100%;
 	animation: TVoff ease-in-out 1.5s;
-	display: none;
 }
