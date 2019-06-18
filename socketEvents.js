@@ -48,6 +48,10 @@ module.exports = function (io) {
       socket.on('SEND_CLEAR_MSGS', data => { 
           io.emit('RECEIVE_CLEAR_MSGS', data);
         });
+
+      socket.on('SEND_CLEAR_PRVT_MSGS', data => {
+          io.to(connections[data.username].id).emit('RECEIVE_CLEAR_PRVT_MSGS', data);
+      });
   
   });
 };

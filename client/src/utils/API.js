@@ -35,5 +35,8 @@ export default {
   },
   getPrivateMessages: function() {
     return axios.get("/api/privateMessages");
+  },
+  deletePrivateMessages: function() {
+    return axios.delete("/api/privateMessages");
   }
 }

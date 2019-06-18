@@ -19,6 +19,7 @@ class Chat extends React.Component {
             typingUsers: [],
             messages: [],
             messagesCleared: '',
+            privateMessagesCleared: '',
             privateMessages: [],
             joiningUsers: [],
             leavingUsers: [],
@@ -116,6 +117,16 @@ class Chat extends React.Component {
             this.clearedTimeout = setTimeout(this.clearingTimeout, 4000);
         });
 
+        this.socket.on('RECEIVE_CLEAR_PRVT_MSGS', data => {
+            removePrivateMessages(data);
+            if (data) {
+                this.clearPrivateMessages();
+                this.loadPrivateMessages();
+            }
+            clearTimeout(this.prvtClearedTimeout);
+            this.prvtClearedTimeout = setTimeout(this.privateClearingTimeout, 4000);
+        });
+
         this.socket.on('connect', () => {
             let id = this.socket.io.engine.id;
             console.log(id);
@@ -147,6 +158,9 @@ class Chat extends React.Component {
         };
 
         const removeMessages = data => {
+        };
+
+        const removePrivateMessages = data => {
         };
     };
 
@@ -246,6 +260,13 @@ class Chat extends React.Component {
             clear: 'Messages Cleared!'
         });
     };
+
+    sendClearPrvtMsgs = () => {
+        this.socket.emit('SEND_CLEAR_PRVT_MSGS', {
+            username: this.state.username,
+            privateClear: 'Private Messages Cleared!'
+        });
+    };
     
     // API calls
     logOut = () => {
@@ -292,6 +313,13 @@ class Chat extends React.Component {
                 .catch(err => console.log(err))
     };
 
+    clearPrivateMessages = () => {
+        API.deletePrivateMessages()
+            .then(res => 
+                this.setState({ privateMessagesCleared: 'cleared' }))
+                .catch(err => console.log(err))
+    };
+
     // event timeouts
     resetLogOutTimeout = () => {
         clearTimeout(this.logOutTimeout);
@@ -324,6 +352,10 @@ class Chat extends React.Component {
 
     clearingTimeout = () => {
         this.setState({ messagesCleared: '' });
+    };
+
+    privateClearingTimeout = () => {
+        this.setState({ privateMessagesCleared: '' })
     };
 
     // sets up logging user out on page unload
@@ -368,6 +400,7 @@ class Chat extends React.Component {
         clearTimeout(this.userLeftTimeout);
         clearTimeout(this.sendMsgTimeout);
         clearTimeout(this.clearedTimeout);
+        clearTimeout(this.prvtClearedTimeout);
     };
 
     componentDidMount() {
@@ -420,7 +453,7 @@ class Chat extends React.Component {
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages">
                                         <div className="inside">
-                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 35 }}>{this.state.privateMessages.length}</span></span> Private Msgs</h6>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 35 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<a className="header-link" onClick={this.sendClearPrvtMsgs}>{this.state.privateMessagesCleared ? `Clearing...` : `Clear` }</a></h6>
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">

@@ -5,13 +5,13 @@ const privateMessagesController = require("../../controllers/privateMessagesCont
 router
   .route("/")
   .get(privateMessagesController.findAll)
-  .post(privateMessagesController.create);
+  .post(privateMessagesController.create)
+  .delete(privateMessagesController.remove);
 
 // Matches with "/api/privatemessages/:id"
 router
   .route("/:id")
   .get(privateMessagesController.findOne)
-  .put(privateMessagesController.update)
-  .delete(privateMessagesController.remove);
+  .put(privateMessagesController.update);
 
 module.exports = router;
