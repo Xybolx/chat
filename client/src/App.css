@@ -358,4 +358,6 @@ hr {
 	border: solid rgba(255, 255, 255, 0.699);
 	border-radius: 100%;
 	animation: TVoff ease-in-out 1.5s;
+	width: 0px;
+	height: 0px;
 }
