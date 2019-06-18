@@ -184,7 +184,7 @@ body {
 	margin-top: 40px;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
-	background: url("./imgs/tv.png"), url("./imgs/square-static.gif");
+	background: url("./imgs/tv.png"), url("./imgs/pyramid.gif");
 	background-blend-mode: normal;
 	background-size: 100% 100%, 100% 195px;
 	background-clip: border-box, padding-box;
