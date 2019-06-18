@@ -110,6 +110,7 @@ class Chat extends React.Component {
         this.socket.on('RECEIVE_CLEAR_MSGS', data => {
             removeMessages(data);
             if (data) {
+                this.setState({ messagesCleared: data.clear });
                 this.clearMessages();
                 this.loadMessages();
             }
@@ -120,6 +121,7 @@ class Chat extends React.Component {
         this.socket.on('RECEIVE_CLEAR_PRVT_MSGS', data => {
             removePrivateMessages(data);
             if (data) {
+                this.setState({ privateMessagesCleared: data.privateClear });
                 this.clearPrivateMessages();
                 this.loadPrivateMessages();
             }
@@ -355,7 +357,7 @@ class Chat extends React.Component {
     };
 
     privateClearingTimeout = () => {
-        this.setState({ privateMessagesCleared: '' })
+        this.setState({ privateMessagesCleared: '' });
     };
 
     // sets up logging user out on page unload
@@ -447,7 +449,8 @@ class Chat extends React.Component {
                                         <div className="messages">
                                             <div className="inside">
                                                 <h6>Msgs Cleared!</h6>
-                                                <img className="tvOff" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/2T0t-6V/static-tv-off-modern-static-noise-from-a-tv-that-turns-off-after-a-while-always-handful-take-it-and-put-it-in-your-footage-with-a-mask-or-a-cookie-cutter-and-voil-this-is-a-balanced-mix-of-real-footage-and-digital-video-modern-version_qkqefjxo__F0004.png" alt=""></img>
+                                                <hr />
+                                                <img className="tvOff" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/2T0t-6V/static-tv-off-modern-static-noise-from-a-tv-that-turns-off-after-a-while-always-handful-take-it-and-put-it-in-your-footage-with-a-mask-or-a-cookie-cutter-and-voil-this-is-a-balanced-mix-of-real-footage-and-digital-video-modern-version_qkqefjxo__F0004.png" alt="" style={{...this.state.messagesCleared ? { display: "block" } : {display: "none"}}}></img>
                                                 </div>
                                             </div>
                                     )}
