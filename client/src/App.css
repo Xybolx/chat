@@ -357,4 +357,5 @@ hr {
 	border: solid white;
 	border-radius: 50%;
 	animation: TVoff ease-in-out 1.5s;
+	display: none;
 }
