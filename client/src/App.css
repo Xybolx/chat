@@ -55,9 +55,17 @@
   @keyframes Title {
 	from {
 		background: url("./imgs/tv.png"), url("./imgs/pyramid.gif");
+		background-blend-mode: normal;
+		background-size: 100% 100%, 100% 195px;
+		background-clip: border-box, padding-box;
+		background-repeat: no-repeat;
 	}
 	to {
 		background: url("./imgs/tv.png"), url("./imgs/square-static.gif");
+		background-blend-mode: normal;
+		background-size: 100% 100%, 100% 195px;
+		background-clip: border-box, padding-box;
+		background-repeat: no-repeat;
 	}
   }
 
