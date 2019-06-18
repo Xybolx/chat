@@ -23,6 +23,15 @@
   }
 }
 
+@keyframes TVoff {
+	from {
+	  width: 500px;
+	}
+	to {
+	  width: 0px;
+	}
+  }
+
 body {
 	width: 100%;
 	font-family: 'Audiowide', cursive;
@@ -327,5 +336,5 @@ hr {
 .tvOff {
 	border: solid transparent;
 	border-radius: 50%;
-	width: 300px;
+	animation: TVoff ease-in-out 1.5s;
 }
