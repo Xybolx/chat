@@ -157,7 +157,7 @@ body {
 	text-shadow: 1px 1px 10px rgba(129, 146, 33, 0.856);
 	background: url("./imgs/tv.png"), url("./imgs/square-static.gif");
 	background-blend-mode: normal;
-	background-size: 100% 100%, 100% 100%;
+	background-size: 100% 100%, 100% 195px;
 	background-clip: border-box, padding-box;
 	background-repeat: no-repeat;
 }
@@ -179,7 +179,7 @@ body {
 	text-align: center;
 	background: url("./imgs/tv.png"), rgb(17, 15, 15);
 	background-blend-mode: normal;
-	background-size: 100% 195px;
+	background-size: 100% 100%;
 	background-clip: border-box content-box;
 	background-repeat: no-repeat;
 }
