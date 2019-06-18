@@ -29,6 +29,7 @@
 	}
 	to {
 	  width: 0px;
+	  display: none;
 	}
   }
 
@@ -353,7 +354,7 @@ hr {
 }
 
 .tvOff {
-	border: solid transparent;
+	border: solid white;
 	border-radius: 50%;
 	animation: TVoff ease-in-out 1.5s;
 }
