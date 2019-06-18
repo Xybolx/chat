@@ -323,3 +323,8 @@ hr {
 	overflow:scroll;
 	overflow-x:hidden;
 }
+
+.tvOff {
+	height: 200px;
+	width: auto;
+}
