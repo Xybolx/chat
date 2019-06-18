@@ -121,7 +121,7 @@ body {
 	height: 200px;
 	overflow-x:hidden;
 	text-align: center;
-	background: url("./imgs/tv.png"), rgb(17, 15, 15);
+	background: url("./imgs/tv.png"), rgb(15, 14, 14);
 	background-blend-mode: normal;
 	background-size: 100% 100%;
 	background-clip: border-box content-box;
