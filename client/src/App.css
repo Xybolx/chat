@@ -179,7 +179,7 @@ body {
 	text-align: center;
 	background: url("./imgs/tv.png"), rgb(17, 15, 15);
 	background-blend-mode: normal;
-	background-size: 100% 100%;
+	background-size: 100% 195px;
 	background-clip: border-box content-box;
 	background-repeat: no-repeat;
 }
