@@ -327,4 +327,5 @@ hr {
 .tvOff {
 	height: 200px;
 	width: auto;
+	border: solid transparent;
 }
