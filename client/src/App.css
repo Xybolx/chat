@@ -26,6 +26,7 @@
 @keyframes TVoff {
 	from {
 	  width: 500px;
+	  display: block;
 	}
 	to {
 	  width: 0px;
