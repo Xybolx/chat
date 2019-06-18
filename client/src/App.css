@@ -32,6 +32,24 @@
 	}
   }
 
+  @keyframes FadeIn {
+	0% {
+		opacity: 0.2;
+  	}
+	25% {
+		opacity: 0.4;
+  	}
+	50% {
+		opacity: 0.6;
+	}
+	75% {
+		opacity: 0.8;
+	}
+	100% {
+		opacity: 0.9;
+	}
+  }
+
 body {
 	width: 100%;
 	font-family: 'Audiowide', cursive;
@@ -208,6 +226,7 @@ h4, h5, h6 {
 	font-family: 'Audiowide', cursive;
   	color: whitesmoke;
 	text-shadow: 1px 1px 1px black;
+	animation: FadeIn ease-in 2s;
 }
 
 h1 {
