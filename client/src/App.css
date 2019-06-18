@@ -14,11 +14,9 @@
 
 @keyframes Flash {
   50% {
-		color: yellow;
 		transform: rotateX(0deg);
   }
   100% {
-		color: red;
 		transform: rotateX(360deg);
   }
 }

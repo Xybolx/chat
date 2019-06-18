@@ -14,10 +14,7 @@ module.exports = function (io) {
         });
 
         socket.on('SEND_PRIVATE_MESSAGE', data => {
-          if (onlineUsers.includes(data.receiver)) {
-            io.to(connections[data.receiver].id).emit('RECEIVE_PRIVATE_MESSAGE', data);
-          }
-
+          io.to(connections[data.receiver].id).emit('RECEIVE_PRIVATE_MESSAGE', data);
         });
 
         socket.on('SEND_MSG_STATUS', data => {

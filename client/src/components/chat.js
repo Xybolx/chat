@@ -474,6 +474,7 @@ class Chat extends React.Component {
                                     <div className="privateMessages">
                                         <div className="inside">
                                             <h6>No Private Msgs!</h6>
+                                            <hr />
                                             <img className="tvOff" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/2T0t-6V/static-tv-off-modern-static-noise-from-a-tv-that-turns-off-after-a-while-always-handful-take-it-and-put-it-in-your-footage-with-a-mask-or-a-cookie-cutter-and-voil-this-is-a-balanced-mix-of-real-footage-and-digital-video-modern-version_qkqefjxo__F0004.png" alt="" style={{...this.state.privateMessagesCleared ? { display: "inline-block" } : {display: "none"}}}></img>
                                             </div>
                                         </div>
