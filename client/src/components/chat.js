@@ -447,21 +447,21 @@ class Chat extends Component {
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
-                                        <div className="typingUser" style={{ color: `${typingUser.userColor}` }}><img className="img-fluid" src={`${typingUser.userAvatar}`} alt=""></img>&nbsp;{typingUser.username}...is typing</div>
+                                        <div className="typingUser" style={{ color: `${typingUser.userColor}` }}><img className="img-fluid" src={`${typingUser.userAvatar}`} alt=""></img>&nbsp;{typingUser.username}<span className="infoSpan">...is typing</span></div>
                                     )
                                 })}
                                 </div>
                                 <div className="joining">
                                 {this.state.joiningUsers.map(joiningUser => {
                                     return (
-                                        <div className="user-alert joining" style={{ color: `${joiningUser.user.colorSeed}` }}><img className="img-fluid" src={`${joiningUser.user.avatarURL}`} alt=""></img>&nbsp;{joiningUser.user.username}&nbsp;joined!</div>
+                                        <div className="user-alert joining" style={{ color: `${joiningUser.user.colorSeed}` }}><img className="img-fluid" src={`${joiningUser.user.avatarURL}`} alt=""></img>&nbsp;{joiningUser.user.username}&nbsp;<span className="infoSpan">Joined!</span></div>
                                     )
                                 })}
                                 </div>
                                 <div className="leaving">
                                 {this.state.leavingUsers.map(leavingUser => {
                                     return (
-                                        <div className="user-alert leaving" style={{ color: `${leavingUser.user.colorSeed}` }}><img className="img-fluid" src={`${leavingUser.user.avatarURL}`} alt=""></img>&nbsp;{leavingUser.user.username}&nbsp;Left!</div>
+                                        <div className="user-alert leaving" style={{ color: `${leavingUser.user.colorSeed}` }}><img className="img-fluid" src={`${leavingUser.user.avatarURL}`} alt=""></img>&nbsp;{leavingUser.user.username}&nbsp;<span className="infoSpan">Left!</span></div>
                                     )
                                 })}
                                 </div>
