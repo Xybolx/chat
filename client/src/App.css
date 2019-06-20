@@ -146,8 +146,8 @@ body {
 }
 
 .messages div {
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .privateMessages {
@@ -165,8 +165,8 @@ body {
 }
 
 .privateMessages div {
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .card {
