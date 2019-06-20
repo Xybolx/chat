@@ -37,7 +37,7 @@ class Users extends Component {
                         <h6><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.users.length}</span></span> Online Now</h6>
                         {this.state.users.map(user => (
                             <div key={user._id}>
-                                <div style={{ boxShadow: `2px 2px 2px 2px${user.colorSeed}` }} className="card-header">
+                                <div style={{ outlineColor: `${user.colorSeed}` }} className="card-header">
                                     <div className="userValue" onClick={this.handleMsgFocus} value={user.username} style={{ color: `${user.colorSeed}` }}>
                                         <img className="img-fluid" alt="" src={user.avatarURL}></img>&nbsp;{user.username} <span className="joinDate" style={{ fontSize: 8 }}>member since {moment(user.date).format("M/YYYY")}</span>
                                     </div>
