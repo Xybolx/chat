@@ -57,9 +57,10 @@ class Chat extends Component {
         this.socket.on('RECEIVE_USER_JOINED', data => {
             const joiningUser = `${data.user.username}`;
             if (data && this.state.userJoining !== joiningUser) {
-                this.setState({ joiningUsers: [...this.state.joiningUsers, data], userJoining: joiningUser });
-                this.userJoiningTimeout();
+                this.setState({ joiningUsers: [...this.state.joiningUsers, data], userJoining: joiningUser })
             } 
+            clearTimeout(this.userJoinedTimeout);
+            this.userJoinedTimeout = setTimeout(this.userJoiningTimeout, 4000);
         });
 
         this.socket.on('RECEIVE_USER_LEFT', data => {
@@ -94,8 +95,9 @@ class Chat extends Component {
         this.socket.on('RECEIVE_TYPING_USER', data => {
             if (data && !this.state.userTyping) {
                 this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
-                this.typingTimeout();
             }
+            clearTimeout(this.typeTimeout);
+            this.typeTimeout = setTimeout(this.typingTimeout, 4000);
         });
 
         this.socket.on('RECEIVE_CLEAR_MSGS', data => {
@@ -294,8 +296,6 @@ class Chat extends Component {
     };
 
     userJoiningTimeout = () => {
-        clearTimeout(this.userJoinedTimeout);
-        this.userJoinedTimeout = setTimeout(this.userJoiningTimeout, 4000);
         this.setState({ joiningUsers: [], userJoining: '' });
     };
 
@@ -304,8 +304,6 @@ class Chat extends Component {
     };
 
     typingTimeout = () => {
-        clearTimeout(this.typeTimeout);
-        this.typeTimeout = setTimeout(this.typingTimeout, 4000);
         this.setState({ typingUsers: [], userTyping: '' });
     };
 
