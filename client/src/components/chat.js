@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Sound from "react-sound";
 import Clock from "./clock";
 import Users from "./users";
@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import API from "../utils/API";
 import moment from "moment";
 
-class Chat extends React.Component {
+class Chat extends Component {
     constructor(props) {
         super(props);
 
@@ -41,14 +41,12 @@ class Chat extends React.Component {
 
         // client receive socket events
         this.socket.on('RECEIVE_MESSAGE', data => {
-            addMessage(data);
             if (data) {
                 this.loadMessages();
             }
         });
 
         this.socket.on('RECEIVE_MSG_STATUS', data => {
-            addMsgStatus(data);
             if (data) {
                 this.setState({ msgSent: "message sent" })
             }
@@ -57,7 +55,6 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_USER_JOINED', data => {
-            addUser(data);
             const joiningUser = `${data.user.username}`;
             if (data && this.state.userJoining !== joiningUser) {
                 this.setState({ joiningUsers: [...this.state.joiningUsers, data], userJoining: joiningUser })
@@ -67,7 +64,6 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_USER_LEFT', data => {
-            removeUser(data);
             const leavingUser = `${data.user.username}`;
             if (data && this.state.userLeaving !== leavingUser) {
                 this.setState({ leavingUsers: [...this.state.leavingUsers, data], userLeaving: leavingUser });
@@ -77,7 +73,6 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_PRIVATE_MESSAGE', data => {
-            addPrivateMessage(data);
             const privateSender = `${data.author}`;
             const privateColor = `${data.userColor}`;
             const privateAvatar = `${data.userAvatar}`;
@@ -90,7 +85,6 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_PRVT_STATUS', data => {
-            addPrvtStatus(data);
             if (data) {
                 this.setState({ prvtSuccess: 'yes' });
             }
@@ -99,7 +93,6 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_TYPING_USER', data => {
-            addTypingUser(data);
             if (data && !this.state.userTyping) {
                 this.setState({ typingUsers: [...this.state.typingUsers, data], userTyping: data.username });
             }
@@ -108,7 +101,6 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_CLEAR_MSGS', data => {
-            removeMessages(data);
             if (data) {
                 this.setState({ messagesCleared: data.clear });
                 this.clearMessages();
@@ -119,7 +111,6 @@ class Chat extends React.Component {
         });
 
         this.socket.on('RECEIVE_CLEAR_PRVT_MSGS', data => {
-            removePrivateMessages(data);
             if (data) {
                 this.setState({ privateMessagesCleared: data.privateClear });
                 this.clearPrivateMessages();
@@ -137,33 +128,6 @@ class Chat extends React.Component {
         this.socket.on('disconnect', () => {
             this.logOut();
         });
-
-        const addMessage = data => {
-        };
-
-        const addPrivateMessage = data => {
-        };
-
-        const addUser = data => {
-        };
-
-        const removeUser = data => {
-        };
-
-        const addTypingUser = data => {
-        };
-
-        const addMsgStatus = data => {
-        };
-        
-        const addPrvtStatus = data => {
-        };
-
-        const removeMessages = data => {
-        };
-
-        const removePrivateMessages = data => {
-        };
     };
 
     // handle msg form submit
@@ -281,7 +245,10 @@ class Chat extends React.Component {
     loadUser = () => {
         API.getUser()
             .then(res =>
-                this.setState({ user: res.data, username: res.data.username, userAvatar: res.data.avatarURL, userColor: res.data.colorSeed }))
+                this.setState({ user: res.data,
+                     username: res.data.username,
+                     userAvatar: res.data.avatarURL, 
+                     userColor: res.data.colorSeed }))
                 .catch(err => console.log(err))
     };
 

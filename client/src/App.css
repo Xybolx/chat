@@ -181,7 +181,6 @@ body {
 
 .card-header {
 	font-family: 'Audiowide', cursive;
-	/* background: rgba(0, 0, 0, 0.521); */
 	text-align: left;
 	border-top-left-radius: 0%;
 	border-top-right-radius: 0%;
@@ -204,7 +203,6 @@ body {
 	background-size: 100% 100%, 100% 195px;
 	background-clip: border-box, padding-box;
 	background-repeat: no-repeat;
-	animation: Title 15s reverse infinite;
 }
 
 .img-fluid {

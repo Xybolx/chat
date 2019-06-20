@@ -14,17 +14,20 @@ module.exports = function (io) {
     });
 
     socket.on('SEND_PRIVATE_MESSAGE', data => {
+      let receiver = connections[data.receiver].id;
       if (onlineUsers.includes(data.receiver)) {
-        io.to(connections[data.receiver].id).emit('RECEIVE_PRIVATE_MESSAGE', data);
+        io.to(receiver).emit('RECEIVE_PRIVATE_MESSAGE', data);
       }
     });
 
     socket.on('SEND_MSG_STATUS', data => {
-      io.to(connections[data.author].id).emit('RECEIVE_MSG_STATUS', data);
+      let author = connections[data.author].id;
+      io.to(author).emit('RECEIVE_MSG_STATUS', data);
     });
 
     socket.on('SEND_PRVT_STATUS', data => {
-      io.to(connections[data.author].id).emit('RECEIVE_PRVT_STATUS', data);
+      let author = connections[data.author].id;
+      io.to(author).emit('RECEIVE_PRVT_STATUS', data);
     });
 
     socket.on('SEND_USER_JOINED', data => {
@@ -35,7 +38,8 @@ module.exports = function (io) {
     });
 
     socket.on('SEND_USER_LEFT', data => {
-      onlineUsers.splice(onlineUsers.indexOf(data.user.username), 1);
+      let user = data.user.username
+      onlineUsers.splice(onlineUsers.indexOf(user), 1);
       console.log(onlineUsers);
       socket.broadcast.emit('RECEIVE_USER_LEFT', data);
     });
@@ -49,7 +53,8 @@ module.exports = function (io) {
     });
 
     socket.on('SEND_CLEAR_PRVT_MSGS', data => {
-      io.to(connections[data.username].id).emit('RECEIVE_CLEAR_PRVT_MSGS', data);
+      let user = connections[data.username].id;
+      io.to(user).emit('RECEIVE_CLEAR_PRVT_MSGS', data);
     });
 
   });
