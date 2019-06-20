@@ -394,7 +394,7 @@ class Chat extends Component {
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         <div className="inside">
-                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button className="header-link btn btn-outline-danger btn-sm" onClick={this.sendClearMsgs}>Clear</button></h6>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button className="header-link btn btn-outline-danger btn-sm" onClick={this.sendClearMsgs}><i className="far fa-trash-alt"></i>&nbsp;Clear</button></h6>
                                         {this.state.messages.map(message => (
                                             <div key={message._id}>
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
@@ -419,7 +419,7 @@ class Chat extends Component {
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages">
                                         <div className="inside">
-                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<button className="header-link btn btn-outline-danger btn-sm" onClick={this.sendClearPrvtMsgs}>Clear</button></h6>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<button className="header-link btn btn-outline-danger btn-sm" onClick={this.sendClearPrvtMsgs}><i className="far fa-trash-alt"></i>&nbsp;Clear</button></h6>
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">
