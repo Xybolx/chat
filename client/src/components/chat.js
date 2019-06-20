@@ -342,15 +342,9 @@ class Chat extends Component {
         });
     };
 
-    handlePrivateToggle = () => {
-        if (!this.state.privateToggle) {
-            this.setState({ privateToggle: 'show' })
-        } 
-        else if (this.state.privateToggle) {
-            this.setState({ privateToggle: '' })
-        }
+    handleMsgInputFocus = () => {
+        document.getElementById('publicMsg').focus();
     };
-
 
     handleTimers = () => {
         this.logOutTimeout = setTimeout(this.logOut, 1800000);
@@ -479,7 +473,7 @@ class Chat extends Component {
                                 <div className={`${this.state.username} prvtSuccess`} style={{ color: `${this.state.userColor}` }} {...this.state.prvtSuccess ? {display: "block"} : {display: "none"}}>{this.state.prvtSuccess ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 </div>
                                 <div className="card-footer text-left">
-                                    <button className="btn btn-info btn-block" data-toggle="collapse" data-target="#collapseMsgForm" aria-expanded="false" aria-controls="collapseMsgForm"><i className="far fa-edit"></i> Message</button>
+                                    <button className="btn btn-info btn-block" data-toggle="collapse" data-target="#collapseMsgForm" aria-expanded="false" aria-controls="collapseMsgForm"><i className="far fa-edit" onClick={this.handleMsgInputFocus}></i> Message</button>
                                     <div className="collapse" id="collapseMsgForm"> 
                                      <form id="msgsForm">
                                      <label className="label" htmlFor="message">Private Msg-@username/</label>
