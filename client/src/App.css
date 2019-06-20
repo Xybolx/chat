@@ -351,6 +351,7 @@ hr {
 
 .sendingPrvt {
 	animation: Flash 1s infinite;
+	font-size: small;
 }
 
 .inside {

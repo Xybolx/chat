@@ -342,6 +342,7 @@ class Chat extends Component {
         });
     };
 
+    // focus on the msg input
     handleMsgInputFocus = () => {
         document.getElementById('publicMsg').focus();
     };
@@ -393,7 +394,7 @@ class Chat extends Component {
                                 {this.state.messages.length ? (
                                     <div className="messages">
                                         <div className="inside">
-                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<a className="header-link" onClick={this.sendClearMsgs}>Clear</a></h6>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button className="header-link btn btn-outline-danger btn-sm" onClick={this.sendClearMsgs}>Clear</button></h6>
                                         {this.state.messages.map(message => (
                                             <div key={message._id}>
                                                 <div style={{ borderColor: `${message.userColor}` }} className="card-header">
@@ -418,7 +419,7 @@ class Chat extends Component {
                                 {this.state.privateMessages.length ? (
                                     <div className="privateMessages">
                                         <div className="inside">
-                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<a className="header-link" onClick={this.sendClearPrvtMsgs}>Clear</a></h6>
+                                    <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.privateMessages.length}</span></span> Private Msgs&nbsp;<button className="header-link btn btn-outline-danger btn-sm" onClick={this.sendClearPrvtMsgs}>Clear</button></h6>
                                         {this.state.privateMessages.map(privateMessage => (
                                             <div key={privateMessage._id}>
                                                 <div style={{ borderColor: `${privateMessage.userColor}` }} className="card-header">
@@ -443,7 +444,6 @@ class Chat extends Component {
                                 <div className="info">
                                 <hr />
                                 <h6> <i className="fas fa-exclamation"></i> Alerts</h6>
-                                <hr />
                                 <div className="typing">
                                 {this.state.typingUsers.map(typingUser => {
                                     return (
@@ -473,7 +473,7 @@ class Chat extends Component {
                                 <div className={`${this.state.username} prvtSuccess`} style={{ color: `${this.state.userColor}` }} {...this.state.prvtSuccess ? {display: "block"} : {display: "none"}}>{this.state.prvtSuccess ? <Sound url="sentmsg.wav" playStatus={Sound.status.PLAYING} /> : ``}</div>
                                 </div>
                                 <div className="card-footer text-left">
-                                    <button className="btn btn-info btn-block" data-toggle="collapse" data-target="#collapseMsgForm" aria-expanded="false" aria-controls="collapseMsgForm"><i className="far fa-edit" onClick={this.handleMsgInputFocus}></i> Message</button>
+                                    <button className="btn btn-info btn-block" data-toggle="collapse" data-target="#collapseMsgForm" aria-expanded="false" aria-controls="collapseMsgForm" onClick={this.handleMsgInputFocus}><i className="far fa-edit"></i> Message</button>
                                     <div className="collapse" id="collapseMsgForm"> 
                                      <form id="msgsForm">
                                      <label className="label" htmlFor="message">Private Msg-@username/</label>
