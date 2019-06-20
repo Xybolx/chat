@@ -212,23 +212,20 @@ body {
 }
 
 .users {
-	overflow: scroll;
-	overflow-x: hidden;
 	color: whitesmoke;
 	font-family: 'Audiowide', cursive;
 	text-shadow: 1px 1px 1px black;
 	height: 200px;
-	overflow-x:hidden;
 	text-align: center;
 	background: url("./imgs/tv.png"), rgb(17, 15, 15);
 	background-blend-mode: normal;
 	background-size: 100% 100%;
 	background-clip: border-box content-box;
 	background-repeat: no-repeat;
+	overflow-x: hidden;
 }
 
 .users div {
-	max-height: 60px;
 	padding-left: 10px;
 	padding-right: 10px;
 }

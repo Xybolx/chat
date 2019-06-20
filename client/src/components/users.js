@@ -9,10 +9,6 @@ class Users extends Component {
         users: []
     };
 
-    handleMsgFocus = () => {
-        document.getElementById("publicMsg").focus();
-    };
-
     loadUsers = () => {
         API.getUsers()
             .then(res =>
@@ -34,16 +30,18 @@ class Users extends Component {
             <div>
                 {this.state.users.length ? (
                     <div className="users flex-fill text-center">
+                        <div className="inside">
                         <h6><span className="fa-layers fa-fw"><i className="fas fa-users"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.users.length}</span></span> Online Now</h6>
                         {this.state.users.map(user => (
                             <div key={user._id}>
-                                <div style={{ outlineColor: `${user.colorSeed}` }} className="card-header">
-                                    <div className="userValue" onClick={this.handleMsgFocus} value={user.username} style={{ color: `${user.colorSeed}` }}>
+                                <div className="card-header">
+                                    <div className="userValue" style={{ color: `${user.colorSeed}` }}>
                                         <img className="img-fluid" alt="" src={user.avatarURL}></img>&nbsp;{user.username} <span className="joinDate" style={{ fontSize: 8 }}>member since {moment(user.date).format("M/YYYY")}</span>
                                     </div>
                                 </div>
                             </div>
                         ))}
+                        </div>
                     </div>
                 ) : (
                         <Sound
