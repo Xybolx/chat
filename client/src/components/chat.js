@@ -397,7 +397,7 @@ class Chat extends Component {
                                     <h6><span className="fa-layers fa-fw"><i className="fas fa-comment-alt"></i><span className="fa-layers-counter" style={{ fontSize: 25 }}>{this.state.messages.length}</span></span> Public Msgs&nbsp;<button className="header-link btn btn-outline-danger btn-sm" onClick={this.sendClearMsgs}><i className="far fa-trash-alt"></i>&nbsp;Clear</button></h6>
                                         {this.state.messages.map(message => (
                                             <div key={message._id}>
-                                                <div style={{ borderColor: `${message.userColor}` }}>
+                                                <div style={{ borderColor: `${message.userColor}` }} className="card-header">
                                                     <div style={{ color: `${message.userColor}` }}>
                                                         <img className="img-fluid" alt="" src={message.userAvatar}></img>
                                                         &nbsp;{message.author} <span className="msgTime" style={{ fontSize: 6 }}>{moment(message.date).fromNow()}:</span> <br /> <span className="msgBody">{message.message}</span>
