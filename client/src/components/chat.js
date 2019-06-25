@@ -13,9 +13,6 @@ class Chat extends Component {
 
         this.state = {
             user: {},
-            username: '',
-            userAvatar: '',
-            userColor: '',
             typingUsers: [],
             messages: [],
             messagesCleared: '',
@@ -143,16 +140,16 @@ class Chat extends Component {
             API.savePrivateMessage({
                 receiver: receiver,
                 author: this.state.username,
-                userAvatar: this.state.userAvatar,
-                userColor: this.state.userColor,
+                userAvatar: this.state.user.avatarURL,
+                userColor: this.state.user.colorSeed,
                 privateMessage: messageIndex
             });
 
             this.socket.emit('SEND_PRIVATE_MESSAGE', {
                 receiver: receiver,
-                author: this.state.username,
-                userAvatar: this.state.userAvatar,
-                userColor: this.state.userColor,
+                author: this.state.user.username,
+                userAvatar: this.state.user.avatarURL,
+                userColor: this.state.user.colorSeed,
                 privateMessage: messageIndex
             });
 
@@ -188,30 +185,30 @@ class Chat extends Component {
 
     sendTypingUser = () => {
         this.socket.emit('SEND_TYPING_USER', {
-            username: this.state.username,
-            userColor: this.state.userColor,
-            userAvatar: this.state.userAvatar
+            username: this.state.user.username,
+            userColor: this.state.user.colorSeed,
+            userAvatar: this.state.user.avatarURL
         });
     };
 
     sendMsg = () => {
         this.socket.emit('SEND_MESSAGE', {
-            author: this.state.username,
-            userAvatar: this.state.userAvatar,
-            userColor: this.state.userColor,
+            author: this.state.user.username,
+            userAvatar: this.state.user.avatarURL,
+            userColor: this.state.user.colorSeed,
             message: this.state.message
         });
     };
 
     sendMsgStatus = () => {
         this.socket.emit('SEND_MSG_STATUS', {
-            author: this.state.username
+            author: this.state.user.username
         });
     };
 
     sendPrvtStatus = () => {
         this.socket.emit('SEND_PRVT_STATUS', {
-            author: this.state.username
+            author: this.state.user.username
         });
     };
 
@@ -229,7 +226,7 @@ class Chat extends Component {
 
     sendClearPrvtMsgs = () => {
         this.socket.emit('SEND_CLEAR_PRVT_MSGS', {
-            username: this.state.username,
+            username: this.state.user.username,
             privateClear: 'Private Messages Cleared!'
         });
     };
@@ -245,10 +242,7 @@ class Chat extends Component {
     loadUser = () => {
         API.getUser()
             .then(res =>
-                this.setState({ user: res.data,
-                     username: res.data.username,
-                     userAvatar: res.data.avatarURL, 
-                     userColor: res.data.colorSeed }))
+                this.setState({ user: res.data }))
                 .catch(err => console.log(err))
     };
 
@@ -268,9 +262,9 @@ class Chat extends Component {
 
     saveMsg = () => {
         API.saveMessage({
-            author: this.state.username,
-            userAvatar: this.state.userAvatar,
-            userColor: this.state.userColor,
+            author: this.state.user.username,
+            userAvatar: this.state.user.avatarURL,
+            userColor: this.state.user.colorSeed,
             message: this.state.message
         });
     };
