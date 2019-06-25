@@ -138,7 +138,7 @@ class Chat extends Component {
         if (this.state.message.substr(0, 1) === '@' && ind !== -1) {
             API.savePrivateMessage({
                 receiver: receiver,
-                author: this.state.username,
+                author: this.state.user.username,
                 userAvatar: this.state.user.avatarURL,
                 userColor: this.state.user.colorSeed,
                 privateMessage: messageIndex
