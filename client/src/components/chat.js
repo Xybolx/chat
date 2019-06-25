@@ -29,8 +29,7 @@ class Chat extends Component {
             prvtSentColor: '',
             prvtSentAvatar: '',
             userJoining: '',
-            userLeaving: '',
-            privateToggle: ''
+            userLeaving: ''
         };
 
         // initialize socket

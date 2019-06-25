@@ -21,6 +21,10 @@ class Users extends Component {
         this.handleUsersInterval = setInterval(this.loadUsers, 5000);
     };
 
+    componentDidUpdate() {
+        console.log("componentDidUpdate");
+    };
+
     componentWillUnmount() {
         clearInterval(this.handleUsersInterval);
     };
