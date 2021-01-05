@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/Xybolx/chat#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bcrypt-nodejs": "0.0.3",
     "express": "^4.17.1",
     "express-session": "^1.16.1",
